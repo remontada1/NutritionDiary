@@ -10,20 +10,12 @@ namespace WebApplication1.Controllers
 {
     public class CustomerController : ApiController
     {
-        ICustomerRepository _repository;
+        ICustomerRepository repository;
 
         public CustomerController(ICustomerRepository repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
-
-
-        List<Customer> customers = new List<Customer>()
-        {
-            new Customer { Id = 1, Name = "Иван", OrderId = 4, PhoneNumber = "+380634750253"},
-            new Customer { Id = 2, Name = "Den", OrderId = 3, PhoneNumber= "+380637350223"}
-        };
-
 
 
         public IEnumerable<Customer> GetAll()
@@ -38,14 +30,14 @@ namespace WebApplication1.Controllers
 
         public Customer Add(Customer item)
         {
-            item = _repository.Add(item);
+            item = repository.Add(item);
             return item;
         }
 
         public void Remove(int id)
         {
-            Customer customer = _repository.GetById(id);
-            _repository.Remove(id);
+            Customer customer = repository.GetById(id);
+            repository.Remove(id);
         }
         
     }
