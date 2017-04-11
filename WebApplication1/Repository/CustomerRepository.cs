@@ -22,17 +22,21 @@ namespace WebApplication1.Repository
         }
         public Customer GetById(int Id)
         {
-            
+            return context.Customers.Single(x => x.Id == Id);
         }
 
-        public Customer Add(Customer item)
+        public  Customer Add(Customer item)
         {
-            
+            context.Customers.Add(item);
+            context.SaveChanges();
+            return item;
         }
 
         public void Remove(int Id)
         {
-            
+            Customer customer = context.Customers.Find(Id);
+            context.Customers.Remove(customer);
+            context.SaveChanges();  
         }
     }
 }
