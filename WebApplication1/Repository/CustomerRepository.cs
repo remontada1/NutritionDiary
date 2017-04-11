@@ -9,13 +9,17 @@ namespace WebApplication1.Repository
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private CustomerContext context = new CustomerContext();
+        public CustomerContext context;
 
-        public IEnumerable<Customer> Customers
+        public CustomerRepository(CustomerContext context)
         {
-            get { return context.Customers; }
+            this.context = context;
         }
 
+        public IEnumerable<Customer> GetAll()
+        {
+            return context.Customers;
+        }
         public Customer GetById(int Id)
         {
             
