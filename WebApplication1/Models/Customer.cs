@@ -13,7 +13,7 @@ namespace WebApplication1.Models
         public string PhoneNumber { get; set; }
 
 
-        public int OrderId { get; set; }
+        public string Email{ get; set; }
 
         
     }

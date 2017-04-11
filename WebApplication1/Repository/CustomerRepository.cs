@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApplication1.Models;
+using WebApplication1.DAL;
 
 namespace WebApplication1.Repository
 {
     public class CustomerRepository : ICustomerRepository
     {
-        CustomerDbEntities CustomerEntities = new CustomerDbEntities();
+        private CustomerContext context = new CustomerContext();
 
-        public IEnumerable<Customer> GetAll()
+        public IEnumerable<Customer> Customers
         {
-            
+            get { return context.Customers; }
         }
 
         public Customer GetById(int Id)
