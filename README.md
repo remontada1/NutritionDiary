@@ -1,4 +1,4 @@
-Simple WebAPI application for practice following instruments:
+Simple WebAPI application for to get experience of using following instruments:
 - Web API 
 - Unity IoC
 - Entity Framework
