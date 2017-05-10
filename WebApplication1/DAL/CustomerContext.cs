@@ -9,6 +9,14 @@ namespace WebApplication1.DAL
 {
     public class CustomerContext : DbContext
     {
+       public CustomerContext()
+            : base("name=CustomerContext")
+        {
+
+        }
         public DbSet<Customer> Customers { get; set; }
+
+
+
     }
 }

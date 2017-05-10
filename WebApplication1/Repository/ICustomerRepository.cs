@@ -9,7 +9,7 @@ namespace WebApplication1.Models
 {
     public interface ICustomerRepository
     {
-        IEnumerable<Customer> GetAll();
+        IQueryable<Customer> GetAll();
         Customer GetById(int Id);
         Customer Add(Customer item);
         void Remove(int Id);
