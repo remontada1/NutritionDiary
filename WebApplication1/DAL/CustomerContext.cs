@@ -10,7 +10,7 @@ namespace WebApplication1.DAL
     public class CustomerContext : DbContext
     {
        public CustomerContext()
-            : base("name=CustomerContext")
+            : base("name=Schedule")
         {
 
         }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using System.Web;
 using WebApplication1.Models;
 using WebApplication1.DAL;
