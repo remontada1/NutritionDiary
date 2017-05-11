@@ -1,0 +1,93 @@
+﻿
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Person</title>
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/App.js"></script>
+    <script src="~/Scripts/User.js"></script>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<body ng-app="adventureModule">
+    <div ng-controller="personCtrl" class="container-fluid">
+        
+        <table ng-cloak class="pure-table">
+            <thead>
+                <tr>
+                    <th hidden="hidden">Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in UserData">
+                    <td style="display:none">{{item.Id}}</td>
+                    <td>{{item.FirstName}}</td>
+                    <td>{{item.LastName}}</td>
+                    
+                        <button ng-model="$scope.User" ng-click="edit(UserData[$index])" class="pure-button pure-button-primary">Edit</button>
+                        <button ng-click="delete($index)" class="pure-button pure-button-primary">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <div>
+            <button ng-click="addnewdiv=true" class="pure-button pure-button-primary">Add Person</button>
+        </div>
+
+        <div ng-show="addnewdiv" class="pure-form">
+            <div>
+                <label for="firstname" class="pure-u-1-8">First Name</label>
+                <input type="text" data-ng-model="User.FirstName" />
+            </div>
+            <div>
+                <label for="lastname" class="pure-u-1-8">Last Name</label>
+                <input type="text" data-ng-model="User.LastName" />
+            </div>
+           
+            <div>
+                <button data-ng-click="save()" class="pure-button pure-button-primary">Save</button>
+                <button data-ng-click="clear()" class="pure-button pure-button-primary">Cancel</button>
+            </div>
+        </div>
+        <div ng-show="updatediv" class="pure-form">
+            <div hidden="hidden">
+                <label for="Id" class="pure-u-1-8">Id</label>
+                <input type="text" data-ng-model="User.Id" />
+            </div>
+            <div>
+                <label for="firstname" class="pure-u-1-8">First Name</label>
+                <input type="text" data-ng-model="User.FirstName" />
+            </div>
+            <div>
+                <label for="lastname" class="pure-u-1-8">Last Name</label>
+                <input type="text" data-ng-model="User.LastName" />
+            </div>
+            <div>
+                <label for="age" class="pure-u-1-8">Age</label>
+                <input type="text" data-ng-model="User.Age" />
+            </div>
+            <div>
+                <label for="gender" class="pure-u-1-8">Gender</label>
+                <input type="text" data-ng-model="User.Gender" />
+            </div>
+            <div>
+                <label for="gender" class="pure-u-1-8">City</label>
+                <input type="text" data-ng-model="User.City" />
+            </div>
+            <div>
+                <button data-ng-click="update()" class="pure-button pure-button-primary">Update</button>
+                <button data-ng-click="clear()" class="pure-button pure-button-primary">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+- See more at: http://www.dotnetfox.com/articles/crud-operation-in-Asp-Net-mvc-using-web-api-and-angularjs-1125.aspx#sthas
