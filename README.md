@@ -1,5 +1,8 @@
-Simple WebAPI application for to get experience of using following instruments:
+Simple WebAPI CRUD Web Application.
+Used technologies:
 - Web API 
 - Unity IoC
 - Entity Framework
-- designing database MSSql
+-  MSSql Server
+- Twitter Bootstrap
+- AngularJS
