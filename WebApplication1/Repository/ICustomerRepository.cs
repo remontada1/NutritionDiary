@@ -14,5 +14,7 @@ namespace WebApplication1.Models
         Customer Add(Customer item);
         void Remove(int Id);
 
+        Customer Update(Customer item);
+
     }
 }
