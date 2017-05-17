@@ -25,6 +25,13 @@ namespace WebApplication1
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+    "~/Scripts/angular.js",
+    "~/Scripts/angular-route.js",
+    "~/Scripts/angular-ui/ui-bootstrap.js",
+    "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
+    ));
         }
     }
 }
