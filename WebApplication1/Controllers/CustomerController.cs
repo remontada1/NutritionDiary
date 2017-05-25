@@ -30,7 +30,11 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public Customer Add(Customer item)
         {
-            item = repository.Add(item);
+            if (ModelState.IsValid){
+            
+                item = repository.Add(item);
+            }
+            
             return item;
         }
         [HttpDelete]

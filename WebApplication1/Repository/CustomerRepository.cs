@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http.Description;
 using System.Web;
-using WebApplication1.Models;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure; 
+using System.Web.Http;
+using System.Web.Http.Description;
+using System.Web.Http.HttpGetAttribute;
+using System.Web.Http.ModelBinding;
 using WebApplication1.DAL;
+using WebApplication1.Models;
+
 
 namespace WebApplication1.Repository
 {
@@ -27,11 +31,17 @@ namespace WebApplication1.Repository
             return context.Customers.Single(x => x.Id == Id);
         }
 
+
+        [HttpPost]
         public  Customer Add(Customer item)
         {
-            context.Customers.Add(item);
-            context.SaveChanges();
-            return item;
+            if(item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
+           context.Customers.Add(item);
+           context.SaveChanges();
+           return item;       
         }
 
         public void Remove(int Id)
@@ -43,6 +53,10 @@ namespace WebApplication1.Repository
 
         public Customer Update(Customer item)
         {
+            if(item ==null)
+            {
+                throw new ArgumentNullException("item");
+            }
             Customer updateCustomer = context.Customers.FirstOrDefault(c => c.Id == item.Id);
             updateCustomer.FirstName = item.FirstName;
             updateCustomer.LastName = item.LastName;
