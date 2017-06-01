@@ -8,8 +8,6 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.HttpGetAttribute;
-using System.Web.Http.ModelBinding;
 using WebApplication1.DAL;
 using WebApplication1.Models;
 

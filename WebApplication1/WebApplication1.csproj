@@ -975,6 +975,10 @@
     <Compile Include="Migrations\201705102309400_InitialCreate1.Designer.cs">
       <DependentUpon>201705102309400_InitialCreate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705251659027_ChangeUserStructure.cs" />
+    <Compile Include="Migrations\201705251659027_ChangeUserStructure.Designer.cs">
+      <DependentUpon>201705251659027_ChangeUserStructure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -994,6 +998,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705102309400_InitialCreate1.resx">
       <DependentUpon>201705102309400_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705251659027_ChangeUserStructure.resx">
+      <DependentUpon>201705251659027_ChangeUserStructure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
