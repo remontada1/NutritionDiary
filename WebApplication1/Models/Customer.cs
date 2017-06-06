@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-
+using System.Data.Entity;
 namespace WebApplication1.Models
 {
     public class Customer
@@ -14,14 +14,7 @@ namespace WebApplication1.Models
 
         public string Password { get; set; }
 
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public DateTime CreateDate { get; set; }
-        public int Weight{ get; set; }
-
-        public int Height { get; set; }
+        public CustomerData CustomerData { get; set; }
         
     }
 

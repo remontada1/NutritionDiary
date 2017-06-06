@@ -15,7 +15,7 @@ namespace WebApplication1.DAL
 
         }
         public DbSet<Customer> Customers { get; set; }
-
+        public DbSet<Food> Foods {get; set;}
 
 
     }

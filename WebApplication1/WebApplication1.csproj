@@ -979,9 +979,22 @@
     <Compile Include="Migrations\201705251659027_ChangeUserStructure.Designer.cs">
       <DependentUpon>201705251659027_ChangeUserStructure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706031707416_AddClassFood.cs" />
+    <Compile Include="Migrations\201706031707416_AddClassFood.Designer.cs">
+      <DependentUpon>201706031707416_AddClassFood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706031714466_AddClassFood2.cs" />
+    <Compile Include="Migrations\201706031714466_AddClassFood2.Designer.cs">
+      <DependentUpon>201706031714466_AddClassFood2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\CustomerData.cs" />
+    <Compile Include="Models\Day.cs" />
+    <Compile Include="Models\Food.cs" />
+    <Compile Include="Models\Meal.cs" />
+    <Compile Include="Models\MealType.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -1001,6 +1014,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705251659027_ChangeUserStructure.resx">
       <DependentUpon>201705251659027_ChangeUserStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706031707416_AddClassFood.resx">
+      <DependentUpon>201706031707416_AddClassFood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706031714466_AddClassFood2.resx">
+      <DependentUpon>201706031714466_AddClassFood2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
