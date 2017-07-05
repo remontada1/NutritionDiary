@@ -7,13 +7,13 @@ namespace WebApplication1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ChangeUserStructure : IMigrationMetadata
+    public sealed partial class TableRelationsComplete2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeUserStructure));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TableRelationsComplete2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705251659027_ChangeUserStructure"; }
+            get { return "201706122103092_TableRelationsComplete2"; }
         }
         
         string IMigrationMetadata.Source

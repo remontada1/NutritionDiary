@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web.Http;
 using Microsoft.Practices.Unity;
 using WebApplication1.Resolver;
-using WebApplication1.Repository;
+using WebApplication1.Infrastructure;
 using WebApplication1.Models;
 using System.Net.Http.Headers;
+using Newtonsoft.Json.Serialization;
+using System.Net.Http.Formatting;
 
 
 namespace WebApplication1
@@ -15,10 +17,10 @@ namespace WebApplication1
     {
         public static void Register(HttpConfiguration config)
         {
-            var container = new UnityContainer();
+          /*  var container = new UnityContainer();
             container.RegisterType<ICustomerRepository, CustomerRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
-
+             */
             
 
 
@@ -30,6 +32,8 @@ namespace WebApplication1
                 routeTemplate: "api/customer/{id}",
                 defaults: new { controller = "customer", id = RouteParameter.Optional }
             );
+            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
+            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }

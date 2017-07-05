@@ -7,13 +7,13 @@ namespace WebApplication1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddClassFood : IMigrationMetadata
+    public sealed partial class AddRelelationWithMeal : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddClassFood));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddRelelationWithMeal));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706031707416_AddClassFood"; }
+            get { return "201706160250499_AddRelelationWithMeal"; }
         }
         
         string IMigrationMetadata.Source

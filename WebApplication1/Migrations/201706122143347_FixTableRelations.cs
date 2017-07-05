@@ -3,7 +3,7 @@ namespace WebApplication1.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddClassFood : DbMigration
+    public partial class FixTableRelations : DbMigration
     {
         public override void Up()
         {

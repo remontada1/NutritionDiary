@@ -4,6 +4,7 @@ namespace WebApplication1.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using WebApplication1.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebApplication1.DAL.CustomerContext>
     {
@@ -27,6 +28,18 @@ namespace WebApplication1.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.Foods.AddOrUpdate(
+                p => p.Id,
+                 new Food()
+                 {
+                     Id = 1,
+                     Hydrates = 70,
+                     KCalory = 340,
+                     Fats = 3,
+                     Name = "Гречка",
+                     Protein = 9
+                 });
         }
     }
 }

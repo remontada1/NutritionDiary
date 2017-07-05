@@ -8,30 +8,33 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using WebApplication1.DAL;
+using WebApplication1.Infrastructure;
 using WebApplication1.Models;
+using WebApplication1.DAL;
 
 
-namespace WebApplication1.Repository
+
+namespace WebApplication1.Infrastructure
 {
-    public class CustomerRepository : ICustomerRepository
+
+    [Authorize]
+    public class CustomerRepository : IRepository<Customer>
     {
         private CustomerContext context = new CustomerContext();
 
-       
 
-        public IQueryable<Customer> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
            return context.Customers; 
          }
-        public Customer GetById(int Id)
+        public Customer Get(int Id)
         {
             return context.Customers.Single(x => x.Id == Id);
         }
 
 
         [HttpPost]
-        public  Customer Add(Customer item)
+        public  void  Create(Customer item)
         {
             if(item == null)
             {
@@ -39,7 +42,7 @@ namespace WebApplication1.Repository
             }
            context.Customers.Add(item);
            context.SaveChanges();
-           return item;       
+                 
         }
 
         public void Remove(int Id)
@@ -49,21 +52,18 @@ namespace WebApplication1.Repository
             context.SaveChanges();  
         }
 
-        public Customer Update(Customer item)
+        public void  Update(Customer item)
         {
-            if(item ==null)
+            if (item == null)
             {
                 throw new ArgumentNullException("item");
             }
             Customer updateCustomer = context.Customers.FirstOrDefault(c => c.Id == item.Id);
-            updateCustomer.FirstName = item.FirstName;
-            updateCustomer.LastName = item.LastName;
-            updateCustomer.Height = item.Height;
-            updateCustomer.Weight = item.Weight;
-             
+
+
             context.SaveChanges();
-            return item;
             
+
         }
     }
 }

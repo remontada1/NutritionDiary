@@ -7,13 +7,13 @@ namespace WebApplication1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate1 : IMigrationMetadata
+    public sealed partial class FixTableRelations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixTableRelations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705102309400_InitialCreate1"; }
+            get { return "201706122143347_FixTableRelations"; }
         }
         
         string IMigrationMetadata.Source

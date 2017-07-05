@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="WebApplication1.Models.Customer" Collapsed="true">
+    <Position X="1.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAIAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>Models\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.CustomerData" Collapsed="true">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAEAABAAAAAAAAAAAAAAAACAAAAAAAAABAAAAAAg=</HashCode>
+      <FileName>Models\CustomerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.Day" Collapsed="true">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Models\Day.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.Food" Collapsed="true">
+    <Position X="0.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAgAAAAAAAAAAAAAABQAAAABAIAAAAEAAAAAAAA=</HashCode>
+      <FileName>Models\Food.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.Meal" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAABAAEAAAAAAAAAAAAAAAAAAAAAAAACAABAAA=</HashCode>
+      <FileName>Models\Meal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApplication1.Models.MealType" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MealType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
