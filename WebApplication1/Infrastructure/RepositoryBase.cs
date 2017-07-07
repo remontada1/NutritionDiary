@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using WebApplication1.DAL;
 
@@ -29,40 +30,46 @@ namespace WebApplication1.Infrastructure
         }
 
 
-
-       public IEnumerable<TEntity> IncludeAll(params System.Linq.Expressions.Expression<Func<TEntity, object>>[] includeProperties)
+       public IEnumerable<TEntity> GetAll()
+       {
+           return dbSet.ToList();
+       }
+       public IQueryable<TEntity> IncludeAll(params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<TEntity> query = DbContext.Set<TEntity>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return query;
         }
 
-       public IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate = null)
-        {
-            throw new NotImplementedException();
-        }
+       
 
-       public TEntity Get(Func<TEntity, bool> predicate)
+       public  TEntity Get(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return dbSet.Where(predicate).FirstOrDefault<TEntity>();
         }
 
        public IEnumerable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return dbSet.Where(predicate).ToList();
         }
 
         public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(entity);
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            dbSet.Attach(entity);
+            dataContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Remove(int id)
+        public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            dbSet.Remove(entity);
         }
     }
 }
