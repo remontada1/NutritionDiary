@@ -12,7 +12,7 @@ namespace WebApplication1.Infrastructure
         IEnumerable<TEntity> IncludeAll(params Expression<Func<TEntity, object>>[] includeProperties);
 
         IEnumerable<TEntity> GetAll();
-        IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate = null);
+        
         TEntity Get(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> FindBy( Expression <Func<TEntity,bool>> predicate);
 
