@@ -1047,6 +1047,7 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Resolver\UnityResolver.cs" />
+    <Compile Include="Service\FoodService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706122103092_TableRelationsComplete2.resx">

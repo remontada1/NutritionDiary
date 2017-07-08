@@ -7,46 +7,23 @@ using System.Web.Http.Description;
 using WebApplication1.DAL;
 using WebApplication1.Models;
 using System.Data.Entity;
+using WebApplication1.Infrastructure;
 
 namespace WebApplication1.Infrastructure
 {
-    public class FoodRepository : IRepository<Food>
+    public class FoodRepository : RepositoryBase<Food>
     {
-        
-            private CustomerContext db;
 
-            public FoodRepository(CustomerContext context)
-            {
-                this.db = context;
-            }
+        public FoodRepository(IDbFactory dbFactory)
+            : base(dbFactory) { }
 
-            public IEnumerable<Food> GetAll()
-            {
-                return db.Foods;
-            }
 
-            public Food Get(int id)
-            {
-                return db.Foods.Find(id);
-            }
-
-            public void Create(Food food)
-            {
-                db.Foods.Add(food);
-            }
-
-            public void Update(Food food)
-            {
-                db.Entry(food).State = EntityState.Modified;
-            }
-
-            public void Remove(int id)
-            {
-               Food food = db.Foods.Find(id);
-                if (food != null)
-                    db.Foods.Remove(food);
-            }
-        }
 
 
     }
+
+    public interface IFoodRepository : IRepository<Food>
+    {
+        Food GetFoodByName(string foodname);
+    }
+}

@@ -8,7 +8,7 @@ using WebApplication1.DAL;
 
 namespace WebApplication1.Infrastructure
 {
-    public class IRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private CustomerContext dataContext;
         private readonly IDbSet<TEntity> dbSet;
@@ -22,7 +22,7 @@ namespace WebApplication1.Infrastructure
             get {  return dataContext ?? ( dataContext = DbFactory.Init()); }
         }
 
-       protected  IRepository(IDbFactory dbFactory)
+       protected  RepositoryBase(IDbFactory dbFactory)
         {
             DbFactory = dbFactory;
             dbSet = DbContext.Set<TEntity>();
