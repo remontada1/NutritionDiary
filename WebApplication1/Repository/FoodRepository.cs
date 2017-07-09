@@ -11,12 +11,17 @@ using WebApplication1.Infrastructure;
 
 namespace WebApplication1.Infrastructure
 {
-    public class FoodRepository : RepositoryBase<Food>
+    public class FoodRepository : RepositoryBase<Food>, IFoodRepository
     {
 
         public FoodRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
-
+        
+        public Food GetFoodByName(string foodName)
+        {
+            var food = this.DbContext.Foods.Where(f => f.Name == foodName).FirstOrDefault();
+            return food;
+        }
 
 
 

@@ -51,23 +51,29 @@ namespace WebApplication1.Infrastructure
             return dbSet.Where(predicate).FirstOrDefault<TEntity>();
         }
 
+       public virtual TEntity GetById(int id)
+       {
+           return dbSet.Find(id);
+              
+       }
+
        public IEnumerable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
             return dbSet.Where(predicate).ToList();
         }
 
-        public void Add(TEntity entity)
+        public  virtual void Add(TEntity entity)
         {
             dbSet.Add(entity);
         }
 
-        public void Update(TEntity entity)
+        public  virtual void Update(TEntity entity)
         {
             dbSet.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Remove(TEntity entity)
+        public  virtual void Remove(TEntity entity)
         {
             dbSet.Remove(entity);
         }

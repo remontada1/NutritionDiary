@@ -8,6 +8,12 @@ using WebApplication1.DAL;
 
 namespace WebApplication1.Service
 {
+
+
+    public interface IFoodService
+    {
+
+    }
     public class FoodService
     {
         private readonly IFoodRepository foodRepository;
@@ -26,5 +32,15 @@ namespace WebApplication1.Service
             var foods = foodRepository.GetAll();
             return foods;
         }
+        public Food GetFood(string name)
+        {
+            var food = foodRepository.GetFoodByName(name);
+            return food;
+        }
+
+
+        
+
+
     }
 }
