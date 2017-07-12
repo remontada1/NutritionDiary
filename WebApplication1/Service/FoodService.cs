@@ -14,7 +14,7 @@ namespace WebApplication1.Service
     {
 
     }
-    public class FoodService
+    public class FoodService :IFoodService
     {
         private readonly IFoodRepository foodRepository;
         private readonly IUnitOfWork unitOfWork;
@@ -38,7 +38,21 @@ namespace WebApplication1.Service
             return food;
         }
 
+        public Food GetFoodById(int id)
+        {
+            var food = foodRepository.GetById(id);
+            return food;
+        }
 
+        public void AddFood(Food food)
+        {
+            foodRepository.Add(food);
+        }
+
+        public void SaveFood()
+        {
+            unitOfWork.Commit();
+        }
         
 
 

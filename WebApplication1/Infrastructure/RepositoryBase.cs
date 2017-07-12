@@ -57,10 +57,10 @@ namespace WebApplication1.Infrastructure
               
        }
 
-       public IEnumerable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+     /*  public IEnumerable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
             return dbSet.Where(predicate).ToList();
-        }
+        } */
 
         public  virtual void Add(TEntity entity)
         {

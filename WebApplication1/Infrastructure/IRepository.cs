@@ -12,6 +12,8 @@ namespace WebApplication1.Infrastructure
         IEnumerable<TEntity> IncludeAll(params Expression<Func<TEntity, object>>[] includeProperties);
         IEnumerable<TEntity> GetAll();
         TEntity Get(Expression<Func<TEntity, bool>> predicate);
+
+        TEntity GetById(int id);
       //  IEnumerable<TEntity> FindBy( Expression <Func<TEntity,bool>> predicate);
         void Add(TEntity entity);
         void Update(TEntity entity);
