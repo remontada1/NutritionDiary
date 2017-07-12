@@ -7,6 +7,7 @@ using System.Web.Routing;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using WebApplication1;
+using WebApplication1.App_Start;
 
 
 namespace WebAplication1
@@ -15,11 +16,14 @@ namespace WebAplication1
     {
         protected void Application_Start()
         {
+            
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Bootstrapper.Run();
         }
     }
 }
