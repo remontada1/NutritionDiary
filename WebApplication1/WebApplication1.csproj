@@ -1017,6 +1017,7 @@
     <Compile Include="Infrastructure\IDbFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Migrations\201706122103092_TableRelationsComplete2.cs" />
     <Compile Include="Migrations\201706122103092_TableRelationsComplete2.Designer.cs">
       <DependentUpon>201706122103092_TableRelationsComplete2.cs</DependentUpon>
