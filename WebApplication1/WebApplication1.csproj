@@ -1019,6 +1019,7 @@
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Mappings\DomainToViewModelMappingFood.cs" />
+    <Compile Include="Mappings\ViewModelToDomainMappingProfile .cs" />
     <Compile Include="Migrations\201706122103092_TableRelationsComplete2.cs" />
     <Compile Include="Migrations\201706122103092_TableRelationsComplete2.Designer.cs">
       <DependentUpon>201706122103092_TableRelationsComplete2.cs</DependentUpon>
