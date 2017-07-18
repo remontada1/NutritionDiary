@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
+using WebApplication1.ViewModels;
+
 namespace WebApplication1.Mappings
 {
     public class AutoMapperConfiguration
@@ -11,10 +13,9 @@ namespace WebApplication1.Mappings
         {
             Mapper.Initialize(x =>
                 {
-                    x.AddProfile<DomainToViewModelMappingFood>();
-                    x.AddProfile<ViewModelToDomainMappingFood>();
+                    x.AddProfile<DomainToViewModelMappingProfile>();
+                    x.AddProfile<ViewModelToDomainMappingProfile>();
                 });
         }
-
     }
 }
