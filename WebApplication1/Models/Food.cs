@@ -17,6 +17,8 @@ namespace WebApplication1.Models
 
         public int KCalory { get; set; }
 
+        public string Image { get; set; }
+
         public ICollection<Meal> Meals { get; set; }
 
         public Food()

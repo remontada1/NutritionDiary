@@ -21,7 +21,8 @@ namespace WebApplication1.Mappings
                 .ForMember(f => f.Hydrates, map => map.MapFrom(vm => vm.Hydrates))
                 .ForMember(f => f.KCalory, map => map.MapFrom(vm => vm.KCalory))
                 .ForMember(f => f.Fats, map => map.MapFrom(vm => vm.Fats))
-                .ForMember(f => f.Protein, map => map.MapFrom(vm => vm.Protein));
+                .ForMember(f => f.Protein, map => map.MapFrom(vm => vm.Protein))
+                .ForMember(f => f.Image, map => map.MapFrom(vm => vm.Image));
         }
     }
 }

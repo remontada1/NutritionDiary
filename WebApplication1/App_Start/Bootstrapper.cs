@@ -11,6 +11,8 @@ using System.Web.Mvc;
 using WebApplication1.Controllers;
 using WebApplication1.Infrastructure;
 using WebApplication1.Service;
+using AutoMapper;
+using WebApplication1.Mappings;
 
 namespace WebApplication1.App_Start
 {
@@ -19,6 +21,7 @@ namespace WebApplication1.App_Start
         public static void Run()
         {
             SetAutofacContainer();
+            AutoMapperConfiguration.Configure();
         }
 
         private static void SetAutofacContainer()
