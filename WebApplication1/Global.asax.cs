@@ -7,6 +7,7 @@ using System.Web.Routing;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using WebApplication1;
+using WebApplication1.Migrations;
 using WebApplication1.App_Start;
 
 
@@ -16,7 +17,7 @@ namespace WebAplication1
     {
         protected void Application_Start()
         {
-            
+            Schedule.SetInitializer(new DatabaseInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             GlobalConfiguration.Configure(WebApiConfig.Register);

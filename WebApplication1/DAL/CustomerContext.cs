@@ -4,17 +4,12 @@ using System.Linq;
 using System.Web;
 using WebApplication1.Models;
 using System.Data.Entity;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Owin;
+
+
 
 namespace WebApplication1.DAL
 {
-    public class CustomerContext : IdentityDbContext<Customer>
+    public class CustomerContext : DbContext
     {
        public CustomerContext()
            : base("name=Schedule")  { }

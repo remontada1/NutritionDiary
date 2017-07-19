@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Infrastructure
 {
-    interface IUnitOfWork
+   public interface IUnitOfWork
     {
         void Commit();
     }

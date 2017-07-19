@@ -12,7 +12,7 @@ namespace WebApplication1.Service
 
     public interface IFoodService
     {
-        public IEnumerable<Food> GetFoods();
+        IEnumerable<Food> GetFoods();
 
 
     }

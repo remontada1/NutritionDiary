@@ -15,7 +15,7 @@ using AutoMapper;
 
 namespace WebApplication1.Controllers
 {
-    [RoutePrefix("api/Food")]
+    
     public class FoodController : ApiController
     {
         private readonly IFoodService foodService;
@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
         {
             this.foodService = foodService;
         }
-
+        [Route("api/GetFoods")]
         public HttpResponseMessage GetFoods()
         {
             IEnumerable<FoodViewModel> viewModelFoods;

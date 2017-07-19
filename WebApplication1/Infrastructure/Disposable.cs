@@ -27,7 +27,7 @@ namespace WebApplication1.Infrastructure
             }
             isDisposed = true;
         }
-        private virtual void DisposeCore()
+        protected virtual void DisposeCore()
         {
 
         }

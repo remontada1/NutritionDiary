@@ -8,7 +8,7 @@ using WebApplication1.DAL;
 
 namespace WebApplication1.Infrastructure
 {
-    public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : class
+    public  abstract class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private CustomerContext dataContext;
         private readonly IDbSet<TEntity> dbSet;
@@ -34,15 +34,7 @@ namespace WebApplication1.Infrastructure
        {
            return dbSet.ToList();
        }
-       public IQueryable<TEntity> IncludeAll(params Expression<Func<TEntity, object>>[] includeProperties)
-        {
-            IQueryable<TEntity> query = DbContext.Set<TEntity>();
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
-            return query;
-        }
+        
 
        
 

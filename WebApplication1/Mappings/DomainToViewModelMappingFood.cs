@@ -10,7 +10,7 @@ namespace WebApplication1.Mappings
 {
     public class DomainToViewModelMappingProfile : Profile
     {
-        public override string FoodName
+        public override string ProfileName
         {
             get { return "DomainToViewModelMappings"; }
         }
