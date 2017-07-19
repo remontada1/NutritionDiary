@@ -9,6 +9,8 @@ using System.Web.Optimization;
 using WebApplication1;
 using WebApplication1.Migrations;
 using WebApplication1.App_Start;
+using System.Data.Entity;
+using WebApplication1.DAL;
 
 
 namespace WebAplication1
@@ -17,7 +19,7 @@ namespace WebAplication1
     {
         protected void Application_Start()
         {
-            Schedule.SetInitializer(new DatabaseInitializer());
+            Database.SetInitializer<CustomerContext>(null);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             GlobalConfiguration.Configure(WebApiConfig.Register);
