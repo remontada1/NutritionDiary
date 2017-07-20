@@ -19,10 +19,11 @@ namespace WebApplication1.Controllers
     public class FoodController : ApiController
     {
         private readonly IFoodService foodService;
-
-        public FoodController(IFoodService foodService)
+        private readonly IMapper mapper;
+        public FoodController(IFoodService foodService, IMapper mapper)
         {
             this.foodService = foodService;
+            this.mapper = mapper;
         }
         [Route("api/GetFoods")]
         public HttpResponseMessage GetFoods()
@@ -32,7 +33,7 @@ namespace WebApplication1.Controllers
 
             foods = foodService.GetFoods().OrderByDescending(f => f.KCalory).Take(10).ToList();
 
-            viewModelFoods = Mapper.Map<IEnumerable<Food>, IEnumerable<FoodViewModel>>(foods);
+            viewModelFoods = mapper.Map<IEnumerable<Food>, IEnumerable<FoodViewModel>>(foods);
 
             return Request.CreateResponse(HttpStatusCode.OK, viewModelFoods);
         }

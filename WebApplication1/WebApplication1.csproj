@@ -1007,7 +1007,8 @@
     <Compile Include="Infrastructure\IDbFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Mappings\AutoMapperModule.cs" />
+    <Compile Include="Mappings\MappingProfile.cs" />
     <Compile Include="Mappings\DomainToViewModelMappingFood.cs" />
     <Compile Include="Mappings\ViewModelToDomainMappingProfile .cs" />
     <Compile Include="Migrations\201706122103092_TableRelationsComplete2.cs" />

@@ -3,22 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
-using WebApplication1.Models;
 using WebApplication1.ViewModels;
+using WebApplication1.Models;
 
 namespace WebApplication1.Mappings
 {
-    public class DomainToViewModelMappingProfile : Profile
+    public class MappingProfile : Profile
     {
-        public override string ProfileName
-        {
-            get { return "DomainToViewModelMappings"; }
-        }
-
         protected override void Configure()
         {
             CreateMap<Food, FoodViewModel>();
-        }
 
+        }
     }
 }

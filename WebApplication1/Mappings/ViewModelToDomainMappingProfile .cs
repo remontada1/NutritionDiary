@@ -16,13 +16,13 @@ namespace WebApplication1.Mappings
 
         protected override void Configure()
         {
-            Mapper.CreateMap<FoodViewModel, Food>()
-                .ForMember(f => f.Name, map => map.MapFrom(vm => vm.FoodName))
+            Mapper.Initialize(cfg => cfg.CreateMap<FoodViewModel, Food>()
+                .ForMember(f => f.Name, map => map.MapFrom(vm => vm.Name))
                 .ForMember(f => f.Hydrates, map => map.MapFrom(vm => vm.Hydrates))
                 .ForMember(f => f.KCalory, map => map.MapFrom(vm => vm.KCalory))
                 .ForMember(f => f.Fats, map => map.MapFrom(vm => vm.Fats))
                 .ForMember(f => f.Protein, map => map.MapFrom(vm => vm.Protein))
-                .ForMember(f => f.Image, map => map.MapFrom(vm => vm.Image));
+                .ForMember(f => f.Image, map => map.MapFrom(vm => vm.Image)));
         }
     }
 }
