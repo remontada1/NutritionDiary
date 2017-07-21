@@ -5,21 +5,28 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 using WebApplication1.ViewModels;
+using WebApplication1.Mappings;
+
 namespace WebApplication1.Mappings
 {
     public class AutoMapperModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            Mapper.Initialize(cfg =>
+
+            builder.RegisterAssemblyTypes(typeof(AutoMapperModule).Assembly).As<Profile>();
+            builder.Register(context => new MapperConfiguration(cfg =>
+            {
+                foreach (var profile in context.Resolve<IEnumerable<Profile>>())
                 {
-                    cfg.AddProfile<ViewModelToDomainMappingProfile>();
-                    cfg.AddProfile<DomainToViewModelMappingProfile>();
+                    cfg.AddProfile(profile);
+                }
+            })).AsSelf().SingleInstance();
 
-                });
-            
-            base.Load(builder);
-        }
+            builder.Register(c => c.Resolve<MapperConfiguration>().CreateMapper(c.Resolve))
+                .As<IMapper>()
+                .InstancePerLifetimeScope();
+         }
+     }
 
-    }
 }

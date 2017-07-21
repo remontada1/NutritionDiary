@@ -13,6 +13,7 @@ using WebApplication1.Infrastructure;
 using WebApplication1.Service;
 using AutoMapper;
 using WebApplication1.Mappings;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.App_Start
 {
@@ -32,18 +33,10 @@ namespace WebApplication1.App_Start
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder.RegisterType<DomainToViewModelMappingProfile>().As<Profile>();
-            builder.RegisterType<ViewModelToDomainMappingProfile>().As<Profile>();
 
-            builder.Register(context => new MapperConfiguration(configuration =>
-            {
-                foreach (var profile in context.Resolve<IEnumerable<Profile>>())
-                {
-                    configuration.AddProfile(profile);
-                }
-            }))
-            .AsSelf()
-            .SingleInstance();
+            builder.RegisterModule(new AutoMapperModule());
+
+
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();

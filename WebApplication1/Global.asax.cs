@@ -11,6 +11,7 @@ using WebApplication1.Migrations;
 using WebApplication1.App_Start;
 using System.Data.Entity;
 using WebApplication1.DAL;
+using WebApplication1.Mappings;
 
 
 namespace WebAplication1

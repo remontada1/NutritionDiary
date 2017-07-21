@@ -10,10 +10,10 @@ namespace WebApplication1.ViewModels
     public class FoodViewModel
     {
         
-        public string Name { get; set; }
+        public string FoodName { get; set; }
         public int KCalory { get; set;}
         public int Protein { get; set;}
-        public int Hydrates { get; set;}
+        public int FoodCarboHydrates { get; set;}
         public int Fats {get; set;}
         public string Image { get; set; }
     }
