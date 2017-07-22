@@ -4,5 +4,6 @@ Used technologies:
 - Autofac IoC
 - Entity Framework
 - MSSql Server
+- Automapper
 - Twitter Bootstrap
-
+-
