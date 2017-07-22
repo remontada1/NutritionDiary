@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using WebApplication1.DAL;
+using WebApplication1.Models;
 
 namespace WebApplication1.Infrastructure
 {
@@ -46,7 +47,6 @@ namespace WebApplication1.Infrastructure
        public virtual TEntity GetById(int id)
        {
            return dbSet.Find(id);
-              
        }
 
      /*  public IEnumerable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)

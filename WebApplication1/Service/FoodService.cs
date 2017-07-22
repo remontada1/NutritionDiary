@@ -13,7 +13,8 @@ namespace WebApplication1.Service
     public interface IFoodService
     {
         IEnumerable<Food> GetFoods();
-
+        Food GetFoodById(int id);
+        Food GetFood(string name);
 
     }
     public class FoodService :IFoodService

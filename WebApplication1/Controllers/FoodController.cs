@@ -37,5 +37,16 @@ namespace WebApplication1.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, viewModelFoods);
         }
+
+        public HttpResponseMessage GetFoodById(int id)
+        {
+            FoodViewModel viewModelFood;
+
+            Food food = foodService.GetFoodById(id);
+
+            viewModelFood = mapper.Map<Food, FoodViewModel>(food);
+            return Request.CreateResponse(HttpStatusCode.OK, viewModelFood);
+             
+        }
     }
 }

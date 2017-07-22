@@ -20,9 +20,9 @@ namespace WebApplication1
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "Customer",
-                routeTemplate: "api/customer/{id}",
-                defaults: new { controller = "customer", id = RouteParameter.Optional }
+                name: "API Default",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new {  id = RouteParameter.Optional }
             );
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
