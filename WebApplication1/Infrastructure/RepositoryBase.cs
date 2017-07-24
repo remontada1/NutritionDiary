@@ -65,9 +65,9 @@ namespace WebApplication1.Infrastructure
             dataContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public  virtual void Remove(TEntity entity)
+        public  virtual void Remove(int id)
         {
-            dbSet.Remove(entity);
+          dbContext.Remove(id);
         }
     }
 }

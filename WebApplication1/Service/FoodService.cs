@@ -9,14 +9,16 @@ using WebApplication1.DAL;
 namespace WebApplication1.Service
 {
 
-
     public interface IFoodService
     {
         IEnumerable<Food> GetFoods();
         Food GetFoodById(int id);
         Food GetFood(string name);
-
+        void AddFood(Food food);
+        void Remove(Food food);
+        void SaveFood();
     }
+
     public class FoodService :IFoodService
     {
         private readonly IFoodRepository foodRepository;
@@ -28,7 +30,6 @@ namespace WebApplication1.Service
             this.foodRepository = foodRepository;
             this.unitOfWork = unitOfWork;
         }
-
 
         public IEnumerable<Food> GetFoods()
         {
@@ -50,6 +51,13 @@ namespace WebApplication1.Service
         public void AddFood(Food food)
         {
             foodRepository.Add(food);
+        }
+
+        public void Remove(int id)
+        {
+            foodRepository.Remove(id);
+            
+
         }
 
         public void SaveFood()

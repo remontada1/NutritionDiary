@@ -48,5 +48,31 @@ namespace WebApplication1.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, viewModelFood);
              
         }
+        [HttpPost]
+        public HttpResponseMessage AddFood( HttpRequestMessage request,  FoodViewModel newFood)
+        {
+            HttpResponseMessage response = null;
+            if (!ModelState.IsValid)
+            {
+                response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            else
+            {
+                Food food = new Food();
+                foodService.AddFood(food);
+
+                foodService.SaveFood();
+
+                newFood = Mapper.Map<Food, FoodViewModel>(food);
+
+                response = request.CreateResponse<FoodViewModel>(HttpStatusCode.Created, newFood);
+            }
+
+            return response;
+        }
+
+
+
     }
 }
