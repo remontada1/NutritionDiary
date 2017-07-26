@@ -15,7 +15,7 @@ namespace WebApplication1.Service
         Food GetFoodById(int id);
         Food GetFood(string name);
         void AddFood(Food food);
-        void Remove(Food food);
+        void Remove(int id);
         void SaveFood();
     }
 

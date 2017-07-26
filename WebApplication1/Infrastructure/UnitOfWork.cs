@@ -16,14 +16,13 @@ namespace WebApplication1.Infrastructure
             this.dbFactory = dbFactory;
         }
 
-
         public CustomerContext DbContext
         {
             get { return dbContext ?? (dbContext = dbFactory.Init()); }
         }
         public void Commit()
         {
-            dbContext.Commit();
+             DbContext.Commit();
         }
     }
 }

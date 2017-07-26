@@ -67,7 +67,9 @@ namespace WebApplication1.Infrastructure
 
         public  virtual void Remove(int id)
         {
-          dbContext.Remove(id);
+            TEntity entity = dbSet.Find(id);
+            dbSet.Attach(entity);
+            dbSet.Remove(entity);
         }
     }
 }

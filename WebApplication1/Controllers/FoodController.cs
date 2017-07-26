@@ -71,8 +71,20 @@ namespace WebApplication1.Controllers
 
             return response;
         }
+        
+        [HttpDelete]
+        [Route("api/DeleteFoodById/{id}")]
+        public HttpResponseMessage RemoveFood( int id)
+        {
 
+            Food food = foodService.GetFoodById(id);
 
+            foodService.Remove(id);
+            foodService.SaveFood();
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+
+        }
 
     }
 }

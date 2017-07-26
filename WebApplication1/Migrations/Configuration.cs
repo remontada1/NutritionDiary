@@ -28,7 +28,7 @@ namespace WebApplication1.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
+            
             context.Foods.AddOrUpdate(
                 p => p.Id,
                  new Food()
@@ -40,6 +40,9 @@ namespace WebApplication1.Migrations
                      Name = "Гречка",
                      Protein = 9
                  });
+
+
+            context.Commit();
         }
     }
 }

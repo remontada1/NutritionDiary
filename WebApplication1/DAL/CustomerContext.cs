@@ -12,7 +12,7 @@ namespace WebApplication1.DAL
     public class CustomerContext : DbContext
     {
        public CustomerContext()
-           : base("name=Schedule")  { }
+           : base("Schedule")  { }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Food> Foods {get; set;}
         public DbSet<Meal> Meals { get; set; }
