@@ -1,8 +1,9 @@
 Simple WebAPI CRUD Web Application.
 Used technologies:
 - Web API 
-- Unity IoC
+- Autofac IoC
 - Entity Framework
--  MSSql Server
+- MSSql Server
+- Automapper
 - Twitter Bootstrap
-- AngularJS
+-
