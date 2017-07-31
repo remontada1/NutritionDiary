@@ -10,7 +10,7 @@ namespace WebApplication1.Mappings
 {
     public class MappingProfile : Profile
     {
-        protected override void Configure()
+        protected  override void  Configure()
         {
             
         }

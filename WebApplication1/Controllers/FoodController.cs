@@ -49,42 +49,39 @@ namespace WebApplication1.Controllers
              
         }
         [HttpPost]
-        public HttpResponseMessage AddFood( HttpRequestMessage request,  FoodViewModel newFood)
+        public HttpResponseMessage AddFood( Food food)
         {
-            HttpResponseMessage response = null;
-            if (!ModelState.IsValid)
-            {
-                response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
 
-            else
+            FoodViewModel viewModelFood;
+            if (ModelState.IsValid)
             {
-                Food food = new Food();
                 foodService.AddFood(food);
-
                 foodService.SaveFood();
-
-                newFood = Mapper.Map<Food, FoodViewModel>(food);
-
-                response = request.CreateResponse<FoodViewModel>(HttpStatusCode.Created, newFood);
             }
+            
 
-            return response;
+            viewModelFood = mapper.Map<Food, FoodViewModel>(food);
+
+            return  Request.CreateResponse(HttpStatusCode.Created);  
         }
         
         [HttpDelete]
         [Route("api/DeleteFoodById/{id}")]
-        public HttpResponseMessage RemoveFood( int id)
+        public  IHttpActionResult RemoveFood( int id)
         {
-
+            
             Food food = foodService.GetFoodById(id);
 
-            foodService.Remove(id);
-            foodService.SaveFood();
-
-            return Request.CreateResponse(HttpStatusCode.OK);
-
+            if (food == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                foodService.Remove(id);
+                foodService.SaveFood();
+                return Ok("Food has been deleted");
+            }
         }
-
     }
 }
