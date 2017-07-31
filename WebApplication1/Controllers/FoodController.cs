@@ -74,13 +74,13 @@ namespace WebApplication1.Controllers
 
             if (food == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "Food does not exist.");
             }
             else
             {
                 foodService.Remove(id);
                 foodService.SaveFood();
-                return Ok("Food has been deleted");
+                return Ok("Food has been deleted.");
             }
         }
     }
