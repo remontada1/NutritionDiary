@@ -69,8 +69,37 @@ namespace WebApplication1.Controllers
             foodService.SaveFood();
             viewModelFood = mapper.Map<Food, FoodViewModel>(food);
 
-            return Content(HttpStatusCode.Created, "Food has been created");
+            return Content(HttpStatusCode.Created, viewModelFood);
         }
+
+        [HttpPut]
+        public IHttpActionResult UpdateFood(Food food)
+        {
+
+            FoodViewModel viewModel;
+
+            if (!ModelState.IsValid)
+            {
+                return Content(HttpStatusCode.BadRequest, ModelState);
+            }
+            else
+            {
+                food = foodService.GetFoodById(food.Id);
+                if (food == null)
+                {
+                    return Content(HttpStatusCode.NotFound, "Food does not exist");
+                }
+                else
+                {
+                    foodService.UpdateFood(food);
+                    foodService.SaveFood();
+
+
+                    return Content(HttpStatusCode.OK, food);
+                }
+            }
+        }
+
 
         [HttpDelete]
         [Route("api/DeleteFoodById/{id}")]

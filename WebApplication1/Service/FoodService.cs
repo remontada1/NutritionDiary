@@ -15,6 +15,7 @@ namespace WebApplication1.Service
         Food GetFoodById(int id);
         Food GetFood(string name);
         void AddFood(Food food);
+        void UpdateFood(Food food);
         void Remove(int id);
         void SaveFood();
     }
@@ -53,6 +54,11 @@ namespace WebApplication1.Service
             foodRepository.Add(food);
         }
 
+        public void UpdateFood(Food food)
+        {
+            foodRepository.Update(food);
+        }
+
         public void Remove(int id)
         {
             foodRepository.Remove(id);
@@ -62,8 +68,5 @@ namespace WebApplication1.Service
         {
             unitOfWork.Commit();
         }
-
-
-
     }
 }
