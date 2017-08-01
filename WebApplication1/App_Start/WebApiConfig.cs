@@ -16,13 +16,13 @@ namespace WebApplication1
     {
         public static void Register(HttpConfiguration config)
         {
-  // Web API routes
+            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "API Default",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new {  id = RouteParameter.Optional }
+                defaults: new { id = RouteParameter.Optional }
             );
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

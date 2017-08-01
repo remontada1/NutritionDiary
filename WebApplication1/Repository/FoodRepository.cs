@@ -16,15 +16,12 @@ namespace WebApplication1.Infrastructure
 
         public FoodRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
-        
+
         public Food GetFoodByName(string foodName)
         {
             var food = this.DbContext.Foods.Where(f => f.Name == foodName).FirstOrDefault();
             return food;
         }
-
-
-
     }
 
     public interface IFoodRepository : IRepository<Food>

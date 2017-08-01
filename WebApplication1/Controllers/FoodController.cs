@@ -15,7 +15,7 @@ using AutoMapper;
 
 namespace WebApplication1.Controllers
 {
-    
+
     public class FoodController : ApiController
     {
         private readonly IFoodService foodService;
@@ -25,51 +25,58 @@ namespace WebApplication1.Controllers
             this.foodService = foodService;
             this.mapper = mapper;
         }
+
         [Route("api/GetFoods")]
-        public HttpResponseMessage GetFoods()
+        public IHttpActionResult GetFoods()
         {
             IEnumerable<FoodViewModel> viewModelFoods;
             IEnumerable<Food> foods;
 
-            foods = foodService.GetFoods().OrderByDescending(f => f.KCalory).Take(10).ToList();
-
+            foods = foodService.GetFoods().OrderByDescending(f => f.Id).Take(5).ToList();
+            if (foods == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Foods not found");
+            }
             viewModelFoods = mapper.Map<IEnumerable<Food>, IEnumerable<FoodViewModel>>(foods);
 
-            return Request.CreateResponse(HttpStatusCode.OK, viewModelFoods);
+            return Content(HttpStatusCode.Found, viewModelFoods);
         }
 
-        public HttpResponseMessage GetFoodById(int id)
+        public IHttpActionResult GetFoodById(int id)
         {
             FoodViewModel viewModelFood;
 
             Food food = foodService.GetFoodById(id);
-
-            viewModelFood = mapper.Map<Food, FoodViewModel>(food);
-            return Request.CreateResponse(HttpStatusCode.OK, viewModelFood);
-             
-        }
-        [HttpPost]
-        public HttpResponseMessage AddFood( Food food)
-        {
-
-            FoodViewModel viewModelFood;
-            if (ModelState.IsValid)
+            if (food == null)
             {
-                foodService.AddFood(food);
-                foodService.SaveFood();
+                return Content(HttpStatusCode.NotFound, "Food not found");
             }
-            
+            viewModelFood = mapper.Map<Food, FoodViewModel>(food);
+            return Content(HttpStatusCode.OK, viewModelFood);
 
+        }
+
+        [HttpPost]
+        public IHttpActionResult AddFood(Food food)
+        {
+            FoodViewModel viewModelFood;
+
+            if (!ModelState.IsValid)
+            {
+                return Content(HttpStatusCode.NotAcceptable, "Can't create new food");
+            }
+            foodService.AddFood(food);
+            foodService.SaveFood();
             viewModelFood = mapper.Map<Food, FoodViewModel>(food);
 
-            return  Request.CreateResponse(HttpStatusCode.Created);  
+            return Content(HttpStatusCode.Created, "Food has been created");
         }
-        
+
         [HttpDelete]
         [Route("api/DeleteFoodById/{id}")]
-        public  IHttpActionResult RemoveFood( int id)
+        public IHttpActionResult RemoveFood(int id)
         {
-            
+
             Food food = foodService.GetFoodById(id);
 
             if (food == null)

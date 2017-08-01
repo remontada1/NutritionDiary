@@ -9,63 +9,60 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Infrastructure
 {
-    public  abstract class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : class
+    public abstract class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private CustomerContext dataContext;
         private readonly IDbSet<TEntity> dbSet;
         protected IDbFactory DbFactory
         {
-            get; private set;
+            get;
+            private set;
         }
 
         protected CustomerContext DbContext
         {
-            get {  return dataContext ?? ( dataContext = DbFactory.Init()); }
+            get { return dataContext ?? (dataContext = DbFactory.Init()); }
         }
 
-       protected  RepositoryBase(IDbFactory dbFactory)
+        protected RepositoryBase(IDbFactory dbFactory)
         {
             DbFactory = dbFactory;
             dbSet = DbContext.Set<TEntity>();
 
         }
 
+        public IEnumerable<TEntity> GetAll()
+        {
+            return dbSet.ToList();
+        }
 
-       public IEnumerable<TEntity> GetAll()
-       {
-           return dbSet.ToList();
-       }
-        
-
-       
-
-       public  TEntity Get(Expression<Func<TEntity, bool>> predicate)
+        public TEntity Get(Expression<Func<TEntity, bool>> predicate)
         {
             return dbSet.Where(predicate).FirstOrDefault<TEntity>();
         }
 
-       public virtual TEntity GetById(int id)
-       {
-           return dbSet.Find(id);
-       }
-
-     /*  public IEnumerable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity GetById(int id)
         {
-            return dbSet.Where(predicate).ToList();
-        } */
+            return dbSet.Find(id);
+        }
 
-        public  virtual void Add(TEntity entity)
+        /*  public IEnumerable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+           {
+               return dbSet.Where(predicate).ToList();
+           } */
+
+        public virtual void Add(TEntity entity)
         {
             dbSet.Add(entity);
         }
 
-        public  virtual void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             dbSet.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public  virtual void Remove(int id)
+        public virtual void Remove(int id)
         {
             TEntity entity = dbSet.Find(id);
             dbSet.Attach(entity);

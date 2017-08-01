@@ -19,7 +19,7 @@ namespace WebApplication1.Service
         void SaveFood();
     }
 
-    public class FoodService :IFoodService
+    public class FoodService : IFoodService
     {
         private readonly IFoodRepository foodRepository;
         private readonly IUnitOfWork unitOfWork;
@@ -56,15 +56,13 @@ namespace WebApplication1.Service
         public void Remove(int id)
         {
             foodRepository.Remove(id);
-            
-
         }
 
         public void SaveFood()
         {
             unitOfWork.Commit();
         }
-        
+
 
 
     }

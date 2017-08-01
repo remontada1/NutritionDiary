@@ -26,7 +26,7 @@ namespace WebApplication1.Mappings
             builder.Register(c => c.Resolve<MapperConfiguration>().CreateMapper(c.Resolve))
                 .As<IMapper>()
                 .InstancePerLifetimeScope();
-         }
-     }
+        }
+    }
 
 }

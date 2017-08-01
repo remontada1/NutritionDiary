@@ -12,19 +12,18 @@ namespace WebApplication1.Models
         [Key]
         [ForeignKey("Customer")]
         public int Id { get; set; }
-
         public int MealTypeId { get; set; }
         public MealType MealType { get; set; }
 
         public DateTime SetDate { get; set; }
         public Customer Customer { get; set; }
 
-        public virtual ICollection<Food> Foods { get; set;}
+        public virtual ICollection<Food> Foods { get; set; }
 
         public Meal()
         {
             Foods = new List<Food>();
         }
-        
+
     }
 }

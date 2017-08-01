@@ -22,7 +22,7 @@ namespace WebApplication1.Infrastructure
         }
         public void Commit()
         {
-             DbContext.Commit();
+            DbContext.Commit();
         }
     }
 }
