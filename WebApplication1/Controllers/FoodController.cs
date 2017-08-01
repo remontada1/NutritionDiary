@@ -76,8 +76,6 @@ namespace WebApplication1.Controllers
         public IHttpActionResult UpdateFood(Food food)
         {
 
-            FoodViewModel viewModel;
-
             if (!ModelState.IsValid)
             {
                 return Content(HttpStatusCode.BadRequest, ModelState);

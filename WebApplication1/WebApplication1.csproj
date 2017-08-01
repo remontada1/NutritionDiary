@@ -1052,6 +1052,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Repository\MealRepository.cs" />
     <Compile Include="Service\FoodService.cs" />
     <Compile Include="ViewModels\FoodViewModel.cs" />
   </ItemGroup>
