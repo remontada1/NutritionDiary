@@ -12,8 +12,8 @@ namespace WebApplication1.Models
         [Key]
         [ForeignKey("Customer")]
         public int Id { get; set; }
-        public int MealTypeId { get; set; }
-        public MealType MealType { get; set; }
+        public string Name { get; set; }
+
 
         public DateTime SetDate { get; set; }
         public Customer Customer { get; set; }

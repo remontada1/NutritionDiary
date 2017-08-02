@@ -13,7 +13,6 @@ namespace WebApplication1.Infrastructure
 {
     public class FoodRepository : RepositoryBase<Food>, IFoodRepository
     {
-
         public FoodRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
 

@@ -1036,6 +1036,10 @@
     <Compile Include="Migrations\201707260120133_AddFoods1.Designer.cs">
       <DependentUpon>201707260120133_AddFoods1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708021552055_ChangeMealStructure.cs" />
+    <Compile Include="Migrations\201708021552055_ChangeMealStructure.Designer.cs">
+      <DependentUpon>201708021552055_ChangeMealStructure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1074,6 +1078,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707260120133_AddFoods1.resx">
       <DependentUpon>201707260120133_AddFoods1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021552055_ChangeMealStructure.resx">
+      <DependentUpon>201708021552055_ChangeMealStructure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
