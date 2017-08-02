@@ -28,7 +28,7 @@ namespace WebApplication1.Models
         
         public CustomerData CustomerData { get; set; }
 
-        public Meal Meal { get; set; }
+        
         
     }
 

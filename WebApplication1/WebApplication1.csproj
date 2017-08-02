@@ -1040,6 +1040,58 @@
     <Compile Include="Migrations\201708021552055_ChangeMealStructure.Designer.cs">
       <DependentUpon>201708021552055_ChangeMealStructure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708021634116_ChangeDateTimeFormat.cs" />
+    <Compile Include="Migrations\201708021634116_ChangeDateTimeFormat.Designer.cs">
+      <DependentUpon>201708021634116_ChangeDateTimeFormat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021701086_ChangeDateTimeFormat1.cs" />
+    <Compile Include="Migrations\201708021701086_ChangeDateTimeFormat1.Designer.cs">
+      <DependentUpon>201708021701086_ChangeDateTimeFormat1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021703249_ChangeDateTimeFormat2.cs" />
+    <Compile Include="Migrations\201708021703249_ChangeDateTimeFormat2.Designer.cs">
+      <DependentUpon>201708021703249_ChangeDateTimeFormat2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021713038_ChangeDateTimeFormat3.cs" />
+    <Compile Include="Migrations\201708021713038_ChangeDateTimeFormat3.Designer.cs">
+      <DependentUpon>201708021713038_ChangeDateTimeFormat3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021715009_ChangeDateTimeFormat4.cs" />
+    <Compile Include="Migrations\201708021715009_ChangeDateTimeFormat4.Designer.cs">
+      <DependentUpon>201708021715009_ChangeDateTimeFormat4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021719283_ChangeDateTimeFormat5.cs" />
+    <Compile Include="Migrations\201708021719283_ChangeDateTimeFormat5.Designer.cs">
+      <DependentUpon>201708021719283_ChangeDateTimeFormat5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021854166_AddDefaultMeal.cs" />
+    <Compile Include="Migrations\201708021854166_AddDefaultMeal.Designer.cs">
+      <DependentUpon>201708021854166_AddDefaultMeal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021858406_AddDefaultMeal1.cs" />
+    <Compile Include="Migrations\201708021858406_AddDefaultMeal1.Designer.cs">
+      <DependentUpon>201708021858406_AddDefaultMeal1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021904052_AddDefaultMeal2.cs" />
+    <Compile Include="Migrations\201708021904052_AddDefaultMeal2.Designer.cs">
+      <DependentUpon>201708021904052_AddDefaultMeal2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021936117_AddDefaultMeal3.cs" />
+    <Compile Include="Migrations\201708021936117_AddDefaultMeal3.Designer.cs">
+      <DependentUpon>201708021936117_AddDefaultMeal3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021940303_AddDefaultMeal4.cs" />
+    <Compile Include="Migrations\201708021940303_AddDefaultMeal4.Designer.cs">
+      <DependentUpon>201708021940303_AddDefaultMeal4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021945331_AddDefaultMeal5.cs" />
+    <Compile Include="Migrations\201708021945331_AddDefaultMeal5.Designer.cs">
+      <DependentUpon>201708021945331_AddDefaultMeal5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708021951330_AddDefaultMeal6.cs" />
+    <Compile Include="Migrations\201708021951330_AddDefaultMeal6.Designer.cs">
+      <DependentUpon>201708021951330_AddDefaultMeal6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1081,6 +1133,45 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708021552055_ChangeMealStructure.resx">
       <DependentUpon>201708021552055_ChangeMealStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021634116_ChangeDateTimeFormat.resx">
+      <DependentUpon>201708021634116_ChangeDateTimeFormat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021701086_ChangeDateTimeFormat1.resx">
+      <DependentUpon>201708021701086_ChangeDateTimeFormat1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021703249_ChangeDateTimeFormat2.resx">
+      <DependentUpon>201708021703249_ChangeDateTimeFormat2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021713038_ChangeDateTimeFormat3.resx">
+      <DependentUpon>201708021713038_ChangeDateTimeFormat3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021715009_ChangeDateTimeFormat4.resx">
+      <DependentUpon>201708021715009_ChangeDateTimeFormat4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021719283_ChangeDateTimeFormat5.resx">
+      <DependentUpon>201708021719283_ChangeDateTimeFormat5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021854166_AddDefaultMeal.resx">
+      <DependentUpon>201708021854166_AddDefaultMeal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021858406_AddDefaultMeal1.resx">
+      <DependentUpon>201708021858406_AddDefaultMeal1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021904052_AddDefaultMeal2.resx">
+      <DependentUpon>201708021904052_AddDefaultMeal2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021936117_AddDefaultMeal3.resx">
+      <DependentUpon>201708021936117_AddDefaultMeal3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021940303_AddDefaultMeal4.resx">
+      <DependentUpon>201708021940303_AddDefaultMeal4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021945331_AddDefaultMeal5.resx">
+      <DependentUpon>201708021945331_AddDefaultMeal5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708021951330_AddDefaultMeal6.resx">
+      <DependentUpon>201708021951330_AddDefaultMeal6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -9,14 +9,18 @@ namespace WebApplication1.Models
 {
     public class Meal
     {
-        [Key]
-        [ForeignKey("Customer")]
+      //  [Key]
+       // [ForeignKey("Customer")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        
+
         public string Name { get; set; }
 
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
         public DateTime SetDate { get; set; }
-        public Customer Customer { get; set; }
+        
 
         public virtual ICollection<Food> Foods { get; set; }
 

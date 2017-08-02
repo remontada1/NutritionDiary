@@ -13,7 +13,7 @@ namespace WebApplication1.Migrations
             AutomaticMigrationsEnabled = false;
             ContextKey = "WebApplication1.DAL.CustomerContext";
         }
-        
+
         protected override void Seed(WebApplication1.DAL.CustomerContext context)
         {
             //  This method will be called after migrating to the latest version.
@@ -29,28 +29,15 @@ namespace WebApplication1.Migrations
             //    );
             //
 
-            context.Foods.AddOrUpdate(
-                p => p.Id,
-                 new Food()
-                 {
-                     Id = 1,
-                     Hydrates = 70,
-                     KCalory = 340,
-                     Fats = 3,
-                     Name = "Гречка",
-                     Protein = 9
-                 },
+            
+            context.Meals.AddOrUpdate(m => m.Id,
+                new Meal()
+                {
+                    
+                    Name = "Завтрак",
+                    SetDate = DateTime.Parse("17/10/2016")
 
-                 new Food()
-                 {
-                     Id = 2,
-                     Hydrates = 10,
-                     KCalory = 120,
-                     Fats = 1,
-                     Name = "Вареная курица",
-                     Protein = 20
-                 });
-
+                });
 
             context.Commit();
         }
