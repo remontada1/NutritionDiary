@@ -5,5 +5,5 @@ Used technologies:
 - Entity Framework
 - MSSql Server
 - Automapper
-- Twitter Bootstrap
--
+
+
