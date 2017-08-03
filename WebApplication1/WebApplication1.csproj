@@ -1110,6 +1110,7 @@
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Repository\MealRepository.cs" />
     <Compile Include="Service\FoodService.cs" />
+    <Compile Include="Service\MealService.cs" />
     <Compile Include="ViewModels\FoodViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

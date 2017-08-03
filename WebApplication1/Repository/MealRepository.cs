@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using WebApplication1.Models;
 using WebApplication1.Infrastructure;
-
+using WebApplication1.DAL;
+using System.Data.Entity;
 
 namespace WebApplication1.Repository
 {
@@ -13,19 +14,17 @@ namespace WebApplication1.Repository
         public MealRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
 
-        public Meal AttachFoodToMeal(int id)
+        public Meal GetMealById(string name)
         {
-            var meal = this.DbContext.Meals.Where(m => m.Id == id).FirstOrDefault();
+            var meal = this.DbContext.Meals.Where(m => m.Name == name).FirstOrDefault();
 
             return meal;
-
-
         }
         
     }
 
     public interface IMealRepository : IRepository<Meal>
     {
-
+        Meal GetMealById(string name);
     }
 }
