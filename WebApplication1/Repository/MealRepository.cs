@@ -17,9 +17,21 @@ namespace WebApplication1.Repository
         public Meal GetMealById(string name)
         {
             var meal = this.DbContext.Meals.Where(m => m.Name == name).FirstOrDefault();
-
             return meal;
         }
+
+        public void AttachFoodToMeal(int mealId, int foodId)
+        {
+            var meal = this.DbContext.Meals.Find(mealId);
+            var food = this.DbContext.Foods.Find(foodId);
+
+            meal.Foods.Add(food);
+
+        }
+
+
+
+
         
     }
 
