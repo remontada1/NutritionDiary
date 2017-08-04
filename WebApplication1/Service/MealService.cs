@@ -11,7 +11,7 @@ using WebApplication1.Repository;
 namespace WebApplication1.Service
 {
 
-    public interface IMealService
+  /*  public interface IMealService
     {
         IEnumerable<Meal> GetMeals();
         Meal GetMealById(int id);
@@ -22,11 +22,11 @@ namespace WebApplication1.Service
         void UpdateMeal(Meal food);
         void RemoveMeal(int id);
         void SaveMeal();
-    }
+    } */
 
 
 
-    public class MealService : IMealService
+    public class MealService 
     {
         IFoodRepository foodRepository;
         IMealRepository mealRepository;
@@ -41,10 +41,8 @@ namespace WebApplication1.Service
 
         public void AddFoodToMeal(int mealId, int foodId)
         {
-            var food = foodRepository.GetById(foodId);
-            var meal = mealRepository.GetById(mealId);
+            mealRepository.AttachFoodToMeal(mealId, foodId);
 
-            
         }
     }
 }

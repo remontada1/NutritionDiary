@@ -12,9 +12,7 @@ namespace WebApplication1.Infrastructure
         
         IEnumerable<TEntity> GetAll();
         TEntity Get(Expression<Func<TEntity, bool>> predicate);
-
         TEntity GetById(int id);
-      
         void Add(TEntity entity);
         void Update(TEntity entity);
         void Remove(int id);

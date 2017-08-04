@@ -23,20 +23,20 @@ namespace WebApplication1.Repository
         public void AttachFoodToMeal(int mealId, int foodId)
         {
             var meal = this.DbContext.Meals.Find(mealId);
+            this.DbContext.Meals.Attach(meal);
+
             var food = this.DbContext.Foods.Find(foodId);
+            this.DbContext.Foods.Attach(food);
+
+            this.DbContext.Foods.Add(food);
 
             meal.Foods.Add(food);
-
-        }
-
-
-
-
-        
+        }  
     }
 
     public interface IMealRepository : IRepository<Meal>
     {
         Meal GetMealById(string name);
+        void AttachFoodToMeal(int mealId, int foodId);
     }
 }
