@@ -31,7 +31,7 @@ namespace WebApplication1.Infrastructure
 
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return dbSet.ToList();
         }

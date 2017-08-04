@@ -9,10 +9,14 @@ using System.Data.Entity;
 
 namespace WebApplication1.Repository
 {
-    public class MealRepository : RepositoryBase<Meal>, IMealRepository 
+    public class MealRepository : RepositoryBase<Meal>, IMealRepository
     {
         public MealRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
+
+        IFoodRepository foodRepository;
+
+
 
         public Meal GetMealById(string name)
         {
@@ -31,12 +35,24 @@ namespace WebApplication1.Repository
             this.DbContext.Foods.Add(food);
 
             meal.Foods.Add(food);
-        }  
+        }
+
+        Meal GetMealWithFoods(int mealId)
+        {
+            var mealWithFoods = this.DbContext.Meals
+                .Where(m => m.Id == mealId)
+                .Include(f => f.Foods)
+                .FirstOrDefault();
+
+            return mealWithFoods;
+        }
+
     }
 
     public interface IMealRepository : IRepository<Meal>
     {
         Meal GetMealById(string name);
         void AttachFoodToMeal(int mealId, int foodId);
+        Meal GetMealWithFoods(int mealId);
     }
 }
