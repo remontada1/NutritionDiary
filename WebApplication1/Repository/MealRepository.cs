@@ -37,7 +37,8 @@ namespace WebApplication1.Repository
             meal.Foods.Add(food);
         }
 
-        Meal GetMealWithFoods(int mealId)
+
+       public  Meal GetMealWithFoods(int mealId)
         {
             var mealWithFoods = this.DbContext.Meals
                 .Where(m => m.Id == mealId)

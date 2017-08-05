@@ -11,22 +11,22 @@ using WebApplication1.Repository;
 namespace WebApplication1.Service
 {
 
-  /*  public interface IMealService
-    {
-        IEnumerable<Meal> GetMeals();
-        Meal GetMealById(int id);
-        Meal GetMealByName(string name);
-        void AddMeal(Meal meal);
+    /*  public interface IMealService
+      {
+          IEnumerable<Meal> GetMeals();
+          Meal GetMealById(int id);
+          Meal GetMealByName(string name);
+          void AddMeal(Meal meal);
 
-        void AddFoodToMeak(int mealId, int foodId);
-        void UpdateMeal(Meal food);
-        void RemoveMeal(int id);
-        void SaveMeal();
-    } */
+          void AddFoodToMeak(int mealId, int foodId);
+          void UpdateMeal(Meal food);
+          void RemoveMeal(int id);
+          void SaveMeal();
+      } */
 
 
 
-    public class MealService 
+    public class MealService
     {
         IFoodRepository foodRepository;
         IMealRepository mealRepository;
@@ -44,6 +44,42 @@ namespace WebApplication1.Service
             mealRepository.AttachFoodToMeal(mealId, foodId);
         }
 
-        
+        public Meal GetMealWithFoods(int mealId)
+        {
+            return mealRepository.GetMealWithFoods(mealId);
+        }
+
+        public IEnumerable<Meal> GetMeals()
+        {
+            return mealRepository.GetAll();
+        }
+
+        public IEnumerable<Meal> SortMealsByDate()
+        {
+            var meals = mealRepository.GetAll();
+            return meals.OrderByDescending(d => d.SetDate);
+        }
+
+        public Meal GetMealById(int id)
+        {
+            return mealRepository.GetById(id);
+        }
+
+        public void AddMeal(Meal meal)
+        {
+            mealRepository.Add(meal);
+        }
+
+        public void UpdateMeal(Meal meal)
+        {
+            mealRepository.Update(meal);
+        }
+
+        public void SaveMeals()
+        {
+            unitOfWork.Commit();
+        }
+
+        //TODO IMealService
     }
 }
