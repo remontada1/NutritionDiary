@@ -26,7 +26,7 @@ namespace WebApplication1.Service
 
 
 
-    public class MealService
+    public class MealService : IMealService
     {
         IFoodRepository foodRepository;
         IMealRepository mealRepository;
@@ -81,5 +81,16 @@ namespace WebApplication1.Service
         }
 
         //TODO IMealService
+    }
+
+    public interface IMealService
+    {
+        public void AddFoodToMeal(int mealId, int foodId);
+        public void SaveMeals();
+        public void UpdateMeal(Meal meal);
+        public void AddMeal(Meal meal);
+        public Meal GetMealById(int id);
+        public IEnumerable<Meal> GetMeals();
+
     }
 }
