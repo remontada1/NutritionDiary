@@ -1000,6 +1000,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MealController.cs" />
     <Compile Include="DAL\CustomerContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1177,6 +1178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Food\" />
+    <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

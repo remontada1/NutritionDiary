@@ -12,6 +12,7 @@ using WebApplication1.App_Start;
 using System.Data.Entity;
 using WebApplication1.DAL;
 using WebApplication1.Mappings;
+using Newtonsoft;
 
 
 namespace WebAplication1
@@ -26,8 +27,12 @@ namespace WebAplication1
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
+            GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
             Bootstrapper.Run();
+
         }
+
+       
     }
 }

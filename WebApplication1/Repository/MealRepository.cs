@@ -14,9 +14,6 @@ namespace WebApplication1.Repository
         public MealRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
 
-        IFoodRepository foodRepository;
-
-
 
         public Meal GetMealById(string name)
         {
@@ -31,8 +28,6 @@ namespace WebApplication1.Repository
 
             var food = this.DbContext.Foods.Find(foodId);
             this.DbContext.Foods.Attach(food);
-
-            this.DbContext.Foods.Add(food);
 
             meal.Foods.Add(food);
         }

@@ -85,12 +85,15 @@ namespace WebApplication1.Service
 
     public interface IMealService
     {
-        public void AddFoodToMeal(int mealId, int foodId);
-        public void SaveMeals();
-        public void UpdateMeal(Meal meal);
-        public void AddMeal(Meal meal);
-        public Meal GetMealById(int id);
-        public IEnumerable<Meal> GetMeals();
+        void AddFoodToMeal(int mealId, int foodId);
+        void SaveMeals();
+        void UpdateMeal(Meal meal);
+        void AddMeal(Meal meal);
+        Meal GetMealById(int id);
+        IEnumerable<Meal> GetMeals();
+        Meal GetMealWithFoods(int mealId);
+
+
 
     }
 }
