@@ -22,7 +22,7 @@ namespace WebApplication1.Models
         public DateTime SetDate { get; set; }
         
 
-        public virtual ICollection<Food> Foods { get; set; }
+        public  ICollection<Food> Foods { get; set; }
 
         public Meal()
         {

@@ -11,10 +11,15 @@ namespace WebApplication1.DAL
 {
     public class CustomerContext : DbContext
     {
-       public CustomerContext()
-           : base("Schedule")  { }
+        public CustomerContext()
+            : base("Schedule")
+        {
+            this.Configuration.LazyLoadingEnabled = false;
+        }
+
+
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Food> Foods {get; set;}
+        public DbSet<Food> Foods { get; set; }
         public DbSet<Meal> Meals { get; set; }
         public DbSet<CustomerData> CustomersData { get; set; }
         public DbSet<MealType> MealTypes { get; set; }

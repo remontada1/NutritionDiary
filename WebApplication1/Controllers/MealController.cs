@@ -32,7 +32,15 @@ namespace WebApplication1.Controllers
         {
             mealService.AddFoodToMeal(mealId, foodId);
             mealService.SaveMeals();
-            return Content(HttpStatusCode.OK,"Meal binding created");
+            return Content(HttpStatusCode.OK, "Meal binding created");
+        }
+        [HttpGet]
+        [Route("GetMealAndFoods/{mealId}")]
+        public IHttpActionResult GetMealAndFoods(int mealId)
+        {
+            var mealWithFoods = mealService.GetMealWithFoods(mealId);
+
+            return Content(HttpStatusCode.OK, mealWithFoods);
         }
 
     }

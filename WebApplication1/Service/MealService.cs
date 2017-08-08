@@ -44,7 +44,7 @@ namespace WebApplication1.Service
             mealRepository.AttachFoodToMeal(mealId, foodId);
         }
 
-        public Meal GetMealWithFoods(int mealId)
+        public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
             return mealRepository.GetMealWithFoods(mealId);
         }
@@ -91,7 +91,7 @@ namespace WebApplication1.Service
         void AddMeal(Meal meal);
         Meal GetMealById(int id);
         IEnumerable<Meal> GetMeals();
-        Meal GetMealWithFoods(int mealId);
+        IEnumerable<Meal> GetMealWithFoods(int mealId);
 
 
 

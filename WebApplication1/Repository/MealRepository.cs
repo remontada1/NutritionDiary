@@ -33,12 +33,15 @@ namespace WebApplication1.Repository
         }
 
 
-       public  Meal GetMealWithFoods(int mealId)
+        public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
-            var mealWithFoods = this.DbContext.Meals
+
+            this.DbContext.Configuration.ProxyCreationEnabled = false;
+           var mealWithFoods = this.DbContext.Meals
                 .Where(m => m.Id == mealId)
                 .Include(f => f.Foods)
-                .FirstOrDefault();
+                .ToList();
+
 
             return mealWithFoods;
         }
@@ -49,6 +52,6 @@ namespace WebApplication1.Repository
     {
         Meal GetMealById(string name);
         void AttachFoodToMeal(int mealId, int foodId);
-        Meal GetMealWithFoods(int mealId);
+        IEnumerable<Meal> GetMealWithFoods(int mealId);
     }
 }
