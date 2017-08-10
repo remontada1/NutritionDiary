@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers
 
             if (!ModelState.IsValid)
             {
-                return Content(HttpStatusCode.NotAcceptable, "Can't create new food");
+                return Content(HttpStatusCode.NotAcceptable, "Invalid arguments.");
             }
             foodService.AddFood(food);
             foodService.SaveFood();

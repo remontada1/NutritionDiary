@@ -21,19 +21,23 @@ namespace WebApplication1.Controllers
 
         IMealService mealService;
         IMapper mapper;
+
         public MealController(IMapper mapper, IMealService mealService)
         {
             this.mealService = mealService;
             this.mapper = mapper;
         }
+
         [HttpPost]
         [Route("GetMealWithFoods/{mealId}/{foodId}")]
         public IHttpActionResult GetMealWithFoods(Meal meal, int mealId, int foodId)
         {
             mealService.AddFoodToMeal(mealId, foodId);
             mealService.SaveMeals();
+
             return Content(HttpStatusCode.OK, "Meal binding created");
         }
+
         [HttpGet]
         [Route("GetMealAndFoods/{mealId}")]
         public IHttpActionResult GetMealAndFoods(int mealId)
@@ -41,6 +45,20 @@ namespace WebApplication1.Controllers
             var mealWithFoods = mealService.GetMealWithFoods(mealId);
 
             return Content(HttpStatusCode.OK, mealWithFoods);
+        }
+        [HttpPost]
+        [Route("CreateMeal")]
+        public IHttpActionResult CreateMeal(Meal meal)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Content(HttpStatusCode.NotAcceptable, "Invalid arguments.");
+            }
+            mealService.AddMeal(meal);
+            mealService.SaveMeals();
+
+            return Content(HttpStatusCode.OK, "Meal created.");
+
         }
 
     }
