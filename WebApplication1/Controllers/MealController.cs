@@ -29,8 +29,8 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [Route("GetMealWithFoods/{mealId}/{foodId}")]
-        public IHttpActionResult GetMealWithFoods(Meal meal, int mealId, int foodId)
+        [Route("AttachMealToFood/{mealId}/{foodId}")]
+        public IHttpActionResult AttachMealToFood(Meal meal, int mealId, int foodId)
         {
             mealService.AddFoodToMeal(mealId, foodId);
             mealService.SaveMeals();
@@ -59,6 +59,17 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, "Meal created.");
 
+        }
+
+        [HttpDelete]
+        [Route("RemoveFoodFromMeal/{mealId}/{foodId}")]
+        public IHttpActionResult RemoveFoodFromMeal(int mealId, int foodId)
+        {
+            
+            mealService.RemoveFoodFromMeal(mealId, foodId);
+            mealService.SaveMeals();
+
+            return Content(HttpStatusCode.Accepted, "Food deleted.");
         }
 
     }

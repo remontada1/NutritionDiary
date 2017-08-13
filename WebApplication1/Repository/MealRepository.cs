@@ -12,7 +12,7 @@ namespace WebApplication1.Repository
     public class MealRepository : RepositoryBase<Meal>, IMealRepository
     {
 
-        
+
         public MealRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
 
@@ -38,25 +38,32 @@ namespace WebApplication1.Repository
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
 
-            
             var mealWithFoods = this.DbContext.Meals
                  .Where(m => m.Id == mealId)
                  .Include(f => f.Foods)
                  .ToList();
-
 
             return mealWithFoods;
         }
 
 
 
-        public void RemoveFoodFromMeal(int mealId, int foodId) { 
+        public void RemoveFoodFromMeal(int mealId, int foodId)
+        {
+            var meal = this.DbContext.Meals.Find(mealId);
 
-}
+            var food = this.DbContext.Foods.Find(foodId);
+            this.DbContext.Entry(meal).Collection("Foods").Load();
+
+            meal.Foods.Remove(food);
+            
+            
+        }
     }
 
     public interface IMealRepository : IRepository<Meal>
     {
+        void RemoveFoodFromMeal(int mealId, int foodId);
         Meal GetMealById(string name);
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);

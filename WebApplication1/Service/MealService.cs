@@ -39,6 +39,12 @@ namespace WebApplication1.Service
             this.mealRepository = mealRepository;
         }
 
+
+        public void RemoveFoodFromMeal(int mealId, int foodId)
+        {
+            mealRepository.RemoveFoodFromMeal(mealId, foodId);
+
+        }
         public void AddFoodToMeal(int mealId, int foodId)
         {
             mealRepository.AttachFoodToMeal(mealId, foodId);
@@ -85,6 +91,7 @@ namespace WebApplication1.Service
 
     public interface IMealService
     {
+        void RemoveFoodFromMeal(int mealId, int foodId);
         void AddFoodToMeal(int mealId, int foodId);
         void SaveMeals();
         void UpdateMeal(Meal meal);
