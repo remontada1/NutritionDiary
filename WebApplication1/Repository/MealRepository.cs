@@ -6,6 +6,7 @@ using WebApplication1.Models;
 using WebApplication1.Infrastructure;
 using WebApplication1.DAL;
 using System.Data.Entity;
+using System.Web.Http;
 
 namespace WebApplication1.Repository
 {
@@ -51,8 +52,12 @@ namespace WebApplication1.Repository
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
             var meal = this.DbContext.Meals.Find(mealId);
-
+            if (meal == null)
+            {
+                throw new Exception("Meal not found");
+            }
             var food = this.DbContext.Foods.Find(foodId);
+
             this.DbContext.Entry(meal).Collection("Foods").Load();
 
             meal.Foods.Remove(food);

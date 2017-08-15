@@ -35,7 +35,7 @@ namespace WebApplication1.Controllers
             mealService.AddFoodToMeal(mealId, foodId);
             mealService.SaveMeals();
 
-            return Content(HttpStatusCode.OK, "Meal binding created");
+            return Content(HttpStatusCode.OK, "Food  have been attached to food.");
         }
 
         [HttpGet]
@@ -65,11 +65,14 @@ namespace WebApplication1.Controllers
         [Route("RemoveFoodFromMeal/{mealId}/{foodId}")]
         public IHttpActionResult RemoveFoodFromMeal(int mealId, int foodId)
         {
-            
-            mealService.RemoveFoodFromMeal(mealId, foodId);
-            mealService.SaveMeals();
 
-            return Content(HttpStatusCode.Accepted, "Food deleted.");
+            {
+                mealService.RemoveFoodFromMeal(mealId, foodId);
+                mealService.SaveMeals();
+
+                return Content(HttpStatusCode.Accepted, "Food deleted.");
+            }
+
         }
 
     }
