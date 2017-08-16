@@ -42,6 +42,7 @@ namespace WebApplication1.Service
 
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
+
             mealRepository.RemoveFoodFromMeal(mealId, foodId);
 
         }
@@ -80,6 +81,10 @@ namespace WebApplication1.Service
         {
             mealRepository.Update(meal);
         }
+        public int SumOfCalories(int mealId)
+        {
+            return mealRepository.SumOfCalories(mealId);
+        }
 
         public void SaveMeals()
         {
@@ -99,8 +104,6 @@ namespace WebApplication1.Service
         Meal GetMealById(int id);
         IEnumerable<Meal> GetMeals();
         IEnumerable<Meal> GetMealWithFoods(int mealId);
-
-
-
+        int SumOfCalories(int mealId);
     }
 }

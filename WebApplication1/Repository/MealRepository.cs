@@ -35,7 +35,15 @@ namespace WebApplication1.Repository
             meal.Foods.Add(food);
         }
 
+        public int SumOfCalories(int mealId)
+        {
 
+            var meal = this.DbContext.Meals
+                .Where(m => m.Id == mealId)
+                .Sum(f => f.Foods.Sum(k => (int)k.KCalory));
+
+            return meal;
+        }
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
 
@@ -52,17 +60,18 @@ namespace WebApplication1.Repository
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
             var meal = this.DbContext.Meals.Find(mealId);
-            if (meal == null)
-            {
-                throw new Exception("Meal not found");
-            }
+
             var food = this.DbContext.Foods.Find(foodId);
+            if (meal == null || food == null)
+            {
+                throw new Exception("Meal or Food not found.");
+            }
 
             this.DbContext.Entry(meal).Collection("Foods").Load();
 
             meal.Foods.Remove(food);
-            
-            
+
+
         }
     }
 
@@ -72,5 +81,7 @@ namespace WebApplication1.Repository
         Meal GetMealById(string name);
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);
+
+        int SumOfCalories(int mealId);
     }
 }

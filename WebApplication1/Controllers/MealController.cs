@@ -42,9 +42,10 @@ namespace WebApplication1.Controllers
         [Route("GetMealAndFoods/{mealId}")]
         public IHttpActionResult GetMealAndFoods(int mealId)
         {
+            var sum = mealService.SumOfCalories(mealId);
             var mealWithFoods = mealService.GetMealWithFoods(mealId);
-
-            return Content(HttpStatusCode.OK, mealWithFoods);
+           
+            return Content(HttpStatusCode.OK, sum);
         }
         [HttpPost]
         [Route("CreateMeal")]
@@ -65,15 +66,10 @@ namespace WebApplication1.Controllers
         [Route("RemoveFoodFromMeal/{mealId}/{foodId}")]
         public IHttpActionResult RemoveFoodFromMeal(int mealId, int foodId)
         {
-
-            {
                 mealService.RemoveFoodFromMeal(mealId, foodId);
                 mealService.SaveMeals();
 
                 return Content(HttpStatusCode.Accepted, "Food deleted.");
-            }
-
         }
-
     }
 }
