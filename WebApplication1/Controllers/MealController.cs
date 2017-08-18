@@ -44,8 +44,8 @@ namespace WebApplication1.Controllers
         {
             var sum = mealService.SumOfCalories(mealId);
             var mealWithFoods = mealService.GetMealWithFoods(mealId);
-           
-            return Content(HttpStatusCode.OK, sum);
+
+            return Content(HttpStatusCode.OK, new { sum, mealWithFoods });
         }
         [HttpPost]
         [Route("CreateMeal")]
