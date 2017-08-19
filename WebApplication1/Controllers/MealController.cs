@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [Route("AttachMealToFood/{mealId}/{foodId}")]
+        [Route("meal/{mealId}/food/{foodId}")]
         public IHttpActionResult AttachMealToFood(Meal meal, int mealId, int foodId)
         {
             mealService.AddFoodToMeal(mealId, foodId);
@@ -39,7 +39,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        [Route("GetMealAndFoods/{mealId}")]
+        [Route("meal/{mealId}/foods")]
         public IHttpActionResult GetMealAndFoods(int mealId)
         {
             var sum = mealService.SumOfCalories(mealId);
@@ -48,7 +48,7 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, new { sum, mealWithFoods });
         }
         [HttpPost]
-        [Route("CreateMeal")]
+        [Route("Meal")]
         public IHttpActionResult CreateMeal(Meal meal)
         {
             if (!ModelState.IsValid)
@@ -63,7 +63,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpDelete]
-        [Route("RemoveFoodFromMeal/{mealId}/{foodId}")]
+        [Route("meal/{mealId}/food/{foodId}")]
         public IHttpActionResult RemoveFoodFromMeal(int mealId, int foodId)
         {
                 mealService.RemoveFoodFromMeal(mealId, foodId);
