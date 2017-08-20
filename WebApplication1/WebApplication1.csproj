@@ -1113,6 +1113,7 @@
     <Compile Include="Service\FoodService.cs" />
     <Compile Include="Service\MealService.cs" />
     <Compile Include="ViewModels\FoodViewModel.cs" />
+    <Compile Include="ViewModels\MealViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706122103092_TableRelationsComplete2.resx">
