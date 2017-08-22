@@ -12,6 +12,7 @@ using AttributeRouting.Web.Http;
 using WebApplication1.Service;
 using WebApplication1.Mappings;
 using WebApplication1.ViewModels;
+using AutoMapper.QueryableExtensions;
 using AutoMapper;
 
 namespace WebApplication1.Controllers
@@ -42,10 +43,15 @@ namespace WebApplication1.Controllers
         [Route("meal/{mealId}/foods")]
         public IHttpActionResult GetMealAndFoods(int mealId)
         {
-            var sum = mealService.SumOfCalories(mealId);
-            var mealWithFoods = mealService.GetMealWithFoods(mealId);
-
-            return Content(HttpStatusCode.OK, new { sum, mealWithFoods });
+            IEnumerable<MealViewModel> mealVm;
+            IEnumerable<FoodViewModel> foodVm;
+            
+            
+            //var sum = mealService.SumOfCalories(mealId);
+            var meals = mealService.GetMealWithFoods(mealId);
+            mealVm = mapper.Map<IEnumerable<Meal>,IEnumerable<MealViewModel>>(meals);
+     
+            return Content(HttpStatusCode.OK, mealVm);
         }
         [HttpPost]
         [Route("Meal")]
@@ -66,10 +72,10 @@ namespace WebApplication1.Controllers
         [Route("meal/{mealId}/food/{foodId}")]
         public IHttpActionResult RemoveFoodFromMeal(int mealId, int foodId)
         {
-                mealService.RemoveFoodFromMeal(mealId, foodId);
-                mealService.SaveMeals();
+            mealService.RemoveFoodFromMeal(mealId, foodId);
+            mealService.SaveMeals();
 
-                return Content(HttpStatusCode.Accepted, "Food deleted.");
+            return Content(HttpStatusCode.Accepted, "Food deleted.");
         }
     }
 }

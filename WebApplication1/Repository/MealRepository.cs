@@ -37,11 +37,9 @@ namespace WebApplication1.Repository
 
         public int SumOfCalories(int mealId)
         {
-
             var meal = this.DbContext.Meals
                 .Where(m => m.Id == mealId)
                 .Sum(f => f.Foods.Sum(k => (int)k.KCalory));
-
             return meal;
         }
         public IEnumerable<Meal> GetMealWithFoods(int mealId)

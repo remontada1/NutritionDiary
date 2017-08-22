@@ -6,6 +6,7 @@ using System.Web;
 using AutoMapper;
 using WebApplication1.ViewModels;
 using WebApplication1.Mappings;
+using AutoMapper.QueryableExtensions;
 
 namespace WebApplication1.Mappings
 {
