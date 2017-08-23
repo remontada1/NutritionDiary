@@ -54,7 +54,6 @@ namespace WebApplication1.Repository
         }
 
 
-
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
             var meal = this.DbContext.Meals.Find(mealId);
@@ -79,7 +78,6 @@ namespace WebApplication1.Repository
         Meal GetMealById(string name);
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);
-
         int SumOfCalories(int mealId);
     }
 }

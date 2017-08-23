@@ -44,14 +44,12 @@ namespace WebApplication1.Controllers
         public IHttpActionResult GetMealAndFoods(int mealId)
         {
             IEnumerable<MealViewModel> mealVm;
-            IEnumerable<FoodViewModel> foodVm;
-            
-            
-            //var sum = mealService.SumOfCalories(mealId);
+
+            var totalCalories = mealService.SumOfCalories(mealId);
             var meals = mealService.GetMealWithFoods(mealId);
-            mealVm = mapper.Map<IEnumerable<Meal>,IEnumerable<MealViewModel>>(meals);
-     
-            return Content(HttpStatusCode.OK, mealVm);
+            mealVm = mapper.Map<IEnumerable<Meal>, IEnumerable<MealViewModel>>(meals);
+
+            return Content(HttpStatusCode.OK, new { mealVm, totalCalories });
         }
         [HttpPost]
         [Route("Meal")]

@@ -25,11 +25,6 @@ namespace WebApplication1.Mappings
             CreateMap<Food, MealViewModel>().ForMember(f => f.FoodName, map => map.MapFrom(vm => vm.Name))
                 .ForMember(f => f.KCalories, map => map.MapFrom(vm => vm.KCalory));
 
-
-
-
-
-
         }
     }
 }
