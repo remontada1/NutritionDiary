@@ -1009,6 +1009,7 @@
     <Compile Include="Infrastructure\Disposable.cs" />
     <Compile Include="Infrastructure\IDbFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\MealTotalValue.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Mappings\AutoMapperModule.cs" />
     <Compile Include="Mappings\MappingProfile.cs" />

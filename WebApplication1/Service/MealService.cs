@@ -81,7 +81,7 @@ namespace WebApplication1.Service
         {
             mealRepository.Update(meal);
         }
-        public int SumOfCalories(int mealId)
+        public MealTotalValue SumOfCalories(int mealId)
         {
             return mealRepository.SumOfCalories(mealId);
         }
@@ -104,6 +104,6 @@ namespace WebApplication1.Service
         Meal GetMealById(int id);
         IEnumerable<Meal> GetMeals();
         IEnumerable<Meal> GetMealWithFoods(int mealId);
-        int SumOfCalories(int mealId);
+       MealTotalValue SumOfCalories(int mealId);
     }
 }

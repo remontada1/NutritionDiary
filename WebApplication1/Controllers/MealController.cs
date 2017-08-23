@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
             var meals = mealService.GetMealWithFoods(mealId);
             mealVm = mapper.Map<IEnumerable<Meal>, IEnumerable<MealViewModel>>(meals);
 
-            return Content(HttpStatusCode.OK, new { mealVm, totalCalories });
+            return Content(HttpStatusCode.OK, new { totalCalories, meals });
         }
         [HttpPost]
         [Route("Meal")]

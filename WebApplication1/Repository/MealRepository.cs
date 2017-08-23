@@ -35,11 +35,19 @@ namespace WebApplication1.Repository
             meal.Foods.Add(food);
         }
 
-        public int SumOfCalories(int mealId)
+        public MealTotalValue SumOfCalories(int mealId)
         {
             var meal = this.DbContext.Meals
                 .Where(m => m.Id == mealId)
-                .Sum(f => f.Foods.Sum(k => (int)k.KCalory));
+                .GroupBy(m => m.Name)
+                .Select(f => new MealTotalValue
+                {
+                    TotalCalories = f.Sum(k => k.Foods.Sum(c => (int?)c.KCalory)),
+                    TotalFats = f.Sum(k => k.Foods.Sum(c => (int?)c.Fats)),
+                    TotalCarbs = f.Sum(k => k.Foods.Sum(c => (int?)c.Hydrates)),
+                    TotalProteins = f.Sum(k => k.Foods.Sum(c => (int?)c.Protein))
+                }).FirstOrDefault();
+             //   .Sum(f => f.Foods.Sum(k => (int)k.KCalory));
             return meal;
         }
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
@@ -78,6 +86,8 @@ namespace WebApplication1.Repository
         Meal GetMealById(string name);
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);
-        int SumOfCalories(int mealId);
+
+
+        MealTotalValue SumOfCalories(int mealId);
     }
 }
