@@ -35,7 +35,7 @@ namespace WebApplication1.Repository
             meal.Foods.Add(food);
         }
 
-        public MealTotalValue SumOfCalories(int mealId)
+        public MealTotalValue SumOfNutrients(int mealId)
         {
             var meal = this.DbContext.Meals
                 .Where(m => m.Id == mealId)
@@ -47,7 +47,7 @@ namespace WebApplication1.Repository
                     TotalCarbs = f.Sum(k => k.Foods.Sum(c => (int?)c.Hydrates)),
                     TotalProteins = f.Sum(k => k.Foods.Sum(c => (int?)c.Protein))
                 }).FirstOrDefault();
-             //   .Sum(f => f.Foods.Sum(k => (int)k.KCalory));
+           
             return meal;
         }
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
@@ -88,6 +88,6 @@ namespace WebApplication1.Repository
         IEnumerable<Meal> GetMealWithFoods(int mealId);
 
 
-        MealTotalValue SumOfCalories(int mealId);
+        MealTotalValue SumOfNutrients(int mealId);
     }
 }

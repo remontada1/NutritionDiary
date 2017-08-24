@@ -10,22 +10,6 @@ using WebApplication1.Repository;
 
 namespace WebApplication1.Service
 {
-
-    /*  public interface IMealService
-      {
-          IEnumerable<Meal> GetMeals();
-          Meal GetMealById(int id);
-          Meal GetMealByName(string name);
-          void AddMeal(Meal meal);
-
-          void AddFoodToMeak(int mealId, int foodId);
-          void UpdateMeal(Meal food);
-          void RemoveMeal(int id);
-          void SaveMeal();
-      } */
-
-
-
     public class MealService : IMealService
     {
         IFoodRepository foodRepository;
@@ -81,9 +65,9 @@ namespace WebApplication1.Service
         {
             mealRepository.Update(meal);
         }
-        public MealTotalValue SumOfCalories(int mealId)
+        public MealTotalValue SumOfNutrients(int mealId)
         {
-            return mealRepository.SumOfCalories(mealId);
+            return mealRepository.SumOfNutrients(mealId);
         }
 
         public void SaveMeals()
@@ -104,6 +88,6 @@ namespace WebApplication1.Service
         Meal GetMealById(int id);
         IEnumerable<Meal> GetMeals();
         IEnumerable<Meal> GetMealWithFoods(int mealId);
-       MealTotalValue SumOfCalories(int mealId);
+        MealTotalValue SumOfNutrients(int mealId);
     }
 }

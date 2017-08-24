@@ -45,7 +45,7 @@ namespace WebApplication1.Controllers
         {
             IEnumerable<MealViewModel> mealVm;
 
-            var totalCalories = mealService.SumOfCalories(mealId);
+            var totalCalories = mealService.SumOfNutrients(mealId);
             var meals = mealService.GetMealWithFoods(mealId);
             mealVm = mapper.Map<IEnumerable<Meal>, IEnumerable<MealViewModel>>(meals);
 
