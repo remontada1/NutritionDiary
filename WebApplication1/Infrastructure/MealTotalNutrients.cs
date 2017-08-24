@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication1.Infrastructure
 {
-    public class MealTotalValue
+    public class MealTotalNutrients
     {
         public int? TotalCalories { get; set; }
         public int? TotalCarbs { get; set; }

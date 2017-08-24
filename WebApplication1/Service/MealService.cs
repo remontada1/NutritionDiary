@@ -65,7 +65,7 @@ namespace WebApplication1.Service
         {
             mealRepository.Update(meal);
         }
-        public MealTotalValue SumOfNutrients(int mealId)
+        public MealTotalNutrients SumOfNutrients(int mealId)
         {
             return mealRepository.SumOfNutrients(mealId);
         }
@@ -88,6 +88,6 @@ namespace WebApplication1.Service
         Meal GetMealById(int id);
         IEnumerable<Meal> GetMeals();
         IEnumerable<Meal> GetMealWithFoods(int mealId);
-        MealTotalValue SumOfNutrients(int mealId);
+        MealTotalNutrients SumOfNutrients(int mealId);
     }
 }
