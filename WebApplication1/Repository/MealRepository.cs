@@ -8,11 +8,11 @@ using WebApplication1.DAL;
 using System.Data.Entity;
 using System.Web.Http;
 
+
 namespace WebApplication1.Repository
 {
     public class MealRepository : RepositoryBase<Meal>, IMealRepository
     {
-
 
         public MealRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
@@ -86,8 +86,6 @@ namespace WebApplication1.Repository
         Meal GetMealById(string name);
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);
-
-
         MealTotalNutrients SumOfNutrients(int mealId);
     }
 }

@@ -12,7 +12,7 @@ using WebApplication1.Service;
 using WebApplication1.Mappings;
 using WebApplication1.ViewModels;
 using AutoMapper;
-
+using NLog;
 namespace WebApplication1.Controllers
 {
 
@@ -20,10 +20,13 @@ namespace WebApplication1.Controllers
     {
         private readonly IFoodService foodService;
         private readonly IMapper mapper;
-        public FoodController(IFoodService foodService, IMapper mapper)
+        private readonly ILogger logger;
+        public FoodController(IFoodService foodService, IMapper mapper, ILogger logger)
         {
             this.foodService = foodService;
             this.mapper = mapper;
+            this.logger = logger;
+
         }
 
         [Route("api/GetFoods")]

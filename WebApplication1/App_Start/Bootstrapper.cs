@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using Autofac.Extras.NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace WebApplication1.App_Start
         public static void Run()
         {
             SetAutofacContainer();
-                 
+            SetNLogConfig();
         }
 
         private static void SetAutofacContainer()
@@ -35,8 +36,6 @@ namespace WebApplication1.App_Start
 
 
             builder.RegisterModule(new AutoMapperModule());
-
-
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
@@ -55,6 +54,13 @@ namespace WebApplication1.App_Start
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container)); 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container);
 
+        }
+
+        private static void SetNLogConfig()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterModule<NLogModule>();
         }
     }
 }
