@@ -8,6 +8,7 @@ using WebApplication1.Service;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Formatting;
+using WebApplication1.ActionFilter;
 
 
 namespace WebApplication1
@@ -16,6 +17,7 @@ namespace WebApplication1
     {
         public static void Register(HttpConfiguration config)
         {
+            config.Filters.Add(new LoggingFilterAttribute());
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -29,6 +31,7 @@ namespace WebApplication1
             var json = config.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+
         }
     }
 }
