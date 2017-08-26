@@ -20,12 +20,12 @@ namespace WebApplication1.Controllers
     {
         private readonly IFoodService foodService;
         private readonly IMapper mapper;
-        private readonly ILogger logger;
-        public FoodController(IFoodService foodService, IMapper mapper, ILogger logger)
+        
+        public FoodController(IFoodService foodService, IMapper mapper)
         {
             this.foodService = foodService;
             this.mapper = mapper;
-            this.logger = logger;
+            
 
         }
 
@@ -43,6 +43,8 @@ namespace WebApplication1.Controllers
             viewModelFoods = mapper.Map<IEnumerable<Food>, IEnumerable<FoodViewModel>>(foods);
 
             return Content(HttpStatusCode.Found, viewModelFoods);
+
+            throw new Exception("No product found for this id");  
         }
 
         public IHttpActionResult GetFoodById(int id)
@@ -52,7 +54,7 @@ namespace WebApplication1.Controllers
             Food food = foodService.GetFoodById(id);
             if (food == null)
             {
-                return Content(HttpStatusCode.NotFound, "Food not found");
+                throw new Exception("Food not found");
             }
             viewModelFood = mapper.Map<Food, FoodViewModel>(food);
             return Content(HttpStatusCode.OK, viewModelFood);
