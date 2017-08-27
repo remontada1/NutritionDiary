@@ -1127,6 +1127,10 @@
     <Compile Include="Migrations\201708021951330_AddDefaultMeal6.Designer.cs">
       <DependentUpon>201708021951330_AddDefaultMeal6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708272018220_AddWeightToFood.cs" />
+    <Compile Include="Migrations\201708272018220_AddWeightToFood.Designer.cs">
+      <DependentUpon>201708272018220_AddWeightToFood.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1209,6 +1213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708021951330_AddDefaultMeal6.resx">
       <DependentUpon>201708021951330_AddDefaultMeal6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708272018220_AddWeightToFood.resx">
+      <DependentUpon>201708272018220_AddWeightToFood.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

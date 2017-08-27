@@ -19,6 +19,7 @@ namespace WebApplication1.Models
 
         public string Image { get; set; }
 
+        public int Weight { get; set; }
         public virtual ICollection<Meal> Meals { get; set; }
 
         public Food()
