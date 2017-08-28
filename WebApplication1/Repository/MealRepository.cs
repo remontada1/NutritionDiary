@@ -30,7 +30,10 @@ namespace WebApplication1.Repository
             this.DbContext.Meals.Attach(meal);
 
             var food = this.DbContext.Foods.Find(foodId);
+
+
             this.DbContext.Foods.Attach(food);
+            
 
             meal.Foods.Add(food);
         }
@@ -62,6 +65,7 @@ namespace WebApplication1.Repository
         }
 
 
+
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
             var meal = this.DbContext.Meals.Find(mealId);
@@ -87,5 +91,7 @@ namespace WebApplication1.Repository
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
+
+        
     }
 }
