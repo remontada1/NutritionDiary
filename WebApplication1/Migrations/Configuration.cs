@@ -39,6 +39,20 @@ namespace WebApplication1.Migrations
 
                 });
 
+            context.Users.AddOrUpdate(m => m.Id,
+                new User()
+                {
+                    UserName = "Vitalii",
+                    Email = "Vitalii@gmail.com",
+                    EmailConfirmed = true,
+                    FirstName = "Jack",
+                    LastName = "Smith",
+                    Weight = 77,
+                    JoinDate = DateTime.Now.AddYears(-3)
+                });
+            
+
+
             context.Commit();
         }
     }

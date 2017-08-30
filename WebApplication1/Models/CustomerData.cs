@@ -9,8 +9,8 @@ namespace WebApplication1.Models
 {
     public class CustomerData
     {
-        [Key]
-        [ForeignKey("Customer")]
+     /*   [Key]
+        [ForeignKey("Customer")] */
         public int Id { get; set; }
 
         public DateTime CreateDate { get; set; }
@@ -22,7 +22,7 @@ namespace WebApplication1.Models
 
         public int Height { get; set; }
         
-        public Customer Customer {get; set;}
+        
 
 
     }
