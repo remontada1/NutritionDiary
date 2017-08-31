@@ -1,10 +1,14 @@
 namespace WebApplication1.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using WebApplication1.Models;
+    using WebApplication1.DAL;
+
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebApplication1.DAL.CustomerContext>
     {
@@ -29,6 +33,7 @@ namespace WebApplication1.Migrations
             //    );
             //
 
+            var manager = new UserManager<User>(new UserStore<User>(new CustomerContext()));
             
             context.Meals.AddOrUpdate(m => m.Id,
                 new Meal()
@@ -50,7 +55,8 @@ namespace WebApplication1.Migrations
                     Weight = 77,
                     JoinDate = DateTime.Now.AddYears(-3)
                 });
-            
+
+           
 
 
             context.Commit();
