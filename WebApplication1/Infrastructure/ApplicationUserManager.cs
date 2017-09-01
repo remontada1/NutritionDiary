@@ -13,6 +13,7 @@ using Owin;
 using WebApplication1.Models;
 using WebApplication1.DAL;
 
+
 namespace WebApplication1.Infrastructure
 {
     public class ApplicationUserManager : UserManager<User>
@@ -23,11 +24,14 @@ namespace WebApplication1.Infrastructure
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
+            
             var appDbContext = context.Get<CustomerContext>();
-            var appUserManager = new ApplicationUserManager(new UserStore<User>(appDbContext));
-
+            var store = new UserStore<User>(appDbContext);
+            var appUserManager = new ApplicationUserManager(store);
+           
+           
             return appUserManager;
-        } 
+        }
 
     }
 }

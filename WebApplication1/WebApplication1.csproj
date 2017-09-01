@@ -1176,6 +1176,10 @@
     <Compile Include="Migrations\201708301738300_AddAspNetIdentity.Designer.cs">
       <DependentUpon>201708301738300_AddAspNetIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708312328334_RestoreDatabase.cs" />
+    <Compile Include="Migrations\201708312328334_RestoreDatabase.Designer.cs">
+      <DependentUpon>201708312328334_RestoreDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1264,6 +1268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708301738300_AddAspNetIdentity.resx">
       <DependentUpon>201708301738300_AddAspNetIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708312328334_RestoreDatabase.resx">
+      <DependentUpon>201708312328334_RestoreDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
