@@ -11,15 +11,16 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using WebApplication1.Models;
+
 using WebApplication1.DAL;
 using WebApplication1.Infrastructure;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 
 namespace WebApplication1.Repository
 {
-    public class AuthRepository : RepositoryBase<Food>
+    public class AuthRepository : RepositoryBase<User>, IAuthRepository
     {
         public AuthRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
@@ -38,7 +39,10 @@ namespace WebApplication1.Repository
             return result;
         }
 
-
-
     }
+    interface IAuthRepository : IRepository<User>
+    {
+        Task<IdentityResult> RegisterUser(UserBindingModel userModel);
+    }
+
 }
