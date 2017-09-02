@@ -15,6 +15,19 @@ using WebApplication1.Service;
 using AutoMapper;
 using WebApplication1.Mappings;
 using WebApplication1.ViewModels;
+using Owin;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
+using Owin;
+using WebApplication1.Models;
+using WebApplication1.DAL;
+using WebApplication1.Infrastructure;
+using System.Threading.Tasks;
 
 namespace WebApplication1.App_Start
 {
@@ -36,6 +49,15 @@ namespace WebApplication1.App_Start
 
 
             builder.RegisterModule(new AutoMapperModule());
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.Register(c=> new UserStore<User>(c.Resolve<CustomerContext>())).AsImplementedInterfaces().InstancePerRequest();
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).As<IAuthenticationManager>();
+            builder.Register(c => new IdentityFactoryOptions<ApplicationUserManager>());
+            builder.Register(c => new IdentityFactoryOptions<ApplicationUserManager>
+            {
+                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Application​")
+            }); 
+
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();

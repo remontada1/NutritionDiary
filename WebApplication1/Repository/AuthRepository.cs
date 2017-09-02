@@ -26,17 +26,16 @@ namespace WebApplication1.Repository
 
         private UserManager<IdentityUser> _userManager;
 
-        public async Task<IdentityResult> RegisterUser(User user)
+        public async Task<IdentityResult> RegisterUser(UserBindingModel userModel)
         {
             IdentityUser identityUser = new IdentityUser
             {
-                UserName = user.UserName
+                UserName = userModel.Email
             };
 
-            var result = await _userManager.CreateAsync(identityUser, user.PasswordHash);
+            var result = await _userManager.CreateAsync(identityUser, userModel.Password);
 
             return result;
-
         }
 
 
