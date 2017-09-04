@@ -28,7 +28,7 @@ namespace WebApplication1.Controllers
             this.mealService = mealService;
             this.mapper = mapper;
         }
-
+        // add food to existing meal
         [HttpPost]
         [Route("meal/{mealId}/food/{foodId}")]
         public IHttpActionResult AttachMealToFood(Meal meal, int mealId, int foodId)
@@ -38,7 +38,7 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, "Food  have been attached to food.");
         }
-
+        // returns meal with foods
         [HttpGet]
         [Route("meal/{mealId}/foods")]
         public IHttpActionResult GetMealAndFoods(int mealId)
@@ -65,7 +65,7 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, "Meal created.");
 
         }
-
+        // delete existing food from meal
         [HttpDelete]
         [Route("meal/{mealId}/food/{foodId}")]
         public IHttpActionResult RemoveFoodFromMeal(int mealId, int foodId)

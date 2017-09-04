@@ -37,7 +37,7 @@ namespace WebApplication1.Repository
 
             meal.Foods.Add(food);
         }
-
+        // counting total nutrient
         public MealTotalNutrients SumOfNutrients(int mealId)
         {
             var meal = this.DbContext.Meals
@@ -53,6 +53,8 @@ namespace WebApplication1.Repository
            
             return meal;
         }
+
+        
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
 
