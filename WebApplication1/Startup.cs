@@ -1,13 +1,21 @@
-﻿using Autofac;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Owin;
+using Owin;
+using System.Web.Http;
+using WebApplication1.App_Start;
+using NLog.Owin.Logging;
+using NLog;
+using Autofac.Integration.WebApi.Owin;
+using Autofac;
+using Autofac.Builder;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Autofac.Extras.NLog;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using WebApplication1.Controllers;
 using WebApplication1.Infrastructure;
@@ -15,29 +23,24 @@ using WebApplication1.Service;
 using AutoMapper;
 using WebApplication1.Mappings;
 using WebApplication1.ViewModels;
-using Owin;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using WebApplication1.Models;
 using WebApplication1.DAL;
-using System.Threading.Tasks;
 
-namespace WebApplication1.App_Start
+[assembly: OwinStartup(typeof(WebApplication1.Startup))]
+
+namespace WebApplication1
 {
-    public class Bootstrapper
+    public class Startup
     {
-        public static void Run()
+        public void Configuration(IAppBuilder app)
         {
-            SetAutofacContainer();
-
-        }
-
-        private static void SetAutofacContainer()
-        {
+            HttpConfiguration config = new HttpConfiguration();
+            WebApiConfig.Register(config);
 
             var builder = new ContainerBuilder();
 
@@ -69,17 +72,20 @@ namespace WebApplication1.App_Start
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
 
-            IContainer container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container);
 
-        }
+            var container = builder.Build();
 
-        public static void SetNLogConfig()
-        {
-            var builder = new ContainerBuilder();
+            // This will add the Autofac middleware as well as the middleware
+            // registered in the container.
+            app.UseAutofacMiddleware(container);
 
-            builder.RegisterModule<NLogModule>();
+            app.UseWebApi(config);
+            app.UseAutofacWebApi(config);
+            app.UseNLog();
+            
+
+            
+
         }
     }
 }
