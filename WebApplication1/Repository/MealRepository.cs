@@ -37,7 +37,7 @@ namespace WebApplication1.Repository
 
             meal.Foods.Add(food);
         }
-        // counting total nutrient
+        // counting total nutrients
         public MealTotalNutrients SumOfNutrients(int mealId)
         {
             var meal = this.DbContext.Meals

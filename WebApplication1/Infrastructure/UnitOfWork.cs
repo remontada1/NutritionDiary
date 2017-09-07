@@ -24,5 +24,12 @@ namespace WebApplication1.Infrastructure
         {
             DbContext.Commit();
         }
+
+        public void CommitAsync()
+        {
+            DbContext.CommitAsync();
+        }
+
+
     }
 }

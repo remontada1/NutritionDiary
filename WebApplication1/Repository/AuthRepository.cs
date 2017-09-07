@@ -21,10 +21,16 @@ namespace WebApplication1.Repository
 {
     public class AuthRepository : RepositoryBase<User>, IAuthRepository
     {
+        private UserManager<IdentityUser> _userManager { get;  set; }
         public AuthRepository(IDbFactory dbFactory)
-            : base(dbFactory) { }
+            : base(dbFactory)
+        {
+            
+        }
+        
 
-        private UserManager<IdentityUser> _userManager;
+
+
 
         public async Task<IdentityResult> RegisterUser(UserBindingModel userModel)
         {

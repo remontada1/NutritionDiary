@@ -35,5 +35,10 @@ namespace WebApplication1.DAL
         {
             base.SaveChanges();
         }
+
+        public async virtual void CommitAsync()
+        {
+             await base.SaveChangesAsync();
+        }
     }
 }
