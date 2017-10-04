@@ -16,5 +16,7 @@ namespace WebApplication1.Infrastructure
         void Add(TEntity entity);
         void Update(TEntity entity);
         void Remove(int id);
+        void RemoveByEntity(TEntity entity);
+        TEntity FindById(object id);
     }
 }

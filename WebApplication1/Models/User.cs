@@ -15,7 +15,7 @@ using Owin;
 
 namespace WebApplication1.Models
 {
-    public class User : IdentityUser
+    public class User
     {
 
         /*   public int Id { get; set; }
@@ -34,21 +34,30 @@ namespace WebApplication1.Models
            [Compare("Password", ErrorMessage = "Пароли не совпадают")]
            public string ConfirmPassword {get; set;} */
 
-        [Required]
-        [MaxLength(100)]
-        public string FirstName { get; set; }
+        private ICollection<ExternalLogin> _externalLogins;
+
+        public Guid Id { get; set; }
+        public string UserName { get; set; }
+        public virtual string PasswordHash { get; set; }
+        public virtual string SecurityStamp { get; set; }
 
         [Required]
         [MaxLength(100)]
         public string LastName { get; set; }
-
         [Required]
         public DateTime JoinDate { get; set; }
         public int Weight { get; set; }
         public CustomerData CustomerData { get; set; }
 
-
-
+        public virtual ICollection<ExternalLogin> Logins
+        {
+            get
+            {
+                return _externalLogins ??
+                    (_externalLogins = new List<ExternalLogin>());
+            }
+            set { _externalLogins = value; }
+        }
     }
 
 }

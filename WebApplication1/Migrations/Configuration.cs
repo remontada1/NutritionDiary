@@ -33,7 +33,7 @@ namespace WebApplication1.Migrations
             //    );
             //
 
-            var manager = new UserManager<User>(new UserStore<User>(new CustomerContext()));
+            
             
             context.Meals.AddOrUpdate(m => m.Id,
                 new Meal()
@@ -44,17 +44,7 @@ namespace WebApplication1.Migrations
 
                 });
 
-            context.Users.AddOrUpdate(m => m.Id,
-                new User()
-                {
-                    UserName = "Vitalii",
-                    Email = "Vitalii@gmail.com",
-                    EmailConfirmed = true,
-                    FirstName = "Jack",
-                    LastName = "Smith",
-                    Weight = 77,
-                    JoinDate = DateTime.Now.AddYears(-3)
-                });
+            
 
            
 

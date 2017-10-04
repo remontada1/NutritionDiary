@@ -11,9 +11,9 @@ namespace WebApplication1.Models
     public class UserBindingModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+       
 
         [Required]
         [DataType(DataType.Password)]
@@ -24,7 +24,7 @@ namespace WebApplication1.Models
         [Required]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match")]
-        public string ConfirmationPassword { get; set; }
+        public string ConfirmPassword { get; set; }
 
     }
 }

@@ -7,13 +7,13 @@ namespace WebApplication1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddAspNetIdentity : IMigrationMetadata
+    public sealed partial class CreateIdentityClasses1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAspNetIdentity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateIdentityClasses1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708301738300_AddAspNetIdentity"; }
+            get { return "201710031535480_CreateIdentityClasses1"; }
         }
         
         string IMigrationMetadata.Source

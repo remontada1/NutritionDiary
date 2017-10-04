@@ -31,6 +31,8 @@ namespace WebApplication1.Infrastructure
 
         }
 
+        
+
         public virtual IEnumerable<TEntity> GetAll()
         {
             return dbSet.ToList();
@@ -46,10 +48,10 @@ namespace WebApplication1.Infrastructure
             return dbSet.Find(id);
         }
 
-        /*  public IEnumerable<TEntity> FindBy(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
-           {
-               return dbSet.Where(predicate).ToList();
-           } */
+        public TEntity FindById(object id)
+        {
+            return dbSet.Find(id);
+        }
 
         public virtual void Add(TEntity entity)
         {
@@ -66,6 +68,11 @@ namespace WebApplication1.Infrastructure
         {
             TEntity entity = dbSet.Find(id);
             dbSet.Attach(entity);
+            dbSet.Remove(entity);
+        }
+
+        public void RemoveByEntity(TEntity entity)
+        {
             dbSet.Remove(entity);
         }
     }

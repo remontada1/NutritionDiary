@@ -19,35 +19,31 @@ using System.Web.Http;
 
 namespace WebApplication1.Repository
 {
-    public class AuthRepository : RepositoryBase<User>, IAuthRepository
+    public class UserRepository : RepositoryBase<User>, IUserRepository
     {
         private UserManager<IdentityUser> _userManager { get;  set; }
-        public AuthRepository(IDbFactory dbFactory)
+        public UserRepository(IDbFactory dbFactory)
             : base(dbFactory)
         {
             
         }
-        
 
-
-
-
-        public async Task<IdentityResult> RegisterUser(UserBindingModel userModel)
+        public User FindByUsername(string username)
         {
-            IdentityUser identityUser = new IdentityUser
-            {
-                UserName = userModel.Email
-            };
-
-            var result = await _userManager.CreateAsync(identityUser, userModel.Password);
-
-            return result;
+            return DbContext.Users.FirstOrDefault(x => x.UserName == username);
         }
-
+        public Task<User> FindByUsernameAsync(string username)
+        {
+            return  DbContext.Users.FirstOrDefaultAsync(x => x.UserName == username);
+        }    
     }
-    interface IAuthRepository : IRepository<User>
+
+
+    public interface IUserRepository : IRepository<User>
     {
-        Task<IdentityResult> RegisterUser(UserBindingModel userModel);
+        User FindByUsername(string username);
+        Task<User> FindByUsernameAsync(string username);
+       
     }
 
 }

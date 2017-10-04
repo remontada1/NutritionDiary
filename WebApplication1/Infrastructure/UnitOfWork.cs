@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using WebApplication1.DAL;
+using WebApplication1.Repository;
 
 namespace WebApplication1.Infrastructure
 {
@@ -10,7 +12,8 @@ namespace WebApplication1.Infrastructure
     {
         private readonly IDbFactory dbFactory;
         private CustomerContext dbContext;
-
+        private IUserRepository _userRepository;
+        private IExternalLoginRepository _externalLoginRepository;
         public UnitOfWork(IDbFactory dbFactory)
         {
             this.dbFactory = dbFactory;
@@ -20,14 +23,24 @@ namespace WebApplication1.Infrastructure
         {
             get { return dbContext ?? (dbContext = dbFactory.Init()); }
         }
-        public void Commit()
+
+        public IUserRepository UserRepository
         {
-            DbContext.Commit();
+            get { return _userRepository ?? (_userRepository = new UserRepository(dbFactory)); }
         }
 
-        public void CommitAsync()
+        public IExternalLoginRepository ExternalLoginRepository
         {
-            DbContext.CommitAsync();
+            get { return _externalLoginRepository ?? (_externalLoginRepository = new ExternalLoginRepository(dbFactory)); }
+        }
+        public void Commit()
+        {
+             DbContext.Commit();
+        }
+
+        public Task<int> CommitAsync()
+        {
+           return DbContext.CommitAsync();
         }
 
 

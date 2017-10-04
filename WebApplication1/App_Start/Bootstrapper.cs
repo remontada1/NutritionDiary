@@ -45,15 +45,7 @@ namespace WebApplication1.App_Start
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
 
-            builder.RegisterModule(new AutoMapperModule());
-            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
-            builder.Register(c => new UserStore<User>(c.Resolve<CustomerContext>())).AsImplementedInterfaces().InstancePerRequest();
-            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).As<IAuthenticationManager>();
-            builder.Register(c => new IdentityFactoryOptions<ApplicationUserManager>());
-            builder.Register(c => new IdentityFactoryOptions<ApplicationUserManager>
-            {
-                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Application​")
-            });
+            
 
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();

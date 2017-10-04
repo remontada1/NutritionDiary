@@ -30,6 +30,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.Cookies;
 using WebApplication1.Models;
 using WebApplication1.DAL;
+using WebApplication1.Repository;
+using WebApplication1.Identity;
 
 [assembly: OwinStartup(typeof(WebApplication1.Startup))]
 
@@ -49,18 +51,12 @@ namespace WebApplication1
 
 
             builder.RegisterModule(new AutoMapperModule());
-            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
-            builder.Register(c => new UserStore<User>(c.Resolve<CustomerContext>())).AsImplementedInterfaces().InstancePerRequest();
-            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).As<IAuthenticationManager>();
-            builder.Register(c => new IdentityFactoryOptions<ApplicationUserManager>());
-            builder.Register(c => new IdentityFactoryOptions<ApplicationUserManager>
-            {
-                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Application​")
-            });
-
+          
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
+            builder.RegisterType<UserStore>().As<IUserStore<Identity.ApplicationUser, Guid>>().InstancePerRequest();
+            builder.RegisterType<UserManager<Identity.ApplicationUser, Guid>>();
             builder.Register(context => context.Resolve<MapperConfiguration>().CreateMapper(context.Resolve)).As<IMapper>()
                 .InstancePerLifetimeScope();
             // Repositories
@@ -71,6 +67,11 @@ namespace WebApplication1
             builder.RegisterAssemblyTypes(typeof(FoodService).Assembly)
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
+            
+            
+            
+            
+
 
 
             var container = builder.Build();
