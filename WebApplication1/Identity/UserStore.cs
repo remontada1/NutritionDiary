@@ -7,11 +7,13 @@ using Microsoft.AspNet.Identity;
 using WebApplication1.Infrastructure;
 using System.Threading.Tasks;
 using WebApplication1.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace WebApplication1.Identity
 {
     public class UserStore :
-        IUserLoginStore<ApplicationUser, Guid>, IUserStore<ApplicationUser, Guid>, IDisposable
+        IUserLoginStore<ApplicationUser, Guid>, IUserStore<ApplicationUser, Guid>,
+        IUserPasswordStore<ApplicationUser, Guid>, IDisposable
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -22,14 +24,17 @@ namespace WebApplication1.Identity
         }
 
         #region IUserStore<IdentityUser, Guid> Members
-        public Task CreateAsync(ApplicationUser user)
+        public Task CreateAsync(Identity.ApplicationUser appUser)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
+            var user = new User()
+            {
+                Id = Guid.NewGuid(),
+                UserName = appUser.UserName,
+                PasswordHash = appUser.PasswordHash,
+                SecurityStamp = appUser.SecurityStamp
+            };
 
-            var u = getUser(user);
-
-            _unitOfWork.UserRepository.Add(u);
+            _unitOfWork.UserRepository.Add(user);
             return _unitOfWork.CommitAsync();
         }
 
@@ -139,6 +144,26 @@ namespace WebApplication1.Identity
 
         #endregion
 
+        public Task<string> GetPasswordHashAsync(ApplicationUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+            return Task.FromResult<string>(user.PasswordHash);
+        }
+
+        public Task<bool> HasPasswordAsync(ApplicationUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+            return Task.FromResult<bool>(!string.IsNullOrWhiteSpace(user.PasswordHash));
+        }
+
+        public Task SetPasswordHashAsync(ApplicationUser user, string passwordHash)
+        {
+            user.PasswordHash = passwordHash;
+            return Task.FromResult(0);
+        }
+
         #region IDisposable Members
         public void Dispose()
         {
@@ -146,7 +171,7 @@ namespace WebApplication1.Identity
         }
         #endregion
 
-        
+
 
 
         #region Private Methods
@@ -163,10 +188,9 @@ namespace WebApplication1.Identity
 
         private void populateUser(User user, ApplicationUser identityUser)
         {
-            user.Id = identityUser.Id;
+
             user.UserName = identityUser.UserName;
-            user.PasswordHash = identityUser.PasswordHash;
-            user.SecurityStamp = identityUser.SecurityStamp;
+
         }
 
         private ApplicationUser getIdentityUser(User user)

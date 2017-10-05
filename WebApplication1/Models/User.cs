@@ -41,13 +41,7 @@ namespace WebApplication1.Models
         public virtual string PasswordHash { get; set; }
         public virtual string SecurityStamp { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string LastName { get; set; }
-        [Required]
-        public DateTime JoinDate { get; set; }
-        public int Weight { get; set; }
-        public CustomerData CustomerData { get; set; }
+
 
         public virtual ICollection<ExternalLogin> Logins
         {

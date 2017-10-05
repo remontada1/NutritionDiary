@@ -23,12 +23,22 @@ namespace WebApplication1.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserBindingModel userModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = userModel.UserName};
-                var result = await _userManager.CreateAsync(user, userModel.Password);
+                return Content(HttpStatusCode.NotAcceptable, "Not valid");
             }
-            return Content(HttpStatusCode.OK, "User created");
+            var user = new ApplicationUser() { UserName = userModel.UserName };
+            var result = await _userManager.CreateAsync(user, userModel.Password);
+            if (result.Succeeded)
+            {
+                return Content(HttpStatusCode.OK, " succeed");
+            }
+            else
+            {
+                return Content(HttpStatusCode.NotModified, "Not succeed");
+            }
+                
+
         }
         private Guid getGuid(string value)
         {

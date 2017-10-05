@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -40,7 +41,22 @@ namespace WebApplication1.Infrastructure
 
         public Task<int> CommitAsync()
         {
-           return DbContext.CommitAsync();
+          try
+        {
+            return DbContext.CommitAsync();
+        }
+        catch (DbEntityValidationException ex)
+        {
+            var errorMessages = ex.EntityValidationErrors
+                    .SelectMany(x => x.ValidationErrors)
+                    .Select(x => x.ErrorMessage);
+
+            var fullErrorMessage = string.Join("; ", errorMessages);
+
+            var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+            throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+        }
         }
 
 

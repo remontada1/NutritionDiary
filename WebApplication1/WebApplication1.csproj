@@ -1130,7 +1130,7 @@
     </Compile>
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
-    <Compile Include="Identity\IdentityUser.cs" />
+    <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\UserStore.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
@@ -1229,6 +1229,10 @@
     <Compile Include="Migrations\201710031535480_CreateIdentityClasses1.Designer.cs">
       <DependentUpon>201710031535480_CreateIdentityClasses1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710050034413_FixUserModel.cs" />
+    <Compile Include="Migrations\201710050034413_FixUserModel.Designer.cs">
+      <DependentUpon>201710050034413_FixUserModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
     <Compile Include="Models\User.cs" />
@@ -1322,6 +1326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710031535480_CreateIdentityClasses1.resx">
       <DependentUpon>201710031535480_CreateIdentityClasses1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710050034413_FixUserModel.resx">
+      <DependentUpon>201710050034413_FixUserModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
