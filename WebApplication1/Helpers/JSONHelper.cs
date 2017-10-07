@@ -19,7 +19,7 @@ namespace WebApplication1.Helpers
             }
             catch (Exception ex)
             {
-                return "";
+                return ex.Message;
             }
         }
     }

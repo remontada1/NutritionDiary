@@ -25,17 +25,17 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Content(HttpStatusCode.NotAcceptable, "Not valid");
+                return Content(HttpStatusCode.NotAcceptable,"Input is not valid");
             }
             var user = new ApplicationUser() { UserName = userModel.UserName };
             var result = await _userManager.CreateAsync(user, userModel.Password);
             if (result.Succeeded)
             {
-                return Content(HttpStatusCode.OK, " succeed");
+                return Content(HttpStatusCode.OK, "User created");
             }
             else
             {
-                return Content(HttpStatusCode.NotModified, "Not succeed");
+                return Content(HttpStatusCode.NotModified, "User not created");
             }
                 
 

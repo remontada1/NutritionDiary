@@ -1247,6 +1247,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Providers\CustomOAuthProvider.cs" />
     <Compile Include="Repository\ExternalLoginRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\FoodRepository.cs" />

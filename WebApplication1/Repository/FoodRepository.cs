@@ -21,11 +21,6 @@ namespace WebApplication1.Infrastructure
             var food = this.DbContext.Foods.Where(f => f.Name == foodName).FirstOrDefault();
             return food;
         }
-        public Food AddFood(Food food)
-        {
-            food.Protein = (food.Weight / 100) * food.KCalory;
-            return food;
-        }
     }
 
     public interface IFoodRepository : IRepository<Food>
