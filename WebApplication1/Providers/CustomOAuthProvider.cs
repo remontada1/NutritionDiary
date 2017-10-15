@@ -34,7 +34,7 @@ namespace WebApplication1.Providers
         {
             var allowedOrigin = "*";
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
-            ApplicationUser user = await _userManager.FindByNameAsync(context.UserName);
+            ApplicationUser user = await _userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
