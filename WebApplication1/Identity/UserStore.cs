@@ -8,6 +8,8 @@ using WebApplication1.Infrastructure;
 using System.Threading.Tasks;
 using WebApplication1.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.SqlServer.Utilities;
+using System.Globalization;
 
 namespace WebApplication1.Identity
 {
@@ -17,12 +19,31 @@ namespace WebApplication1.Identity
     {
 
         private readonly IUnitOfWork _unitOfWork;
-
+        protected internal IUserStore<ApplicationUser, Guid> Store { get; set; }
+        private IPasswordHasher _passwordHasher;
         public UserStore(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
+
+        public IPasswordHasher PasswordHasher
+        {
+            get
+            {
+
+                return _passwordHasher;
+            }
+            set
+            {
+
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
+                _passwordHasher = value;
+            }
+        }
         #region IUserStore<IdentityUser, Guid> Members
         public Task CreateAsync(Identity.ApplicationUser appUser)
         {
@@ -72,6 +93,59 @@ namespace WebApplication1.Identity
         {
             var user = _unitOfWork.UserRepository.FindByUsername(userName);
             return Task.FromResult<ApplicationUser>(getIdentityUser(user));
+        }
+        public virtual async Task<ApplicationUser> FindAsync(string userName, string password)
+        {
+
+            var user = await FindByNameAsync(userName);
+            if (user == null)
+            {
+                return null;
+            }
+            return await CheckPasswordAsync(user, password).WithCurrentCulture() ? user : null;
+        }
+
+
+        public virtual async Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
+        {
+
+            var passwordStore = GetPasswordStore();
+            if (user == null)
+            {
+                return false;
+            }
+            return await VerifyPasswordAsync(passwordStore, user, password).WithCurrentCulture();
+        }
+
+
+        protected virtual async Task<bool> VerifyPasswordAsync(IUserPasswordStore<ApplicationUser, Guid> store, ApplicationUser user,
+            string password)
+        {
+            var hash = await store.GetPasswordHashAsync(user).WithCurrentCulture();
+            return PasswordHasher.VerifyHashedPassword(hash, password) != PasswordVerificationResult.Failed;
+        }
+
+        private IUserPasswordStore<ApplicationUser, Guid> GetPasswordStore()
+        {
+            var cast = Store as IUserPasswordStore<ApplicationUser, Guid>;
+            if (cast == null)
+            {
+                throw new NotSupportedException();
+            }
+            return cast;
+        }
+
+
+        public virtual async Task<bool> HasPasswordAsync(Guid userId)
+        {
+
+            var passwordStore = GetPasswordStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
+            if (user == null)
+            {
+                throw new InvalidOperationException();
+            }
+            return await passwordStore.HasPasswordAsync(user).WithCurrentCulture();
         }
 
         public Task UpdateAsync(ApplicationUser user)

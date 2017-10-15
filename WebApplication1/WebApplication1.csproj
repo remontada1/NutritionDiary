@@ -1132,6 +1132,7 @@
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
+    <Compile Include="Identity\PasswordHasher.cs" />
     <Compile Include="Identity\UserStore.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
