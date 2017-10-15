@@ -1125,6 +1125,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="DAL\CustomerContext.cs" />
+    <Compile Include="DependencyContainer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -32,6 +32,9 @@ using WebApplication1.Models;
 using WebApplication1.DAL;
 using WebApplication1.Repository;
 using WebApplication1.Identity;
+using Microsoft.Owin.Security.OAuth;
+using WebApplication1.Providers;
+using System.Diagnostics;
 
 [assembly: OwinStartup(typeof(WebApplication1.Startup))]
 
@@ -39,24 +42,61 @@ namespace WebApplication1
 {
     public class Startup
     {
+
+        public static OAuthAuthorizationServerOptions OAuthAuthorizationServer { get; set; }
+        public static UserManager<ApplicationUser, Guid> userManager { get; set; }
         public void Configuration(IAppBuilder app)
         {
-            HttpConfiguration config = new HttpConfiguration();
-            WebApiConfig.Register(config);
 
+            var config = WebApiConfig.Register();
+            //  var container = DependencyContainer.Initialize(app);
+
+
+            /*    var provider = container.ResolveOptional<CustomOAuthProvider>();
+                OAuthAuthorizationServer = new OAuthAuthorizationServerOptions
+                {
+                    AllowInsecureHttp = true,
+                    TokenEndpointPath = new PathString("oauth/token"),
+                    AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                    Provider = provider
+                };
+
+                app.UseOAuthAuthorizationServer(OAuthAuthorizationServer); */
             var builder = new ContainerBuilder();
+
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
 
             builder.RegisterModule(new AutoMapperModule());
-          
+            builder
+                .RegisterInstance(app)
+                .As<IAppBuilder>();
+
+
+            builder
+               .RegisterType<CustomOAuthProvider>()
+               .As<IOAuthAuthorizationServerProvider>()
+               .InstancePerDependency();
+
+            builder
+                .Register(x => new OAuthAuthorizationServerOptions
+                {
+                    AllowInsecureHttp = true, 
+                    TokenEndpointPath = new PathString("/oauth/token"),
+                    AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                    Provider = x.Resolve<IOAuthAuthorizationServerProvider>()
+                })
+                 .AsSelf()
+                .InstancePerDependency();
+
+            builder.RegisterType<OAuthAuthorizationServerMiddleware>().AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
-            builder.RegisterType<UserStore>().As<IUserStore<Identity.ApplicationUser, Guid>>().InstancePerRequest();
-            builder.RegisterType<UserManager<Identity.ApplicationUser, Guid>>();
+            builder.RegisterType<UserStore>().As<IUserStore<ApplicationUser, Guid>>().InstancePerRequest();
+            builder.RegisterType<UserManager<ApplicationUser, Guid>>();
             builder.Register(context => context.Resolve<MapperConfiguration>().CreateMapper(context.Resolve)).As<IMapper>()
                 .InstancePerLifetimeScope();
             // Repositories
@@ -67,15 +107,14 @@ namespace WebApplication1
             builder.RegisterAssemblyTypes(typeof(FoodService).Assembly)
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
-            
-            
-            
-            
-
 
 
             var container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
+
+
+            //   var container = builder.Build();
             // This will add the Autofac middleware as well as the middleware
             // registered in the container.
             app.UseAutofacMiddleware(container);
@@ -83,9 +122,9 @@ namespace WebApplication1
             app.UseWebApi(config);
             app.UseAutofacWebApi(config);
             app.UseNLog();
-            
 
-            
+
+
 
         }
     }

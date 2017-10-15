@@ -1,8 +1,8 @@
+using System.Data.Entity.Migrations;
+
 namespace WebApplication1.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
+
     public partial class AddDataFood : DbMigration
     {
         public override void Up()

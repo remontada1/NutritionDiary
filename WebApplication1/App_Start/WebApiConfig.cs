@@ -15,8 +15,10 @@ namespace WebApplication1
 {
     public static class WebApiConfig
     {
-        public static void Register(HttpConfiguration config)
+        public static HttpConfiguration Register()
         {
+            var config = new HttpConfiguration();
+
             config.Filters.Add(new LoggingFilterAttribute());
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -30,8 +32,11 @@ namespace WebApplication1
             .Add(new MediaTypeHeaderValue("text/html"));
             var json = config.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
+
+            return config;
         }
     }
 }
