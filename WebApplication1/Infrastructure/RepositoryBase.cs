@@ -53,6 +53,11 @@ namespace WebApplication1.Infrastructure
             return dbSet.Find(id);
         }
 
+        public TEntity FindByGuid (Guid id)
+        {
+            return dbSet.Find(id);
+        }
+
         public virtual void Add(TEntity entity)
         {
             dbSet.Add(entity);

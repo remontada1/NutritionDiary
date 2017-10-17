@@ -49,19 +49,7 @@ namespace WebApplication1
         {
 
             var config = WebApiConfig.Register();
-            //  var container = DependencyContainer.Initialize(app);
-
-
-            /*    var provider = container.ResolveOptional<CustomOAuthProvider>();
-                OAuthAuthorizationServer = new OAuthAuthorizationServerOptions
-                {
-                    AllowInsecureHttp = true,
-                    TokenEndpointPath = new PathString("oauth/token"),
-                    AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                    Provider = provider
-                };
-
-                app.UseOAuthAuthorizationServer(OAuthAuthorizationServer); */
+           
             var builder = new ContainerBuilder();
 
 
@@ -90,7 +78,8 @@ namespace WebApplication1
                 })
                  .AsSelf()
                 .InstancePerDependency();
-
+            
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
             builder.RegisterType<OAuthAuthorizationServerMiddleware>().AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();

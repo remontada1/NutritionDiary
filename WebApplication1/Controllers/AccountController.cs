@@ -6,6 +6,7 @@ using WebApplication1.Identity;
 using WebApplication1.Models;
 using System.Threading.Tasks;
 using System.Net;
+using WebApplication1.Repository;
 
 namespace WebApplication1.Controllers
 {
@@ -14,9 +15,11 @@ namespace WebApplication1.Controllers
     public class AccountController : ApiController
     {
         private readonly UserManager<Identity.ApplicationUser, Guid> _userManager;
-        public AccountController(UserManager<Identity.ApplicationUser, Guid> userManager)
+        private readonly IUserRepository _userRepository;
+        public AccountController(UserManager<Identity.ApplicationUser, Guid> userManager, IUserRepository userRepository)
         {
             _userManager = userManager;
+            _userRepository = userRepository;
         }
 
         [AllowAnonymous]
@@ -37,9 +40,23 @@ namespace WebApplication1.Controllers
             {
                 return Content(HttpStatusCode.NotModified, "User not created");
             }
-                
-
         }
+
+
+        [Authorize]
+        [Route("info")]
+        public IHttpActionResult GetUserInfo()
+        {
+            Guid ownerIdGuid = Guid.Empty; // create Guid for further converting
+
+            var currentUserId = User.Identity.GetUserId();  //get current ID
+            ownerIdGuid = new Guid(currentUserId);  // convert to Guid type
+            User currentUser = _userRepository.FindByGuid(ownerIdGuid);
+
+            return Content(HttpStatusCode.Accepted, currentUser);
+        }
+
+
         private Guid getGuid(string value)
         {
             var result = default(Guid);

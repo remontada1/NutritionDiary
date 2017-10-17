@@ -18,5 +18,6 @@ namespace WebApplication1.Infrastructure
         void Remove(int id);
         void RemoveByEntity(TEntity entity);
         TEntity FindById(object id);
+        TEntity FindByGuid(Guid id);
     }
 }
