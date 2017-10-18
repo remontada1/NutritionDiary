@@ -18,23 +18,8 @@ namespace WebApplication1.Models
     public class User
     {
 
-        /*   public int Id { get; set; }
-        
-           [DataType(DataType.EmailAddress)]
-           public string Email{ get; set; }
-
-           [Required(ErrorMessage = "Необходимо ввести пароль")]
-           [StringLength(30,ErrorMessage="Пароль должен быть от 6 до 30 символов", MinimumLength=6)]
-           [DataType(DataType.Password)]
-           public string Password { get; set; }
-
-           [Required(ErrorMessage = "Необходимо подтвердить пароль")]
-           [StringLength(30, ErrorMessage = "Пароль должен быть от 6 до 30 символов", MinimumLength = 6)]
-           [DataType(DataType.Password)]
-           [Compare("Password", ErrorMessage = "Пароли не совпадают")]
-           public string ConfirmPassword {get; set;} */
-
         private ICollection<ExternalLogin> _externalLogins;
+        public ICollection<Meal> Meals { get; set; }
 
         public Guid Id { get; set; }
         public string UserName { get; set; }

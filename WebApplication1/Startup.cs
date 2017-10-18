@@ -45,40 +45,32 @@ namespace WebApplication1
 
         public static OAuthAuthorizationServerOptions OAuthAuthorizationServer { get; set; }
         public static UserManager<ApplicationUser, Guid> userManager { get; set; }
+
         public void Configuration(IAppBuilder app)
         {
-
             var config = WebApiConfig.Register();
-           
-            var builder = new ContainerBuilder();
 
+            var builder = new ContainerBuilder();
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-
             builder.RegisterModule(new AutoMapperModule());
-            builder
-                .RegisterInstance(app)
-                .As<IAppBuilder>();
+            builder.RegisterInstance(app).As<IAppBuilder>();
 
-
-            builder
-               .RegisterType<CustomOAuthProvider>()
-               .As<IOAuthAuthorizationServerProvider>()
-               .InstancePerDependency();
+            builder.RegisterType<CustomOAuthProvider>().As<IOAuthAuthorizationServerProvider>().InstancePerDependency();
 
             builder
                 .Register(x => new OAuthAuthorizationServerOptions
                 {
-                    AllowInsecureHttp = true, 
+                    AllowInsecureHttp = true,
                     TokenEndpointPath = new PathString("/oauth/token"),
                     AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                     Provider = x.Resolve<IOAuthAuthorizationServerProvider>()
                 })
                  .AsSelf()
                 .InstancePerDependency();
-            
+
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
             builder.RegisterType<OAuthAuthorizationServerMiddleware>().AsSelf().InstancePerLifetimeScope();
 
@@ -97,23 +89,13 @@ namespace WebApplication1
                .Where(t => t.Name.EndsWith("Service"))
                .AsImplementedInterfaces().InstancePerRequest();
 
-
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
-
-
-            //   var container = builder.Build();
-            // This will add the Autofac middleware as well as the middleware
-            // registered in the container.
             app.UseAutofacMiddleware(container);
-
             app.UseWebApi(config);
             app.UseAutofacWebApi(config);
             app.UseNLog();
-
-
-
 
         }
     }

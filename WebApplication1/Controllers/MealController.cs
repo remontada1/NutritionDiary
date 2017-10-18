@@ -28,6 +28,7 @@ namespace WebApplication1.Controllers
             this.mealService = mealService;
             this.mapper = mapper;
         }
+
         // add food to existing meal
         [HttpPost]
         [Route("meal/{mealId}/food/{foodId}")]
@@ -36,8 +37,9 @@ namespace WebApplication1.Controllers
             mealService.AddFoodToMeal(mealId, foodId);
             mealService.SaveMeals();
 
-            return Content(HttpStatusCode.OK, "Food  have been attached to food.");
+            return Content(HttpStatusCode.OK, "Food  have been attached to meal.");
         }
+
         // returns meal with foods
         [HttpGet]
         [Route("meal/{mealId}/foods")]

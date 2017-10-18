@@ -1235,6 +1235,34 @@
     <Compile Include="Migrations\201710050034413_FixUserModel.Designer.cs">
       <DependentUpon>201710050034413_FixUserModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710181726316_DeleteMealTypeTable1.cs" />
+    <Compile Include="Migrations\201710181726316_DeleteMealTypeTable1.Designer.cs">
+      <DependentUpon>201710181726316_DeleteMealTypeTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710181733098_DeleteMealTypeTable11.cs" />
+    <Compile Include="Migrations\201710181733098_DeleteMealTypeTable11.Designer.cs">
+      <DependentUpon>201710181733098_DeleteMealTypeTable11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710181812380_AddSodiumToFood.cs" />
+    <Compile Include="Migrations\201710181812380_AddSodiumToFood.Designer.cs">
+      <DependentUpon>201710181812380_AddSodiumToFood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710182131222_DeleteFKFromMeal.cs" />
+    <Compile Include="Migrations\201710182131222_DeleteFKFromMeal.Designer.cs">
+      <DependentUpon>201710182131222_DeleteFKFromMeal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710182155193_DeleteColumnFromMeal.cs" />
+    <Compile Include="Migrations\201710182155193_DeleteColumnFromMeal.Designer.cs">
+      <DependentUpon>201710182155193_DeleteColumnFromMeal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710182207022_DeleteSodium.cs" />
+    <Compile Include="Migrations\201710182207022_DeleteSodium.Designer.cs">
+      <DependentUpon>201710182207022_DeleteSodium.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710182214250_AddOneToManyToUserAndMeal.cs" />
+    <Compile Include="Migrations\201710182214250_AddOneToManyToUserAndMeal.Designer.cs">
+      <DependentUpon>201710182214250_AddOneToManyToUserAndMeal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
     <Compile Include="Models\User.cs" />
@@ -1242,7 +1270,6 @@
     <Compile Include="Models\CustomerData.cs" />
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\Meal.cs" />
-    <Compile Include="Models\MealType.cs" />
     <Compile Include="Models\UserBindingModel.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1332,6 +1359,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710050034413_FixUserModel.resx">
       <DependentUpon>201710050034413_FixUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710181726316_DeleteMealTypeTable1.resx">
+      <DependentUpon>201710181726316_DeleteMealTypeTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710181733098_DeleteMealTypeTable11.resx">
+      <DependentUpon>201710181733098_DeleteMealTypeTable11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710181812380_AddSodiumToFood.resx">
+      <DependentUpon>201710181812380_AddSodiumToFood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710182131222_DeleteFKFromMeal.resx">
+      <DependentUpon>201710182131222_DeleteFKFromMeal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710182155193_DeleteColumnFromMeal.resx">
+      <DependentUpon>201710182155193_DeleteColumnFromMeal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710182207022_DeleteSodium.resx">
+      <DependentUpon>201710182207022_DeleteSodium.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710182214250_AddOneToManyToUserAndMeal.resx">
+      <DependentUpon>201710182214250_AddOneToManyToUserAndMeal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
