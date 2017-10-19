@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
         }
 
         [AllowAnonymous]
-        [Route("Register")]
+        [Route("signup")]
         public async Task<IHttpActionResult> Register(UserBindingModel userModel)
         {
             if (!ModelState.IsValid)
@@ -61,13 +61,22 @@ namespace WebApplication1.Controllers
         }
         [HttpPost]
         [Authorize]
-        [Route("CreateMeal/{mealId}")]
+        [Route("createMeal/{mealId}")]
         public IHttpActionResult CreateMeal(int mealId)
         {
             _mealService.AttachMealToUser(mealId);
             _mealService.SaveMeals();
 
             return Content(HttpStatusCode.Accepted, "Meal created");
+        }
+        [HttpGet]
+        [Authorize]
+        [Route("getMeals")]
+        public IHttpActionResult GetCurrentUserMeals()
+        {
+            var mealList = _mealService.GetCurrentUserMeal();
+
+            return Content(HttpStatusCode.OK, mealList);
         }
 
 

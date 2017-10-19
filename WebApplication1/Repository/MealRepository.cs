@@ -91,20 +91,35 @@ namespace WebApplication1.Repository
 
             this.DbContext.Meals.Attach(meal);
             this.DbContext.Users.Attach(user);
-           
+
             user.Meals.Add(meal);
 
         }
-
+        // Get user by Guid id
         public User GetByGuid()
         {
 
             Guid guid = Guid.Empty;
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
-            guid = new Guid(currentUserId);
+            guid = new Guid(currentUserId); //convert to guid format
             var user = DbContext.Users.Find(guid);
 
             return user;
+        }
+
+        public IEnumerable<User> GetCurrentUserMeals()
+        {
+            Guid guid = Guid.Empty;
+            var currentUserId = HttpContext.Current.User.Identity.GetUserId();
+            guid = new Guid(currentUserId);
+
+            var userMeals = DbContext.Users.
+                Where(x => x.Id == guid)
+                .Include(m => m.Meals)
+                .Take(5)
+                .ToList();
+
+            return userMeals;
         }
 
     }
@@ -117,6 +132,6 @@ namespace WebApplication1.Repository
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
         void AttachMealToUser(int mealId);
-
+        IEnumerable<User> GetCurrentUserMeals();
     }
 }

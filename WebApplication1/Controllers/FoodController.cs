@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [Route("api/GetFoods")]
+        [Route("api/getFoods")]
         public IHttpActionResult GetFoods()
         {
             IEnumerable<FoodViewModel> viewModelFoods;
@@ -105,7 +105,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpDelete]
-        [Route("api/DeleteFoodById/{id}")]
+        [Route("api/deleteFoodById/{id}")]
         public IHttpActionResult RemoveFood(int id)
         {
 

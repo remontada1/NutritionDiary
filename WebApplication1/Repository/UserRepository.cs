@@ -26,6 +26,9 @@ namespace WebApplication1.Repository
         {
             return  DbContext.Users.FirstOrDefaultAsync(x => x.UserName == username);
         }    
+
+
+        
     }
 
 
@@ -33,7 +36,7 @@ namespace WebApplication1.Repository
     {
         User FindByUsername(string username);
         Task<User> FindByUsernameAsync(string username);
-       
+
     }
 
 }

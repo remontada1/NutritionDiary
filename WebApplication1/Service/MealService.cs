@@ -78,6 +78,11 @@ namespace WebApplication1.Service
             mealRepository.AttachMealToUser(mealId);
         }
 
+        public IEnumerable<User> GetCurrentUserMeal()
+        {
+            return mealRepository.GetCurrentUserMeals();
+        }
+
         public void SaveMeals()
         {
             unitOfWork.Commit();
@@ -98,5 +103,6 @@ namespace WebApplication1.Service
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
         void AttachMealToUser(int mealId);
+        IEnumerable<User> GetCurrentUserMeal();
     }
 }

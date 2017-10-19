@@ -54,7 +54,7 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, new { totalCalories, meals });
         }
         [HttpPost]
-        [Route("Meal")]
+        [Route("createMeal")]
         public IHttpActionResult CreateMeal(Meal meal)
         {
             if (!ModelState.IsValid)
