@@ -85,23 +85,26 @@ namespace WebApplication1.Repository
 
         public void AttachMealToUser(int mealId)
         {
-            Guid guid = Guid.Empty;
-            var currentUserId = HttpContext.Current.User.Identity.GetUserId();
-            guid = new Guid(currentUserId);
-            var user = GetByGuid(guid);
+            var user = GetByGuid();
 
             var meal = this.DbContext.Meals.Find(mealId);
+
             this.DbContext.Meals.Attach(meal);
             this.DbContext.Users.Attach(user);
            
-
             user.Meals.Add(meal);
 
         }
 
-        public User GetByGuid(Guid guid)
+        public User GetByGuid()
         {
-            return this.DbContext.Users.Find(guid);
+
+            Guid guid = Guid.Empty;
+            var currentUserId = HttpContext.Current.User.Identity.GetUserId();
+            guid = new Guid(currentUserId);
+            var user = DbContext.Users.Find(guid);
+
+            return user;
         }
 
     }
