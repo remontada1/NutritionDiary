@@ -1131,6 +1131,7 @@
     </Compile>
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
+    <Compile Include="Helpers\UserExtensions.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\PasswordHasher.cs" />
     <Compile Include="Identity\UserStore.cs" />
@@ -1263,6 +1264,18 @@
     <Compile Include="Migrations\201710182214250_AddOneToManyToUserAndMeal.Designer.cs">
       <DependentUpon>201710182214250_AddOneToManyToUserAndMeal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710190144349_FixRelation.cs" />
+    <Compile Include="Migrations\201710190144349_FixRelation.Designer.cs">
+      <DependentUpon>201710190144349_FixRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710190220157_FixRelation1.cs" />
+    <Compile Include="Migrations\201710190220157_FixRelation1.Designer.cs">
+      <DependentUpon>201710190220157_FixRelation1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710190230010_AddRelationOneToMany.cs" />
+    <Compile Include="Migrations\201710190230010_AddRelationOneToMany.Designer.cs">
+      <DependentUpon>201710190230010_AddRelationOneToMany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
     <Compile Include="Models\User.cs" />
@@ -1380,6 +1393,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710182214250_AddOneToManyToUserAndMeal.resx">
       <DependentUpon>201710182214250_AddOneToManyToUserAndMeal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710190144349_FixRelation.resx">
+      <DependentUpon>201710190144349_FixRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710190220157_FixRelation1.resx">
+      <DependentUpon>201710190220157_FixRelation1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710190230010_AddRelationOneToMany.resx">
+      <DependentUpon>201710190230010_AddRelationOneToMany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

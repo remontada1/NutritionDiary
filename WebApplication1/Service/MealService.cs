@@ -6,7 +6,7 @@ using WebApplication1.Infrastructure;
 using WebApplication1.Models;
 using WebApplication1.DAL;
 using WebApplication1.Repository;
-
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication1.Service
 {
@@ -15,12 +15,15 @@ namespace WebApplication1.Service
         IFoodRepository foodRepository;
         IMealRepository mealRepository;
         IUnitOfWork unitOfWork;
+        IUserRepository userRepository;
 
-        public MealService(IFoodRepository foodRepository, IMealRepository mealRepository, IUnitOfWork unitOfWork)
+        public MealService(IFoodRepository foodRepository, IMealRepository mealRepository,
+            IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
             this.foodRepository = foodRepository;
             this.mealRepository = mealRepository;
+            this.userRepository = userRepository;
         }
 
 
@@ -70,6 +73,11 @@ namespace WebApplication1.Service
             return mealRepository.SumOfNutrients(mealId);
         }
 
+        public void AttachMealToUser(int mealId)
+        {
+            mealRepository.AttachMealToUser(mealId);
+        }
+
         public void SaveMeals()
         {
             unitOfWork.Commit();
@@ -89,5 +97,6 @@ namespace WebApplication1.Service
         IEnumerable<Meal> GetMeals();
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
+        void AttachMealToUser(int mealId);
     }
 }

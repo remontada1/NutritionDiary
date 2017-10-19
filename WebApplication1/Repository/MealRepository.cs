@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using WebApplication1.Models;
 using WebApplication1.Infrastructure;
-using WebApplication1.DAL;
 using System.Data.Entity;
-using System.Web.Http;
-
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using WebApplication1.Identity;
+using System.Web;
 
 namespace WebApplication1.Repository
 {
@@ -15,7 +15,8 @@ namespace WebApplication1.Repository
     {
 
         public MealRepository(IDbFactory dbFactory)
-            : base(dbFactory) { }
+            : base(dbFactory)
+        { }
 
 
         public Meal GetMealById(string name)
@@ -47,11 +48,11 @@ namespace WebApplication1.Repository
                     TotalCarbs = f.Sum(k => k.Foods.Sum(c => (int?)c.Hydrates)),
                     TotalProteins = f.Sum(k => k.Foods.Sum(c => (int?)c.Protein))
                 }).FirstOrDefault();
-           
+
             return meal;
         }
 
-        
+
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
 
@@ -79,8 +80,30 @@ namespace WebApplication1.Repository
 
             meal.Foods.Remove(food);
 
+        }
+
+
+        public void AttachMealToUser(int mealId)
+        {
+            Guid guid = Guid.Empty;
+            var currentUserId = HttpContext.Current.User.Identity.GetUserId();
+            guid = new Guid(currentUserId);
+            var user = GetByGuid(guid);
+
+            var meal = this.DbContext.Meals.Find(mealId);
+            this.DbContext.Meals.Attach(meal);
+            this.DbContext.Users.Attach(user);
+           
+
+            user.Meals.Add(meal);
 
         }
+
+        public User GetByGuid(Guid guid)
+        {
+            return this.DbContext.Users.Find(guid);
+        }
+
     }
 
     public interface IMealRepository : IRepository<Meal>
@@ -90,6 +113,7 @@ namespace WebApplication1.Repository
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
-     
+        void AttachMealToUser(int mealId);
+
     }
 }

@@ -7,6 +7,7 @@ using WebApplication1.Models;
 using System.Threading.Tasks;
 using System.Net;
 using WebApplication1.Repository;
+using WebApplication1.Service;
 
 namespace WebApplication1.Controllers
 {
@@ -16,10 +17,13 @@ namespace WebApplication1.Controllers
     {
         private readonly UserManager<Identity.ApplicationUser, Guid> _userManager;
         private readonly IUserRepository _userRepository;
-        public AccountController(UserManager<Identity.ApplicationUser, Guid> userManager, IUserRepository userRepository)
+        private readonly IMealService _mealService;
+        public AccountController(UserManager<Identity.ApplicationUser, Guid> userManager,
+            IUserRepository userRepository, IMealService mealService)
         {
             _userManager = userManager;
             _userRepository = userRepository;
+            _mealService = mealService;
         }
 
         [AllowAnonymous]
@@ -28,7 +32,7 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Content(HttpStatusCode.NotAcceptable,"Input is not valid");
+                return Content(HttpStatusCode.NotAcceptable, "Input is not valid");
             }
             var user = new ApplicationUser() { UserName = userModel.UserName };
             var result = await _userManager.CreateAsync(user, userModel.Password);
@@ -54,6 +58,16 @@ namespace WebApplication1.Controllers
             User currentUser = _userRepository.FindByGuid(ownerIdGuid);
 
             return Content(HttpStatusCode.Accepted, currentUser);
+        }
+        [HttpPost]
+        [Authorize]
+        [Route("CreateMeal/{mealId}")]
+        public IHttpActionResult CreateMeal(int mealId)
+        {
+            _mealService.AttachMealToUser(mealId);
+            _mealService.SaveMeals();
+
+            return Content(HttpStatusCode.Accepted, "Meal created");
         }
 
 

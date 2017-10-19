@@ -19,14 +19,19 @@ namespace WebApplication1.Models
     {
 
         private ICollection<ExternalLogin> _externalLogins;
-        public ICollection<Meal> Meals { get; set; }
+      
 
         public Guid Id { get; set; }
         public string UserName { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string SecurityStamp { get; set; }
 
+        public ICollection<Meal> Meals { get; set; }
 
+        public User()
+        {
+            Meals = new List<Meal>();
+        }
 
         public virtual ICollection<ExternalLogin> Logins
         {
@@ -37,6 +42,7 @@ namespace WebApplication1.Models
             }
             set { _externalLogins = value; }
         }
+ 
     }
 
 }

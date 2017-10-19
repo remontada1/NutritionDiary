@@ -17,6 +17,7 @@ namespace WebApplication1.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
         public DateTime SetDate { get; set; }
 
+        public Guid? UserId { get; set; }
         public User User { get; set; }
         public virtual ICollection<Food> Foods { get; set; }
 
