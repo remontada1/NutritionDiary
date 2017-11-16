@@ -13,7 +13,7 @@ namespace WebApplication1.Service
     {
         IEnumerable<Food> GetFoods();
         Food GetFoodById(int id);
-        Food GetFood(string name);
+        Food GetFoodByName(string name);
         void AddFood(Food food);
         void UpdateFood(Food food);
         void Remove(int id);
@@ -37,7 +37,7 @@ namespace WebApplication1.Service
             var foods = foodRepository.GetAll();
             return foods;
         }
-        public Food GetFood(string name)
+        public Food GetFoodByName(string name)
         {
             var food = foodRepository.GetFoodByName(name);
             return food;

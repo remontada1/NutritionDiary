@@ -1,35 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using WebApplication1.Models;
-using WebApplication1.Infrastructure;
-using AttributeRouting.Web.Http;
 using WebApplication1.Service;
-using WebApplication1.Mappings;
 using WebApplication1.ViewModels;
 using AutoMapper;
-using NLog;
+using System.Web.Http.Cors;
+
 namespace WebApplication1.Controllers
 {
-
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FoodController : ApiController
     {
         private readonly IFoodService foodService;
         private readonly IMapper mapper;
-        
+
         public FoodController(IFoodService foodService, IMapper mapper)
         {
             this.foodService = foodService;
             this.mapper = mapper;
-            
-
         }
 
-        [Route("api/getFoods")]
+        [Route("api/foods")]
         public IHttpActionResult GetFoods()
         {
             IEnumerable<FoodViewModel> viewModelFoods;
@@ -42,9 +36,7 @@ namespace WebApplication1.Controllers
             }
             viewModelFoods = mapper.Map<IEnumerable<Food>, IEnumerable<FoodViewModel>>(foods);
 
-            return Content(HttpStatusCode.Found, viewModelFoods);
-
-            throw new Exception("No product found for this id");  
+            return Content(HttpStatusCode.OK, viewModelFoods);
         }
 
         public IHttpActionResult GetFoodById(int id)
@@ -54,11 +46,26 @@ namespace WebApplication1.Controllers
             Food food = foodService.GetFoodById(id);
             if (food == null)
             {
-                throw new Exception("Food not found");
+                return Content(HttpStatusCode.NotFound, "Food not found");
             }
             viewModelFood = mapper.Map<Food, FoodViewModel>(food);
-            return Content(HttpStatusCode.OK, viewModelFood);
 
+            return Content(HttpStatusCode.OK, viewModelFood);
+        }
+        [HttpGet]
+        [Route("api/food/{name}")]
+        public IHttpActionResult GetFoodByName(string name)
+        {
+            FoodViewModel viewModelFood;
+
+            Food food = foodService.GetFoodByName(name);
+            if (food == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Food not found");
+            }
+            viewModelFood = mapper.Map<Food, FoodViewModel>(food);
+
+            return Content(HttpStatusCode.Created, viewModelFood);
         }
 
         [HttpPost]
@@ -72,6 +79,7 @@ namespace WebApplication1.Controllers
             }
             foodService.AddFood(food);
             foodService.SaveFood();
+
             viewModelFood = mapper.Map<Food, FoodViewModel>(food);
 
             return Content(HttpStatusCode.Created, viewModelFood);
@@ -97,7 +105,6 @@ namespace WebApplication1.Controllers
                     foodService.UpdateFood(food);
                     foodService.SaveFood();
 
-
                     return Content(HttpStatusCode.OK, food);
                 }
             }
@@ -105,7 +112,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpDelete]
-        [Route("api/deleteFoodById/{id}")]
+        [Route("api/food/{id}")]
         public IHttpActionResult RemoveFood(int id)
         {
 

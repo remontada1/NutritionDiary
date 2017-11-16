@@ -19,7 +19,7 @@ namespace WebApplication1.Repository
         { }
 
 
-        public Meal GetMealById(string name)
+        public Meal GetMealByName(string name)
         {
             var meal = this.DbContext.Meals.Where(m => m.Name == name).FirstOrDefault();
             return meal;
@@ -98,10 +98,11 @@ namespace WebApplication1.Repository
         // Get user by Guid id
         public User GetByGuid()
         {
-
             Guid guid = Guid.Empty;
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
+
             guid = new Guid(currentUserId); //convert to guid format
+
             var user = DbContext.Users.Find(guid);
 
             return user;
@@ -127,7 +128,7 @@ namespace WebApplication1.Repository
     public interface IMealRepository : IRepository<Meal>
     {
         void RemoveFoodFromMeal(int mealId, int foodId);
-        Meal GetMealById(string name);
+        Meal GetMealByName(string name);
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
