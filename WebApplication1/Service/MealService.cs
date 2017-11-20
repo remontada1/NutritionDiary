@@ -29,9 +29,7 @@ namespace WebApplication1.Service
 
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
-
             mealRepository.RemoveFoodFromMeal(mealId, foodId);
-
         }
         public void AddFoodToMeal(int mealId, int foodId)
         {
@@ -59,23 +57,19 @@ namespace WebApplication1.Service
             return mealRepository.GetById(id);
         }
 
-        public void AddMeal(Meal meal)
-        {
-            mealRepository.Add(meal);
-        }
-
         public void UpdateMeal(Meal meal)
         {
             mealRepository.Update(meal);
         }
+
         public MealTotalNutrients SumOfNutrients(int mealId)
         {
             return mealRepository.SumOfNutrients(mealId);
         }
 
-        public void AttachMealToUser(int mealId)
+        public void CreateMeal(Meal meal)
         {
-            mealRepository.AttachMealToUser(mealId);
+            mealRepository.CreateMeal(meal);
         }
 
         public IEnumerable<User> GetCurrentUserMeal()
@@ -87,8 +81,6 @@ namespace WebApplication1.Service
         {
             unitOfWork.Commit();
         }
-
-        //TODO IMealService
     }
 
     public interface IMealService
@@ -96,13 +88,12 @@ namespace WebApplication1.Service
         void RemoveFoodFromMeal(int mealId, int foodId);
         void AddFoodToMeal(int mealId, int foodId);
         void SaveMeals();
-        void UpdateMeal(Meal meal);
-        void AddMeal(Meal meal);
+        void UpdateMeal(Meal meal);      
         Meal GetMealById(int id);
         IEnumerable<Meal> GetMeals();
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
-        void AttachMealToUser(int mealId);
+        void CreateMeal(Meal meal);
         IEnumerable<User> GetCurrentUserMeal();
     }
 }

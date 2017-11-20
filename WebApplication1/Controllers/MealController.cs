@@ -53,20 +53,7 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, new { totalCalories, meals });
         }
-        [HttpPost]
-        [Route("createMeal")]
-        public IHttpActionResult CreateMeal(Meal meal)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Content(HttpStatusCode.NotAcceptable, "Invalid arguments.");
-            }
-            mealService.AddMeal(meal);
-            mealService.SaveMeals();
-
-            return Content(HttpStatusCode.OK, "Meal created.");
-
-        }
+        
         // delete existing food from meal
         [HttpDelete]
         [Route("meal/{mealId}/food/{foodId}")]

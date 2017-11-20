@@ -46,9 +46,8 @@ namespace WebApplication1.Controllers
             }
         }
 
-
         [Authorize]
-        [Route("info")]
+        [Route("api/info")]
         public IHttpActionResult GetUserInfo()
         {
             Guid ownerIdGuid = Guid.Empty; // create Guid for further converting
@@ -61,24 +60,24 @@ namespace WebApplication1.Controllers
         }
         [HttpPost]
         [Authorize]
-        [Route("createMeal/{mealId}")]
-        public IHttpActionResult CreateMeal(int mealId)
+        [Route("api/meal")]
+        public IHttpActionResult CreateMeal(Meal meal)
         {
-            _mealService.AttachMealToUser(mealId);
+            _mealService.CreateMeal(meal);
             _mealService.SaveMeals();
 
             return Content(HttpStatusCode.Accepted, "Meal created");
         }
+
         [HttpGet]
         [Authorize]
-        [Route("getMeals")]
+        [Route("api/meals")]
         public IHttpActionResult GetCurrentUserMeals()
         {
             var mealList = _mealService.GetCurrentUserMeal();
 
             return Content(HttpStatusCode.OK, mealList);
         }
-
 
         private Guid getGuid(string value)
         {

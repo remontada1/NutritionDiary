@@ -5,8 +5,6 @@ using WebApplication1.Models;
 using WebApplication1.Infrastructure;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using WebApplication1.Identity;
 using System.Web;
 
 namespace WebApplication1.Repository
@@ -64,8 +62,6 @@ namespace WebApplication1.Repository
             return mealWithFoods;
         }
 
-
-
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
             var meal = this.DbContext.Meals.Find(mealId);
@@ -83,14 +79,15 @@ namespace WebApplication1.Repository
         }
 
 
-        public void AttachMealToUser(int mealId)
+        public void CreateMeal(Meal meal)
         {
             var user = GetByGuid();
 
-            var meal = this.DbContext.Meals.Find(mealId);
+            var mealEntity = this.DbContext.Meals.Add(meal);
 
-            this.DbContext.Meals.Attach(meal);
-            this.DbContext.Users.Attach(user);
+
+            DbContext.Meals.Add(mealEntity);
+            DbContext.Users.Attach(user);
 
             user.Meals.Add(meal);
 
@@ -132,7 +129,7 @@ namespace WebApplication1.Repository
         void AttachFoodToMeal(int mealId, int foodId);
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
-        void AttachMealToUser(int mealId);
+        void CreateMeal(Meal meal);
         IEnumerable<User> GetCurrentUserMeals();
     }
 }
