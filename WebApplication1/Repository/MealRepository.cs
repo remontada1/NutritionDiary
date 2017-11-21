@@ -105,19 +105,21 @@ namespace WebApplication1.Repository
             return user;
         }
 
-        public IEnumerable<User> GetCurrentUserMeals()
+        public User GetCurrentUserMeals()
         {
             Guid guid = Guid.Empty;
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
             guid = new Guid(currentUserId);
 
-            var userMeals = DbContext.Users.
-                Where(x => x.Id == guid)
-                .Include(m => m.Meals)
-                .Take(5)
-                .ToList();
+            var user = DbContext.Users.FirstOrDefault(i => i.Id == guid);
+            var meals = DbContext.Entry(user);
 
-            return userMeals;
+            meals.Collection(m => m.Meals)
+                .Query()
+                .OrderByDescending(d => d.SetDate)
+                .Load();
+
+            return user;
         }
 
     }
@@ -130,6 +132,6 @@ namespace WebApplication1.Repository
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
         void CreateMeal(Meal meal);
-        IEnumerable<User> GetCurrentUserMeals();
+        User GetCurrentUserMeals();
     }
 }

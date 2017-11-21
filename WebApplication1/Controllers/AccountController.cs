@@ -11,8 +11,6 @@ using WebApplication1.Service;
 
 namespace WebApplication1.Controllers
 {
-
-
     public class AccountController : ApiController
     {
         private readonly UserManager<Identity.ApplicationUser, Guid> _userManager;
@@ -58,6 +56,7 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.Accepted, currentUser);
         }
+
         [HttpPost]
         [Authorize]
         [Route("api/meal")]

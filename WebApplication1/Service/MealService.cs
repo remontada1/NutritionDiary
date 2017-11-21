@@ -72,7 +72,7 @@ namespace WebApplication1.Service
             mealRepository.CreateMeal(meal);
         }
 
-        public IEnumerable<User> GetCurrentUserMeal()
+        public User GetCurrentUserMeal()
         {
             return mealRepository.GetCurrentUserMeals();
         }
@@ -94,6 +94,6 @@ namespace WebApplication1.Service
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
         void CreateMeal(Meal meal);
-        IEnumerable<User> GetCurrentUserMeal();
+        User GetCurrentUserMeal();
     }
 }
