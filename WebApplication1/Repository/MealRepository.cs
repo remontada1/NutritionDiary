@@ -16,7 +16,6 @@ namespace WebApplication1.Repository
             : base(dbFactory)
         { }
 
-
         public Meal GetMealByName(string name)
         {
             var meal = this.DbContext.Meals.Where(m => m.Name == name).FirstOrDefault();
@@ -53,7 +52,6 @@ namespace WebApplication1.Repository
 
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
-
             var mealWithFoods = this.DbContext.Meals
                  .Where(m => m.Id == mealId)
                  .Include(f => f.Foods)
@@ -75,9 +73,7 @@ namespace WebApplication1.Repository
             this.DbContext.Entry(meal).Collection("Foods").Load();
 
             meal.Foods.Remove(food);
-
         }
-
 
         public void CreateMeal(Meal meal)
         {
@@ -85,13 +81,12 @@ namespace WebApplication1.Repository
 
             var mealEntity = this.DbContext.Meals.Add(meal);
 
-
             DbContext.Meals.Add(mealEntity);
             DbContext.Users.Attach(user);
 
             user.Meals.Add(meal);
-
         }
+
         // Get user by Guid id
         public User GetByGuid()
         {

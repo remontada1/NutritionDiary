@@ -51,10 +51,13 @@ namespace WebApplication1.Controllers
             Guid ownerIdGuid = Guid.Empty; // create Guid for further converting
 
             var currentUserId = User.Identity.GetUserId();  //get current ID
-            ownerIdGuid = new Guid(currentUserId);  // convert to Guid type
-            User currentUser = _userRepository.FindByGuid(ownerIdGuid);
+            var currentGuidId = new Guid(currentUserId);  // convert to Guid type
 
-            return Content(HttpStatusCode.Accepted, currentUser);
+            User currentUser = _userRepository.FindByGuid(currentGuidId);
+
+            var mealList = _mealService.GetCurrentUserMeal();
+
+            return Content(HttpStatusCode.Accepted, mealList);
         }
 
         [HttpPost]
