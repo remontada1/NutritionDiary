@@ -71,15 +71,7 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.Accepted, "Meal created");
         }
 
-        [HttpGet]
-        [Authorize]
-        [Route("api/meals")]
-        public IHttpActionResult GetCurrentUserMeals()
-        {
-            var mealList = _mealService.GetCurrentUserMeal();
-
-            return Content(HttpStatusCode.OK, mealList);
-        }
+        
 
         private Guid getGuid(string value)
         {

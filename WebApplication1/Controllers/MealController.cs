@@ -40,10 +40,19 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, "Food  have been attached to meal.");
         }
 
+        [HttpGet]
+        [Authorize]
+        [Route("api/meals")]
+        public IHttpActionResult GetCurrentUserMeals()
+        {
+            var mealList = mealService.GetCurrentUserMeal();
+
+            return Content(HttpStatusCode.OK, mealList);
+        }
         // returns meal with foods
         [HttpGet]
         [Route("meal/{mealId}/foods")]
-        public IHttpActionResult GetMealAndFoods(int mealId)
+        public IHttpActionResult GetMealAndFoodsUnauthorized(int mealId)
         {
             IEnumerable<MealViewModel> mealVm;
 
