@@ -59,6 +59,7 @@ namespace WebApplication1
             builder.RegisterType<UserManager<ApplicationUser, Guid>>();
             builder.Register(context => context.Resolve<MapperConfiguration>().CreateMapper(context.Resolve)).As<IMapper>()
                 .InstancePerLifetimeScope();
+
             // Repositories
             builder.RegisterAssemblyTypes(typeof(FoodRepository).Assembly)
                 .Where(t => t.Name.EndsWith("Repository"))
@@ -75,7 +76,6 @@ namespace WebApplication1
             app.UseWebApi(config);
             app.UseAutofacWebApi(config);
             app.UseNLog();
-
         }
     }
 }

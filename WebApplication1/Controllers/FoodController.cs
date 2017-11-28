@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
             IEnumerable<FoodViewModel> viewModelFoods;
             IEnumerable<Food> foods;
 
-            foods = foodService.GetFoods().OrderByDescending(f => f.Id).Take(5).ToList();
+            foods = foodService.GetFoods();
             if (foods == null)
             {
                 return Content(HttpStatusCode.NotFound, "Foods not found");
