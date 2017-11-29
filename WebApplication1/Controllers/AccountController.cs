@@ -59,20 +59,7 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.Accepted, mealList);
         }
-
-        [HttpPost]
-        [Authorize]
-        [Route("api/meal")]
-        public IHttpActionResult CreateMeal(Meal meal)
-        {
-            _mealService.CreateMeal(meal);
-            _mealService.SaveMeals();
-
-            return Content(HttpStatusCode.Accepted, "Meal created");
-        }
-
-        
-
+      
         private Guid getGuid(string value)
         {
             var result = default(Guid);

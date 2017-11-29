@@ -62,7 +62,18 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, new { totalCalories, meals });
         }
-        
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/meal")]
+        public IHttpActionResult CreateMeal(Meal meal)
+        {
+            mealService.CreateMeal(meal);
+            mealService.SaveMeals();
+
+            return Content(HttpStatusCode.Accepted, "Meal created");
+        }
+
         // delete existing food from meal
         [HttpDelete]
         [Route("meal/{mealId}/food/{foodId}")]
