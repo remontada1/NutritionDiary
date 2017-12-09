@@ -26,7 +26,6 @@ namespace WebApplication1.Identity
             _unitOfWork = unitOfWork;
         }
 
-
         public IPasswordHasher PasswordHasher
         {
             get
@@ -44,6 +43,7 @@ namespace WebApplication1.Identity
                 _passwordHasher = value;
             }
         }
+
         #region IUserStore<IdentityUser, Guid> Members
         public Task CreateAsync(Identity.ApplicationUser appUser)
         {
@@ -214,8 +214,6 @@ namespace WebApplication1.Identity
             _unitOfWork.UserRepository.Update(u);
             return _unitOfWork.CommitAsync();
         }
-
-
         #endregion
 
         public Task<string> GetPasswordHashAsync(ApplicationUser user)
@@ -244,9 +242,6 @@ namespace WebApplication1.Identity
             // Dispose does nothing since we want Unity to manage the lifecycle of our Unit of Work
         }
         #endregion
-
-
-
 
         #region Private Methods
         private User getUser(ApplicationUser identityUser)

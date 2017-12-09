@@ -28,8 +28,8 @@ namespace WebApplication1.Providers
         {
             context.Validated();
             return Task.FromResult<object>(null);
-
         }
+
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var allowedOrigin = "*";
@@ -48,8 +48,5 @@ namespace WebApplication1.Providers
 
             context.Validated(ticket);
         }
-
-        // TODO: Add comments to CustomOAuthProvider
-
     }
 }

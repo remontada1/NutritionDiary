@@ -18,10 +18,11 @@ using AutoMapper;
 namespace WebApplication1.Controllers
 {
     public class MealController : ApiController
-    {
 
-        IMealService mealService;
-        IMapper mapper;
+
+    {
+        private readonly IMealService mealService;
+        private readonly IMapper mapper;
 
         public MealController(IMapper mapper, IMealService mealService)
         {
@@ -47,7 +48,9 @@ namespace WebApplication1.Controllers
         {
             var mealList = mealService.GetCurrentUserMeal();
 
-            return Content(HttpStatusCode.OK, mealList);
+            var userMealsVM = mapper.Map<User, UserMealsViewModel>(mealList);
+
+            return Content(HttpStatusCode.OK, userMealsVM);
         }
         // returns meal with foods
         [HttpGet]

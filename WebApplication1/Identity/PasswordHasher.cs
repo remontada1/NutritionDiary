@@ -29,10 +29,6 @@ namespace WebApplication1.Identity
             return PasswordVerificationResult.Failed;
         }
 
-
-
-
-
         public interface IPasswordHasher
         {
             /// <summary>
@@ -50,10 +46,5 @@ namespace WebApplication1.Identity
             /// <returns></returns>
             PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword);
         }
-
-
-
-
-
     }
 }

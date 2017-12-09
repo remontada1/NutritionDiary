@@ -88,7 +88,7 @@ namespace WebApplication1.Service
         void RemoveFoodFromMeal(int mealId, int foodId);
         void AddFoodToMeal(int mealId, int foodId);
         void SaveMeals();
-        void UpdateMeal(Meal meal);      
+        void UpdateMeal(Meal meal);
         Meal GetMealById(int id);
         IEnumerable<Meal> GetMeals();
         IEnumerable<Meal> GetMealWithFoods(int mealId);

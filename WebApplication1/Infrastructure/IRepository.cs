@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace WebApplication1.Infrastructure
 {
      public interface IRepository<TEntity>  where TEntity  : class
-    {
-        
+    {    
         IEnumerable<TEntity> GetAll();
         TEntity Get(Expression<Func<TEntity, bool>> predicate);
         TEntity GetById(int id);

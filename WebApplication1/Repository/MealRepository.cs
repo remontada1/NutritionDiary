@@ -105,6 +105,9 @@ namespace WebApplication1.Repository
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
             guid = new Guid(currentUserId);
 
+            /* var user = DbContext.Users.Where(i => i.Id == guid)
+                 .Include(f => f.Meals)
+                 .ToList();*/
             var user = DbContext.Users.FirstOrDefault(i => i.Id == guid);
             var meals = DbContext.Entry(user);
 

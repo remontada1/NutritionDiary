@@ -20,14 +20,11 @@ namespace WebApplication1.Mappings
                 .ForMember(f => f.Protein, map => map.MapFrom(vm => vm.Protein))
                 .ForMember(f => f.Image, map => map.MapFrom(vm => vm.Image));
 
-            CreateMap<Meal, MealViewModel>().ForMember(m => m.MealName, map => map.MapFrom(vm => vm.Name))
-                .ForMember(m => m.Foods, map => map.MapFrom(vm => vm.Foods.ToList()));
-            CreateMap<Food, MealViewModel>().ForMember(f => f.FoodName, map => map.MapFrom(vm => vm.Name))
-                .ForMember(f => f.KCalories, map => map.MapFrom(vm => vm.KCalory));
-
-            CreateMap<User, UserMealsViewModel>().ForMember(u => u.UserName, map => map.MapFrom(vm => vm.UserName))
-                .ForMember(u => u.MealName, map => map.MapFrom(vm => vm.Meals.Select(m => m.Name)));
-
+            CreateMap<Meal, MealViewModel>().ForMember(u => u.Name, map => map.MapFrom(vm => vm.Name));
+            CreateMap<User, UserMealsViewModel>().ForMember(u => u.Name, map => map.MapFrom(vm => vm.UserName))
+                .ForMember(u => u.Meals, opt => opt.MapFrom(s => s.Meals.Select(m => m.Name)));
+                
+           
         }
     }
 }
