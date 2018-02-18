@@ -14,11 +14,11 @@ using WebApplication1.Mappings;
 using WebApplication1.ViewModels;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Controllers
 {
     public class MealController : ApiController
-
 
     {
         private readonly IMealService mealService;
@@ -38,6 +38,8 @@ namespace WebApplication1.Controllers
             mealService.AddFoodToMeal(mealId, foodId);
             mealService.SaveMeals();
 
+            var currentMealFoodList = mealService.GetMealWithFoods(mealId);
+
             return Content(HttpStatusCode.OK, "Food  have been attached to meal.");
         }
 
@@ -52,6 +54,7 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, userMealsVM);
         }
+
         // returns meal with foods
         [HttpGet]
         [Route("meal/{mealId}/foods")]

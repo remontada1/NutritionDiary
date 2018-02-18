@@ -101,6 +101,7 @@ namespace WebApplication1.Repository
 
         public User GetCurrentUserMeals()
         {
+            var guidFromMethod = GetByGuid();
             Guid guid = Guid.Empty;
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
             guid = new Guid(currentUserId);

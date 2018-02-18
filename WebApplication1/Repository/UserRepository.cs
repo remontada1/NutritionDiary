@@ -11,11 +11,10 @@ namespace WebApplication1.Repository
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        private UserManager<IdentityUser> _userManager { get;  set; }
+        private UserManager<IdentityUser> _userManager { get; set; }
         public UserRepository(IDbFactory dbFactory)
             : base(dbFactory)
         {
-            
         }
 
         public User FindByUsername(string username)
@@ -24,19 +23,13 @@ namespace WebApplication1.Repository
         }
         public Task<User> FindByUsernameAsync(string username)
         {
-            return  DbContext.Users.FirstOrDefaultAsync(x => x.UserName == username);
-        }    
-
-
-        
+            return DbContext.Users.FirstOrDefaultAsync(x => x.UserName == username);
+        }
     }
-
 
     public interface IUserRepository : IRepository<User>
     {
         User FindByUsername(string username);
         Task<User> FindByUsernameAsync(string username);
-
     }
-
 }

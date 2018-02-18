@@ -9,5 +9,6 @@ namespace WebApplication1.ViewModels
     public class MealViewModel
     {
         public string Name { get; set; }
+        public string MealDate { get; set; }
     }
 }

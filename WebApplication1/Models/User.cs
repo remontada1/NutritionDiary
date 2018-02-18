@@ -20,7 +20,6 @@ namespace WebApplication1.Models
 
         private ICollection<ExternalLogin> _externalLogins;
       
-
         public Guid Id { get; set; }
         public string UserName { get; set; }
         public virtual string PasswordHash { get; set; }

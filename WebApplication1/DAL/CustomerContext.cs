@@ -23,15 +23,11 @@ namespace WebApplication1.DAL
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
-
-
-        
+               
         public DbSet<Food> Foods { get; set; }
         public DbSet<Meal> Meals { get; set; }
         public DbSet<CustomerData> CustomersData { get; set; }
-        
         public DbSet<User> Users { get; set; }
-
         public DbSet<ExternalLogin> Logins { get; set; }
 
         public virtual void Commit()
