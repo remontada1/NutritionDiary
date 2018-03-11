@@ -124,60 +124,59 @@ namespace WebApplication1.Controllers
 
                 var httpRequest = HttpContext.Current.Request;
 
-                foreach (string file in httpRequest.Files)
-                {
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
 
-                    var postedFile = httpRequest.Files[file];
-                    if (postedFile != null && postedFile.ContentLength > 0)
+                var postedFile = httpRequest.Files[0];
+                if (postedFile != null && postedFile.ContentLength > 0)
+                {
+
+                    int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
+
+                    IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".jpeg" };
+                    var extension = postedFile.FileName.Substring(postedFile.FileName.ToLower().LastIndexOf('.'));
+
+                    if (!AllowedFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
                     {
 
-                        int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
+                        var messageImageType = string.Format("Please Upload image of type .jpg,.gif,.png.");
 
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
-                        var extension = postedFile.FileName.Substring(postedFile.FileName.ToLower().LastIndexOf('.'));
+                        dict.Add("error", messageImageType);
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                    }
+                    else if (postedFile.ContentLength > MaxContentLength)
+                    {
 
-                        if (!AllowedFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
+                        var messageSizeRestriction = string.Format("Please Upload a file upto 1 mb.");
+
+                        dict.Add("error", messageSizeRestriction);
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                    }
+                    else
+                    {
+                        var foodOld = foodService.GetFoodById(foodId);
+
+                        var filePath = HttpContext.Current.Server.MapPath("~/Images/" + postedFile.FileName + extension);
+
+                        postedFile.SaveAs(filePath);
+
+                        FileUploadResult uploadResult = new FileUploadResult
                         {
+                            FileLength = postedFile.ContentLength,
+                            FileName = postedFile.FileName,
+                            LocalFilePath = filePath
+                        };
 
-                            var message = string.Format("Please Upload image of type .jpg,.gif,.png.");
+                        foodOld.Image = uploadResult.FileName;
+                        foodService.UpdateFood(foodOld);
+                        await foodService.SaveFoodAsync();
 
-                            dict.Add("error", message);
-                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
-                        }
-                        else if (postedFile.ContentLength > MaxContentLength)
-                        {
-
-                            var message = string.Format("Please Upload a file upto 1 mb.");
-
-                            dict.Add("error", message);
-                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
-                        }
-                        else
-                        {
-                            var foodOld = foodService.GetFoodById(foodId);
-
-                            var filePath = HttpContext.Current.Server.MapPath("~/Images/" + postedFile.FileName + extension);
-
-                            postedFile.SaveAs(filePath);
-                            FileUploadResult uploadResult = new FileUploadResult
-                            {
-                                FileLength = postedFile.ContentLength,
-                                FileName = postedFile.FileName,
-                                LocalFilePath = filePath
-                            };
-                            foodOld.Image = uploadResult.FileName;
-                            foodService.UpdateFood(foodOld);
-                            await foodService.SaveFoodAsync() ;
-
-                        }
                     }
 
-                    var message1 = string.Format("Image Updated Successfully.");
-                    return Request.CreateErrorResponse(HttpStatusCode.Created, message1); ;
+                    var successUploadMessage = string.Format("Image Updated Successfully.");
+                    return Request.CreateErrorResponse(HttpStatusCode.Created, successUploadMessage); ;
                 }
-                var res = string.Format("Please Upload a image.");
-                dict.Add("error", res);
+                var uploadImageMessage = string.Format("Please Upload a image.");
+                dict.Add("error", uploadImageMessage);
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
             catch (Exception ex)
@@ -187,34 +186,6 @@ namespace WebApplication1.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
         }
-
-        //[MimeMultipart]
-        //[HttpPut]
-        //[Route("api/upload/{foodId}")]
-        //public IHttpActionResult PostImage(int foodId)
-        //{
-        //    var foodOld = foodService.GetFoodById(foodId);
-
-        //    var uploadPath = HttpContext.Current.Server.MapPath("~/Images");
-
-        //    var streamProvider = new UploadMultipartFormProvider(uploadPath);
-        //    Request.Content.ReadAsMultipartAsync(streamProvider);
-
-        //    string _localFileName = streamProvider.FileData.Select(m => m.LocalFileName).FirstOrDefault();
-        //    FileUploadResult fileUploadResult = new FileUploadResult
-        //    {
-        //        LocalFilePath = _localFileName,
-        //        FileName = Path.GetFileName(_localFileName),
-        //        FileLength = new FileInfo(_localFileName).Length
-        //    };
-
-        //    foodOld.Image = fileUploadResult.FileName;
-        //    foodService.UpdateFood(foodOld);
-
-        //    foodService.SaveFood();
-
-        //    return Content(HttpStatusCode.OK, fileUploadResult);
-        //}
 
         [HttpDelete]
         [Route("api/food/{id}")]
