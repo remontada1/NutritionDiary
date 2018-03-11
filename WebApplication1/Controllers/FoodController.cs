@@ -116,7 +116,7 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [Route("api/upload/{foodId}")]
-        public async Task<HttpResponseMessage> PostUserImage(int foodId)
+        public async Task<HttpResponseMessage> PostFoodImage(int foodId)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             try
@@ -137,7 +137,7 @@ namespace WebApplication1.Controllers
                         IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
                         var extension = postedFile.FileName.Substring(postedFile.FileName.ToLower().LastIndexOf('.'));
 
-                        if (!AllowedFileExtensions.Contains(extension))
+                        if (!AllowedFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
                         {
 
                             var message = string.Format("Please Upload image of type .jpg,.gif,.png.");
