@@ -5,6 +5,7 @@ using System.Web;
 using WebApplication1.Infrastructure;
 using WebApplication1.Models;
 using WebApplication1.DAL;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Service
 {
@@ -18,6 +19,7 @@ namespace WebApplication1.Service
         void UpdateFood(Food food);
         void Remove(int id);
         void SaveFood();
+        Task<int> SaveFoodAsync();
     }
 
     public class FoodService : IFoodService
@@ -68,6 +70,9 @@ namespace WebApplication1.Service
         {
             unitOfWork.Commit();
         }
-        
+        public async Task<int> SaveFoodAsync()
+        {
+            return await unitOfWork.CommitAsync();
+        }
     }
 }

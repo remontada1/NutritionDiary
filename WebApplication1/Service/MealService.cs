@@ -97,5 +97,6 @@ namespace WebApplication1.Service
         MealTotalNutrients SumOfNutrients(int mealId);
         void CreateMeal(Meal meal);
         Task<User> GetCurrentUserMeal();
+
     }
 }

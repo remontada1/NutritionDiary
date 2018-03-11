@@ -136,7 +136,7 @@ namespace WebApplication1.Controllers
 
                         IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
                         var extension = postedFile.FileName.Substring(postedFile.FileName.ToLower().LastIndexOf('.'));
-                       
+
                         if (!AllowedFileExtensions.Contains(extension))
                         {
 
@@ -168,7 +168,7 @@ namespace WebApplication1.Controllers
                             };
                             foodOld.Image = uploadResult.FileName;
                             foodService.UpdateFood(foodOld);
-                            foodService.SaveFood();
+                            await foodService.SaveFoodAsync() ;
 
                         }
                     }
@@ -178,7 +178,7 @@ namespace WebApplication1.Controllers
                 }
                 var res = string.Format("Please Upload a image.");
                 dict.Add("error", res);
-                return  Request.CreateResponse(HttpStatusCode.NotFound, dict);
+                return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
             catch (Exception ex)
             {
@@ -187,52 +187,52 @@ namespace WebApplication1.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
         }
-    
-    //[MimeMultipart]
-    //[HttpPut]
-    //[Route("api/upload/{foodId}")]
-    //public IHttpActionResult PostImage(int foodId)
-    //{
-    //    var foodOld = foodService.GetFoodById(foodId);
 
-    //    var uploadPath = HttpContext.Current.Server.MapPath("~/Images");
+        //[MimeMultipart]
+        //[HttpPut]
+        //[Route("api/upload/{foodId}")]
+        //public IHttpActionResult PostImage(int foodId)
+        //{
+        //    var foodOld = foodService.GetFoodById(foodId);
 
-    //    var streamProvider = new UploadMultipartFormProvider(uploadPath);
-    //    Request.Content.ReadAsMultipartAsync(streamProvider);
+        //    var uploadPath = HttpContext.Current.Server.MapPath("~/Images");
 
-    //    string _localFileName = streamProvider.FileData.Select(m => m.LocalFileName).FirstOrDefault();
-    //    FileUploadResult fileUploadResult = new FileUploadResult
-    //    {
-    //        LocalFilePath = _localFileName,
-    //        FileName = Path.GetFileName(_localFileName),
-    //        FileLength = new FileInfo(_localFileName).Length
-    //    };
+        //    var streamProvider = new UploadMultipartFormProvider(uploadPath);
+        //    Request.Content.ReadAsMultipartAsync(streamProvider);
 
-    //    foodOld.Image = fileUploadResult.FileName;
-    //    foodService.UpdateFood(foodOld);
+        //    string _localFileName = streamProvider.FileData.Select(m => m.LocalFileName).FirstOrDefault();
+        //    FileUploadResult fileUploadResult = new FileUploadResult
+        //    {
+        //        LocalFilePath = _localFileName,
+        //        FileName = Path.GetFileName(_localFileName),
+        //        FileLength = new FileInfo(_localFileName).Length
+        //    };
 
-    //    foodService.SaveFood();
+        //    foodOld.Image = fileUploadResult.FileName;
+        //    foodService.UpdateFood(foodOld);
 
-    //    return Content(HttpStatusCode.OK, fileUploadResult);
-    //}
+        //    foodService.SaveFood();
 
-[HttpDelete]
-[Route("api/food/{id}")]
-public IHttpActionResult RemoveFood(int id)
-{
+        //    return Content(HttpStatusCode.OK, fileUploadResult);
+        //}
 
-    Food food = foodService.GetFoodById(id);
+        [HttpDelete]
+        [Route("api/food/{id}")]
+        public IHttpActionResult RemoveFood(int id)
+        {
 
-    if (food == null)
-    {
-        return Content(HttpStatusCode.NotFound, "Food does not exist.");
-    }
-    else
-    {
-        foodService.Remove(id);
-        foodService.SaveFood();
-        return Ok("Food has been deleted.");
-    }
-}
+            Food food = foodService.GetFoodById(id);
+
+            if (food == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Food does not exist.");
+            }
+            else
+            {
+                foodService.Remove(id);
+                foodService.SaveFood();
+                return Ok("Food has been deleted.");
+            }
+        }
     }
 }
