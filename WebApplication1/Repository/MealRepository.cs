@@ -6,6 +6,7 @@ using WebApplication1.Infrastructure;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using System.Web;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Repository
 {
@@ -99,7 +100,7 @@ namespace WebApplication1.Repository
             return user;
         }
 
-        public User GetCurrentUserMeals()
+        public async Task<User> GetCurrentUserMeals()
         {
             var guidFromMethod = GetByGuid();
             Guid guid = Guid.Empty;
@@ -109,15 +110,15 @@ namespace WebApplication1.Repository
             /* var user = DbContext.Users.Where(i => i.Id == guid)
                  .Include(f => f.Meals)
                  .ToList();*/
-            var user = DbContext.Users.FirstOrDefault(i => i.Id == guid);
-            var meals = DbContext.Entry(user);
+            var user = await DbContext.Users.FirstOrDefaultAsync(i => i.Id == guid);
+            var meals =  DbContext.Entry(user);
 
             meals.Collection(m => m.Meals)
                 .Query()
                 .OrderByDescending(d => d.SetDate)
                 .Load();
 
-            return user;
+             return user;
         }
 
     }
@@ -130,6 +131,6 @@ namespace WebApplication1.Repository
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
         void CreateMeal(Meal meal);
-        User GetCurrentUserMeals();
+        Task<User> GetCurrentUserMeals();
     }
 }

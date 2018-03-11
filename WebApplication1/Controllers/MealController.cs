@@ -40,15 +40,15 @@ namespace WebApplication1.Controllers
 
             var currentMealFoodList = mealService.GetMealWithFoods(mealId);
 
-            return Content(HttpStatusCode.OK, "Food  have been attached to meal.");
+            return Content(HttpStatusCode.OK, currentMealFoodList);
         }
 
         [HttpGet]
         [Authorize]
         [Route("api/meals")]
-        public IHttpActionResult GetCurrentUserMeals()
+        public async Task<IHttpActionResult> GetCurrentUserMeals()
         {
-            var mealList = mealService.GetCurrentUserMeal();
+            var mealList = await mealService.GetCurrentUserMeal();
 
             var userMealsVM = mapper.Map<User, UserMealsViewModel>(mealList);
 

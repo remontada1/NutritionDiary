@@ -7,6 +7,7 @@ using WebApplication1.Models;
 using WebApplication1.DAL;
 using WebApplication1.Repository;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Service
 {
@@ -73,9 +74,9 @@ namespace WebApplication1.Service
             mealRepository.CreateMeal(meal);
         }
 
-        public User GetCurrentUserMeal()
+        public async Task<User> GetCurrentUserMeal()
         {
-            return mealRepository.GetCurrentUserMeals();
+             return await mealRepository.GetCurrentUserMeals();
         }
 
         public void SaveMeals()
@@ -95,6 +96,6 @@ namespace WebApplication1.Service
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
         void CreateMeal(Meal meal);
-        User GetCurrentUserMeal();
+        Task<User> GetCurrentUserMeal();
     }
 }

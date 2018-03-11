@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -51,7 +52,7 @@ namespace WebApplication1.Infrastructure
             return dbSet.Find(id);
         }
 
-        public TEntity FindByGuid (Guid id)
+        public TEntity FindByGuid(Guid id)
         {
             return dbSet.Find(id);
         }
@@ -64,7 +65,7 @@ namespace WebApplication1.Infrastructure
         public virtual void Update(TEntity entity)
         {
             dbSet.Attach(entity);
-            dataContext.Entry(entity).State = EntityState.Modified;
+            DbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Remove(int id)

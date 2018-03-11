@@ -1142,10 +1142,13 @@
     <Compile Include="Identity\UserStore.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
+    <Compile Include="Infrastructure\FileUploadResult.cs" />
     <Compile Include="Infrastructure\IDbFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\MealTotalNutrients.cs" />
+    <Compile Include="Infrastructure\MimeMultipart.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Infrastructure\UploadMultipartFormProvider.cs" />
     <Compile Include="Mappings\AutoMapperModule.cs" />
     <Compile Include="Mappings\MappingProfile.cs" />
     <Compile Include="Mappings\ViewModelToDomainMappingProfile .cs" />
@@ -1411,6 +1414,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\" />
     <Folder Include="Views\Food\" />
     <Folder Include="Views\Meal\" />
   </ItemGroup>
