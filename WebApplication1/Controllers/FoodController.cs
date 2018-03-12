@@ -118,6 +118,7 @@ namespace WebApplication1.Controllers
         [Route("api/upload/{foodId}")]
         public async Task<HttpResponseMessage> PostFoodImage(int foodId)
         {
+            FoodViewModel viewModelFood;
             Dictionary<string, object> dict = new Dictionary<string, object>();
             try
             {
@@ -153,7 +154,7 @@ namespace WebApplication1.Controllers
                     }
                     else
                     {
-                        var foodOld = foodService.GetFoodById(foodId);
+                        Food foodOld = foodService.GetFoodById(foodId);
 
                         var filePath = HttpContext.Current.Server.MapPath("~/Images/" + postedFile.FileName + extension);
 
@@ -170,10 +171,12 @@ namespace WebApplication1.Controllers
                         foodService.UpdateFood(foodOld);
                         await foodService.SaveFoodAsync();
 
+                        viewModelFood = mapper.Map<Food, FoodViewModel>(foodOld);
+
                     }
 
                     var successUploadMessage = string.Format("Image Updated Successfully.");
-                    return Request.CreateErrorResponse(HttpStatusCode.Created, successUploadMessage); ;
+                    return Request.CreateResponse(HttpStatusCode.Created, viewModelFood); ;
                 }
                 var uploadImageMessage = string.Format("Please Upload a image.");
                 dict.Add("error", uploadImageMessage);
