@@ -29,12 +29,12 @@ namespace WebApplication1.Controllers
         }
 
         [Route("api/foods")]
-        public IHttpActionResult GetFoods()
+        public async Task<IHttpActionResult> GetFoods()
         {
             IEnumerable<FoodViewModel> viewModelFoods;
             IEnumerable<Food> foods;
 
-            foods = foodService.GetFoods();
+            foods = await foodService.GetFoodsAsync();
             if (foods == null)
             {
                 return Content(HttpStatusCode.NotFound, "Foods not found");
@@ -182,7 +182,7 @@ namespace WebApplication1.Controllers
                 dict.Add("error", uploadImageMessage);
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 var res = string.Format("some Message");
                 dict.Add("error", res);

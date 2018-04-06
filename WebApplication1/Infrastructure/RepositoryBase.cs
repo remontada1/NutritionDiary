@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Web;
 using WebApplication1.DAL;
 using WebApplication1.Models;
@@ -35,6 +36,10 @@ namespace WebApplication1.Infrastructure
         public virtual IEnumerable<TEntity> GetAll()
         {
             return dbSet.ToList();
+        }
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await dbSet.ToListAsync();
         }
 
         public TEntity Get(Expression<Func<TEntity, bool>> predicate)

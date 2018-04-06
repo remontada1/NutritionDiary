@@ -12,6 +12,7 @@ namespace WebApplication1.Service
 
     public interface IFoodService
     {
+        Task<IEnumerable<Food>> GetFoodsAsync();
         IEnumerable<Food> GetFoods();
         Food GetFoodById(int id);
         Food GetFoodByName(string name);
@@ -34,6 +35,10 @@ namespace WebApplication1.Service
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task<IEnumerable<Food>> GetFoodsAsync()
+        {
+            return await foodRepository.GetAllAsync();
+        }
         public IEnumerable<Food> GetFoods()
         {
             var foods = foodRepository.GetAll();

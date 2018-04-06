@@ -18,5 +18,7 @@ namespace WebApplication1.Infrastructure
         void RemoveByEntity(TEntity entity);
         TEntity FindById(object id);
         TEntity FindByGuid(Guid id);
+
+         Task<IEnumerable<TEntity>> GetAllAsync();
     }
 }
