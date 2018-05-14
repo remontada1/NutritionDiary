@@ -18,10 +18,12 @@ namespace WebApplication1.Providers
     {
 
         private readonly UserManager<ApplicationUser, Guid> _userManager;
+        private Func<object> test;
 
         public CustomOAuthProvider(UserManager<ApplicationUser, Guid> userManager)
         {
             _userManager = userManager;
+                
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)

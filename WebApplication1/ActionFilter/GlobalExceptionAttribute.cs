@@ -29,6 +29,11 @@ namespace WebApplication1.ActionFilter
                         Content = new StringContent(context.Exception.Message), ReasonPhrase = "Argument exception", };
                         throw new HttpResponseException(resp);
                     }
+
+            else if (exceptionType == typeof(UnauthorizedAccessException))
+            {
+                throw new HttpResponseException(context.Request.CreateResponse(HttpStatusCode.Unauthorized));
+            }
             else  
             {  
                 throw new HttpResponseException(context.Request.CreateResponse(HttpStatusCode.InternalServerError));  

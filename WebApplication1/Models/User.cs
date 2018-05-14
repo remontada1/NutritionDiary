@@ -32,7 +32,7 @@ namespace WebApplication1.Models
             Meals = new List<Meal>();
         }
 
-        public virtual ICollection<ExternalLogin> Logins
+        public  ICollection<ExternalLogin> Logins
         {
             get
             {

@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
 
             var mealList = _mealService.GetCurrentUserMeal();
 
-            return Content(HttpStatusCode.Accepted, mealList);
+            return Content(HttpStatusCode.OK, mealList);
         }
       
         private Guid getGuid(string value)

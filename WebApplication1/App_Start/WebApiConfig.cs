@@ -23,6 +23,7 @@ namespace WebApplication1
             config.EnableCors();
 
             config.Filters.Add(new LoggingFilterAttribute());
+            config.Filters.Add(new GlobalExceptionAttribute());
             // Web API routes
             config.MapHttpAttributeRoutes();
 

@@ -74,9 +74,9 @@ namespace WebApplication1.Service
             mealRepository.CreateMeal(meal);
         }
 
-        public async Task<User> GetCurrentUserMeal()
+        public User GetCurrentUserMeal()
         {
-             return await mealRepository.GetCurrentUserMeals();
+             return mealRepository.GetCurrentUserMeals();
         }
 
         public void SaveMeals()
@@ -96,7 +96,7 @@ namespace WebApplication1.Service
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
         void CreateMeal(Meal meal);
-        Task<User> GetCurrentUserMeal();
+        User GetCurrentUserMeal();
 
     }
 }

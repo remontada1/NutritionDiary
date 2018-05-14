@@ -20,7 +20,7 @@ namespace WebApplication1.Models
 
         public Guid? UserId { get; set; }
         public User User { get; set; }
-        public virtual ICollection<Food> Foods { get; set; }
+        public  ICollection<Food> Foods { get; set; }
 
         public Meal()
         {

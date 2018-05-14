@@ -22,8 +22,8 @@ namespace WebApplication1
     public class Startup
     {
 
-        public static OAuthAuthorizationServerOptions OAuthAuthorizationServer { get; set; }
-        public static UserManager<ApplicationUser, Guid> userManager { get; set; }
+        public OAuthAuthorizationServerOptions OAuthAuthorizationServer { get; set; }
+        public UserManager<ApplicationUser, Guid> userManager { get; set; }
 
         public void Configuration(IAppBuilder app)
         {

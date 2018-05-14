@@ -33,18 +33,19 @@ namespace WebApplication1.Controllers
         {
             IEnumerable<FoodViewModel> viewModelFoods;
             IEnumerable<Food> foods;
-
+            
             foods = await foodService.GetFoodsAsync();
             if (foods == null)
             {
                 return Content(HttpStatusCode.NotFound, "Foods not found");
             }
             viewModelFoods = mapper.Map<IEnumerable<Food>, IEnumerable<FoodViewModel>>(foods);
-
+            
             return Content(HttpStatusCode.OK, viewModelFoods);
+            
         }
         [HttpGet]
-        [Route("api/food/id/{id}")]
+        [Route("api/food/{id:int}")]
         public IHttpActionResult GetFoodById(int id)
         {
             FoodViewModel viewModelFood;
@@ -52,7 +53,7 @@ namespace WebApplication1.Controllers
             Food food = foodService.GetFoodById(id);
             if (food == null)
             {
-                return Content(HttpStatusCode.NotFound, "Food not found");
+               return Content(HttpStatusCode.NotFound, "Food not found");
             }
             viewModelFood = mapper.Map<Food, FoodViewModel>(food);
 

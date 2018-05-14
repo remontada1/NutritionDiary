@@ -46,9 +46,9 @@ namespace WebApplication1.Controllers
         [HttpGet]
         [Authorize]
         [Route("api/meals")]
-        public async Task<IHttpActionResult> GetCurrentUserMeals()
+        public IHttpActionResult GetCurrentUserMeals()
         {
-            var mealList = await mealService.GetCurrentUserMeal();
+            var mealList = mealService.GetCurrentUserMeal();
 
             var userMealsVM = mapper.Map<User, UserMealsViewModel>(mealList);
 
