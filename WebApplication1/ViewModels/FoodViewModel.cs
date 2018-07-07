@@ -9,6 +9,7 @@ namespace WebApplication1.ViewModels
 {
     public class FoodViewModel
     {
+        public int FoodId { get; set; }
         public string FoodName { get; set; }
         public int KCalory { get; set;}
         public int Protein { get; set;}

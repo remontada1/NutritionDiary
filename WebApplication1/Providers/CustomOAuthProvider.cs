@@ -11,14 +11,15 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using WebApplication1.Identity;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
+using System.Web.Http.Cors;
 
 namespace WebApplication1.Providers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
 
         private readonly UserManager<ApplicationUser, Guid> _userManager;
-        private Func<object> test;
 
         public CustomOAuthProvider(UserManager<ApplicationUser, Guid> userManager)
         {
@@ -31,7 +32,7 @@ namespace WebApplication1.Providers
             context.Validated();
             return Task.FromResult<object>(null);
         }
-
+        
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var allowedOrigin = "*";
