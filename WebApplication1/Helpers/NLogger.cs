@@ -54,8 +54,8 @@ namespace WebApplication1.Helpers
                 if (record.Request.RequestUri != null)
                     message.Append("").Append("URL: " + record.Request.RequestUri + Environment.NewLine);
 
-                if (record.Request.Headers != null && record.Request.Headers.Contains("Token") && record.Request.Headers.GetValues("Token") != null && record.Request.Headers.GetValues("Token").FirstOrDefault() != null)
-                    message.Append("").Append("Token: " + record.Request.Headers.GetValues("Token").FirstOrDefault() + Environment.NewLine);
+                if (record.Request.Headers != null && record.Request.Headers.Contains("Authorization") && record.Request.Headers.GetValues("Authorization") != null && record.Request.Headers.GetValues("Authorization").FirstOrDefault() != null)
+                    message.Append("").Append("Token: " + record.Request.Headers.GetValues("Authorization").FirstOrDefault() + Environment.NewLine);
             }
 
             if (!string.IsNullOrWhiteSpace(record.Category))
