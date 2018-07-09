@@ -5,6 +5,7 @@ using WebApplication1.Models;
 using WebApplication1.Infrastructure;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using WebApplication1.Repository;
 using System.Web;
 using System.Threading.Tasks;
 
@@ -12,10 +13,13 @@ namespace WebApplication1.Repository
 {
     public class MealRepository : RepositoryBase<Meal>, IMealRepository
     {
+        private readonly IGuidRepository guidRepository;
 
-        public MealRepository(IDbFactory dbFactory)
+        public MealRepository(IDbFactory dbFactory, IGuidRepository guidRepository)
             : base(dbFactory)
-        { }
+        {
+            this.guidRepository = guidRepository;
+        }
 
         public Meal GetMealByName(string name)
         {
@@ -77,7 +81,7 @@ namespace WebApplication1.Repository
 
         public void CreateMeal(Meal meal)
         {
-            var user = GetByGuid();
+            var user = guidRepository.GetUserByGuid();
 
             var mealEntity = this.DbContext.Meals.Add(meal);
 
@@ -87,37 +91,19 @@ namespace WebApplication1.Repository
             user.Meals.Add(meal);
         }
 
-        // Get user by Guid id
-        public User GetByGuid()
-        {
-            Guid guid = Guid.Empty;
-            var currentUserId = HttpContext.Current.User.Identity.GetUserId();
-
-            guid = new Guid(currentUserId); //convert to guid format
-
-            var user = DbContext.Users.Find(guid);
-
-            return user;
-        }
-
-        public User GetCurrentUserMeals()
+        public IEnumerable<Meal> GetCurrentUserMeals()
         {
             Guid guid = Guid.Empty;
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
             guid = new Guid(currentUserId);
 
-            /* var user = DbContext.Users.Where(i => i.Id == guid)
-                 .Include(f => f.Meals)
-                 .ToList();*/
             var user = DbContext.Users.FirstOrDefault(i => i.Id == guid);
-            var meals = DbContext.Entry(user);
 
-            meals.Collection(m => m.Meals)
-                .Query()
-                .OrderByDescending(d => d.SetDate)
-                .Load();
+            IEnumerable<Meal> meals = DbContext.Meals
+                .Where(x => x.UserId == guid)
+                .OrderByDescending(d => d.SetDate).ToList();
 
-            return user;
+            return meals;
         }
 
     }
@@ -130,6 +116,6 @@ namespace WebApplication1.Repository
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrients(int mealId);
         void CreateMeal(Meal meal);
-        User GetCurrentUserMeals();
+        IEnumerable<Meal> GetCurrentUserMeals();
     }
 }
