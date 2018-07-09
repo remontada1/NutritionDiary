@@ -50,7 +50,7 @@ namespace WebApplication1.Controllers
         {
             var mealList = mealService.GetCurrentUserMeal();
 
-            var userMealsVM = mapper.Map<User, UserMealsViewModel>(mealList);
+            var userMealsVM = mapper.Map<IEnumerable<Meal>,IEnumerable<MealViewModel>>(mealList);
 
             return Content(HttpStatusCode.OK, userMealsVM);
         }
@@ -66,7 +66,7 @@ namespace WebApplication1.Controllers
             var meals = mealService.GetMealWithFoods(mealId);
             mealVm = mapper.Map<IEnumerable<Meal>, IEnumerable<MealViewModel>>(meals);
 
-            return Content(HttpStatusCode.OK, new { totalCalories, meals });
+            return Content(HttpStatusCode.OK, new { totalCalories, mealVm });
         }
 
         [HttpPost]

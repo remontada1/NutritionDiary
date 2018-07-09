@@ -116,7 +116,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [Route("api/upload/{foodId}")]
+        [Route("api/food/upload/{foodId}")]
         public async Task<HttpResponseMessage> PostFoodImage(int foodId)
         {
             FoodViewModel viewModelFood;
@@ -179,7 +179,7 @@ namespace WebApplication1.Controllers
                     var successUploadMessage = string.Format("Image Updated Successfully.");
                     return Request.CreateResponse(HttpStatusCode.Created, viewModelFood); ;
                 }
-                var uploadImageMessage = string.Format("Please Upload a image.");
+                var uploadImageMessage = string.Format("Please Upload an image.");
                 dict.Add("error", uploadImageMessage);
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
