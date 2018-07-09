@@ -10,5 +10,6 @@ namespace WebApplication1.ViewModels
     {
         public string Name { get; set; }
         public string MealDate { get; set; }
+        public List<FoodViewModel> Foods { get; set; }
     }
 }
