@@ -22,6 +22,7 @@
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1299,6 +1300,7 @@
     </Compile>
     <Compile Include="Providers\CustomOAuthProvider.cs" />
     <Compile Include="Repository\ExternalLoginRepository.cs" />
+    <Compile Include="Repository\GuidRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\FoodRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
