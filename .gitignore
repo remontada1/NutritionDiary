@@ -187,3 +187,16 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/.idea
+*.jpg
+*.config
+*.dtbcache
+*.PNG
+/WebApplication1/Images/9664b12c7cf482780711f402330b9431_big.jpeg
+*.ide
+*.lock
+*.ide-shm
+*.ide-wal
+/WebApplication1/Content/1a
+/WebApplication1/Content/BodyPart_e34fb9ad-e571-4f1f-af92-4a43bf8baa7b
+/WebApplication1/Migrations/201710181713210_RemoveMealType111.Designer.cs
