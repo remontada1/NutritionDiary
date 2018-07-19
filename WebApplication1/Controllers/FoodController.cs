@@ -28,6 +28,9 @@ namespace WebApplication1.Controllers
             this.mapper = mapper;
         }
 
+
+        [HttpGet]
+        [Authorize]
         [Route("api/foods")]
         public async Task<IHttpActionResult> GetFoods()
         {
@@ -76,6 +79,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("api/food")]
         public IHttpActionResult AddFood(Food food)
         {
@@ -192,6 +196,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("api/food/{id}")]
         public IHttpActionResult RemoveFood(int id)
         {

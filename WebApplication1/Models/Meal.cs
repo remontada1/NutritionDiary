@@ -19,7 +19,7 @@ namespace WebApplication1.Models
         public DateTime SetDate { get; set; }
 
         public Guid? UserId { get; set; }
-        public User User { get; set; }
+        
         public  ICollection<Food> Foods { get; set; }
 
         public Meal()

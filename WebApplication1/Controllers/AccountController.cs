@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using System.Net;
 using WebApplication1.Repository;
 using WebApplication1.Service;
+using System.Web.Http.Cors;
 
 namespace WebApplication1.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         private readonly UserManager<Identity.ApplicationUser, Guid> _userManager;
