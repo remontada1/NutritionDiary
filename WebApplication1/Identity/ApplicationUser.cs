@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using WebApplication1.Models;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Identity
 {
@@ -22,7 +23,7 @@ namespace WebApplication1.Identity
             this.UserName = userName;
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser,Guid> manager, string authenticationType)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, Guid> manager, string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             return userIdentity;
@@ -30,6 +31,8 @@ namespace WebApplication1.Identity
 
         public Guid Id { get; set; }
         public string UserName { get; set; }
+
+        public DateTime JoinDate { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string SecurityStamp { get; set; }
     }

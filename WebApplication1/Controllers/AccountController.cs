@@ -35,7 +35,7 @@ namespace WebApplication1.Controllers
                 return Content(HttpStatusCode.NotAcceptable, "Input is not valid");
             }
 
-            var user = new ApplicationUser() { UserName = userModel.UserName };
+            var user = new ApplicationUser() { UserName = userModel.UserName, JoinDate = new DateTime(2010,08,08) };
             var result = await _userManager.CreateAsync(user, userModel.Password);
 
             if (result.Succeeded)

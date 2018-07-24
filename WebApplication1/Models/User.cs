@@ -18,21 +18,28 @@ namespace WebApplication1.Models
     public class User
     {
 
+     
         private ICollection<ExternalLogin> _externalLogins;
-      
+
         public Guid Id { get; set; }
         public string UserName { get; set; }
+
+        public DateTime JoinDate { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string SecurityStamp { get; set; }
+
+
+
 
         public ICollection<Meal> Meals { get; set; }
 
         public User()
         {
             Meals = new List<Meal>();
+            JoinDate = DateTime.Now;
         }
 
-        public  ICollection<ExternalLogin> Logins
+        public ICollection<ExternalLogin> Logins
         {
             get
             {
@@ -41,7 +48,7 @@ namespace WebApplication1.Models
             }
             set { _externalLogins = value; }
         }
- 
+
     }
 
 }

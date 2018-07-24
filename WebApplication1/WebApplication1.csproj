@@ -1153,137 +1153,25 @@
     <Compile Include="Mappings\AutoMapperModule.cs" />
     <Compile Include="Mappings\MappingProfile.cs" />
     <Compile Include="Mappings\ViewModelToDomainMappingProfile .cs" />
-    <Compile Include="Migrations\201706122103092_TableRelationsComplete2.cs" />
-    <Compile Include="Migrations\201706122103092_TableRelationsComplete2.Designer.cs">
-      <DependentUpon>201706122103092_TableRelationsComplete2.cs</DependentUpon>
+    <Compile Include="Migrations\201807242020274_Initial.cs" />
+    <Compile Include="Migrations\201807242020274_Initial.Designer.cs">
+      <DependentUpon>201807242020274_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706122143347_FixTableRelations.cs" />
-    <Compile Include="Migrations\201706122143347_FixTableRelations.Designer.cs">
-      <DependentUpon>201706122143347_FixTableRelations.cs</DependentUpon>
+    <Compile Include="Migrations\201807242044353_JoinDateFix.cs" />
+    <Compile Include="Migrations\201807242044353_JoinDateFix.Designer.cs">
+      <DependentUpon>201807242044353_JoinDateFix.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706160250499_AddRelelationWithMeal.cs" />
-    <Compile Include="Migrations\201706160250499_AddRelelationWithMeal.Designer.cs">
-      <DependentUpon>201706160250499_AddRelelationWithMeal.cs</DependentUpon>
+    <Compile Include="Migrations\201807242049362_JoinDateFix1.cs" />
+    <Compile Include="Migrations\201807242049362_JoinDateFix1.Designer.cs">
+      <DependentUpon>201807242049362_JoinDateFix1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706291449583_AddDataFood.cs" />
-    <Compile Include="Migrations\201706291449583_AddDataFood.Designer.cs">
-      <DependentUpon>201706291449583_AddDataFood.cs</DependentUpon>
+    <Compile Include="Migrations\201807242051266_JoinDateFix2.cs" />
+    <Compile Include="Migrations\201807242051266_JoinDateFix2.Designer.cs">
+      <DependentUpon>201807242051266_JoinDateFix2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201707191932377_AddFoods.cs" />
-    <Compile Include="Migrations\201707191932377_AddFoods.Designer.cs">
-      <DependentUpon>201707191932377_AddFoods.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707260120133_AddFoods1.cs" />
-    <Compile Include="Migrations\201707260120133_AddFoods1.Designer.cs">
-      <DependentUpon>201707260120133_AddFoods1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021552055_ChangeMealStructure.cs" />
-    <Compile Include="Migrations\201708021552055_ChangeMealStructure.Designer.cs">
-      <DependentUpon>201708021552055_ChangeMealStructure.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021634116_ChangeDateTimeFormat.cs" />
-    <Compile Include="Migrations\201708021634116_ChangeDateTimeFormat.Designer.cs">
-      <DependentUpon>201708021634116_ChangeDateTimeFormat.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021701086_ChangeDateTimeFormat1.cs" />
-    <Compile Include="Migrations\201708021701086_ChangeDateTimeFormat1.Designer.cs">
-      <DependentUpon>201708021701086_ChangeDateTimeFormat1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021703249_ChangeDateTimeFormat2.cs" />
-    <Compile Include="Migrations\201708021703249_ChangeDateTimeFormat2.Designer.cs">
-      <DependentUpon>201708021703249_ChangeDateTimeFormat2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021713038_ChangeDateTimeFormat3.cs" />
-    <Compile Include="Migrations\201708021713038_ChangeDateTimeFormat3.Designer.cs">
-      <DependentUpon>201708021713038_ChangeDateTimeFormat3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021715009_ChangeDateTimeFormat4.cs" />
-    <Compile Include="Migrations\201708021715009_ChangeDateTimeFormat4.Designer.cs">
-      <DependentUpon>201708021715009_ChangeDateTimeFormat4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021719283_ChangeDateTimeFormat5.cs" />
-    <Compile Include="Migrations\201708021719283_ChangeDateTimeFormat5.Designer.cs">
-      <DependentUpon>201708021719283_ChangeDateTimeFormat5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021854166_AddDefaultMeal.cs" />
-    <Compile Include="Migrations\201708021854166_AddDefaultMeal.Designer.cs">
-      <DependentUpon>201708021854166_AddDefaultMeal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021858406_AddDefaultMeal1.cs" />
-    <Compile Include="Migrations\201708021858406_AddDefaultMeal1.Designer.cs">
-      <DependentUpon>201708021858406_AddDefaultMeal1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021904052_AddDefaultMeal2.cs" />
-    <Compile Include="Migrations\201708021904052_AddDefaultMeal2.Designer.cs">
-      <DependentUpon>201708021904052_AddDefaultMeal2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021936117_AddDefaultMeal3.cs" />
-    <Compile Include="Migrations\201708021936117_AddDefaultMeal3.Designer.cs">
-      <DependentUpon>201708021936117_AddDefaultMeal3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021940303_AddDefaultMeal4.cs" />
-    <Compile Include="Migrations\201708021940303_AddDefaultMeal4.Designer.cs">
-      <DependentUpon>201708021940303_AddDefaultMeal4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021945331_AddDefaultMeal5.cs" />
-    <Compile Include="Migrations\201708021945331_AddDefaultMeal5.Designer.cs">
-      <DependentUpon>201708021945331_AddDefaultMeal5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708021951330_AddDefaultMeal6.cs" />
-    <Compile Include="Migrations\201708021951330_AddDefaultMeal6.Designer.cs">
-      <DependentUpon>201708021951330_AddDefaultMeal6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708272018220_AddWeightToFood.cs" />
-    <Compile Include="Migrations\201708272018220_AddWeightToFood.Designer.cs">
-      <DependentUpon>201708272018220_AddWeightToFood.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710031535480_CreateIdentityClasses1.cs" />
-    <Compile Include="Migrations\201710031535480_CreateIdentityClasses1.Designer.cs">
-      <DependentUpon>201710031535480_CreateIdentityClasses1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710050034413_FixUserModel.cs" />
-    <Compile Include="Migrations\201710050034413_FixUserModel.Designer.cs">
-      <DependentUpon>201710050034413_FixUserModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710181726316_DeleteMealTypeTable1.cs" />
-    <Compile Include="Migrations\201710181726316_DeleteMealTypeTable1.Designer.cs">
-      <DependentUpon>201710181726316_DeleteMealTypeTable1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710181733098_DeleteMealTypeTable11.cs" />
-    <Compile Include="Migrations\201710181733098_DeleteMealTypeTable11.Designer.cs">
-      <DependentUpon>201710181733098_DeleteMealTypeTable11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710181812380_AddSodiumToFood.cs" />
-    <Compile Include="Migrations\201710181812380_AddSodiumToFood.Designer.cs">
-      <DependentUpon>201710181812380_AddSodiumToFood.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710182131222_DeleteFKFromMeal.cs" />
-    <Compile Include="Migrations\201710182131222_DeleteFKFromMeal.Designer.cs">
-      <DependentUpon>201710182131222_DeleteFKFromMeal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710182155193_DeleteColumnFromMeal.cs" />
-    <Compile Include="Migrations\201710182155193_DeleteColumnFromMeal.Designer.cs">
-      <DependentUpon>201710182155193_DeleteColumnFromMeal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710182207022_DeleteSodium.cs" />
-    <Compile Include="Migrations\201710182207022_DeleteSodium.Designer.cs">
-      <DependentUpon>201710182207022_DeleteSodium.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710182214250_AddOneToManyToUserAndMeal.cs" />
-    <Compile Include="Migrations\201710182214250_AddOneToManyToUserAndMeal.Designer.cs">
-      <DependentUpon>201710182214250_AddOneToManyToUserAndMeal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710190144349_FixRelation.cs" />
-    <Compile Include="Migrations\201710190144349_FixRelation.Designer.cs">
-      <DependentUpon>201710190144349_FixRelation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710190220157_FixRelation1.cs" />
-    <Compile Include="Migrations\201710190220157_FixRelation1.Designer.cs">
-      <DependentUpon>201710190220157_FixRelation1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710190230010_AddRelationOneToMany.cs" />
-    <Compile Include="Migrations\201710190230010_AddRelationOneToMany.Designer.cs">
-      <DependentUpon>201710190230010_AddRelationOneToMany.cs</DependentUpon>
+    <Compile Include="Migrations\201807242056496_AddJoinDateAgain.cs" />
+    <Compile Include="Migrations\201807242056496_AddJoinDateAgain.Designer.cs">
+      <DependentUpon>201807242056496_AddJoinDateAgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
@@ -1315,113 +1203,29 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706122103092_TableRelationsComplete2.resx">
-      <DependentUpon>201706122103092_TableRelationsComplete2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706122143347_FixTableRelations.resx">
-      <DependentUpon>201706122143347_FixTableRelations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706160250499_AddRelelationWithMeal.resx">
-      <DependentUpon>201706160250499_AddRelelationWithMeal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706291449583_AddDataFood.resx">
-      <DependentUpon>201706291449583_AddDataFood.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707191932377_AddFoods.resx">
-      <DependentUpon>201707191932377_AddFoods.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707260120133_AddFoods1.resx">
-      <DependentUpon>201707260120133_AddFoods1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021552055_ChangeMealStructure.resx">
-      <DependentUpon>201708021552055_ChangeMealStructure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021634116_ChangeDateTimeFormat.resx">
-      <DependentUpon>201708021634116_ChangeDateTimeFormat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021701086_ChangeDateTimeFormat1.resx">
-      <DependentUpon>201708021701086_ChangeDateTimeFormat1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021703249_ChangeDateTimeFormat2.resx">
-      <DependentUpon>201708021703249_ChangeDateTimeFormat2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021713038_ChangeDateTimeFormat3.resx">
-      <DependentUpon>201708021713038_ChangeDateTimeFormat3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021715009_ChangeDateTimeFormat4.resx">
-      <DependentUpon>201708021715009_ChangeDateTimeFormat4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021719283_ChangeDateTimeFormat5.resx">
-      <DependentUpon>201708021719283_ChangeDateTimeFormat5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021854166_AddDefaultMeal.resx">
-      <DependentUpon>201708021854166_AddDefaultMeal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021858406_AddDefaultMeal1.resx">
-      <DependentUpon>201708021858406_AddDefaultMeal1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021904052_AddDefaultMeal2.resx">
-      <DependentUpon>201708021904052_AddDefaultMeal2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021936117_AddDefaultMeal3.resx">
-      <DependentUpon>201708021936117_AddDefaultMeal3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021940303_AddDefaultMeal4.resx">
-      <DependentUpon>201708021940303_AddDefaultMeal4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021945331_AddDefaultMeal5.resx">
-      <DependentUpon>201708021945331_AddDefaultMeal5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708021951330_AddDefaultMeal6.resx">
-      <DependentUpon>201708021951330_AddDefaultMeal6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708272018220_AddWeightToFood.resx">
-      <DependentUpon>201708272018220_AddWeightToFood.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710031535480_CreateIdentityClasses1.resx">
-      <DependentUpon>201710031535480_CreateIdentityClasses1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710050034413_FixUserModel.resx">
-      <DependentUpon>201710050034413_FixUserModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710181726316_DeleteMealTypeTable1.resx">
-      <DependentUpon>201710181726316_DeleteMealTypeTable1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710181733098_DeleteMealTypeTable11.resx">
-      <DependentUpon>201710181733098_DeleteMealTypeTable11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710181812380_AddSodiumToFood.resx">
-      <DependentUpon>201710181812380_AddSodiumToFood.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710182131222_DeleteFKFromMeal.resx">
-      <DependentUpon>201710182131222_DeleteFKFromMeal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710182155193_DeleteColumnFromMeal.resx">
-      <DependentUpon>201710182155193_DeleteColumnFromMeal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710182207022_DeleteSodium.resx">
-      <DependentUpon>201710182207022_DeleteSodium.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710182214250_AddOneToManyToUserAndMeal.resx">
-      <DependentUpon>201710182214250_AddOneToManyToUserAndMeal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710190144349_FixRelation.resx">
-      <DependentUpon>201710190144349_FixRelation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710190220157_FixRelation1.resx">
-      <DependentUpon>201710190220157_FixRelation1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710190230010_AddRelationOneToMany.resx">
-      <DependentUpon>201710190230010_AddRelationOneToMany.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Images\" />
     <Folder Include="Views\Food\" />
     <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807242020274_Initial.resx">
+      <DependentUpon>201807242020274_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807242044353_JoinDateFix.resx">
+      <DependentUpon>201807242044353_JoinDateFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807242049362_JoinDateFix1.resx">
+      <DependentUpon>201807242049362_JoinDateFix1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807242051266_JoinDateFix2.resx">
+      <DependentUpon>201807242051266_JoinDateFix2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807242056496_AddJoinDateAgain.resx">
+      <DependentUpon>201807242056496_AddJoinDateAgain.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -53,6 +53,7 @@ namespace WebApplication1.Identity
                 UserName = appUser.UserName,
                 PasswordHash = appUser.PasswordHash,
                 SecurityStamp = appUser.SecurityStamp
+                
             };
 
             _unitOfWork.UserRepository.Add(user);
