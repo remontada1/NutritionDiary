@@ -9,7 +9,7 @@ namespace WebApplication1.Infrastructure
 {
     public interface IUnitOfWork
     {
-
+        IRoleRepository RoleRepository { get; }
         IUserRepository UserRepository { get; }
 
         IExternalLoginRepository ExternalLoginRepository { get; }

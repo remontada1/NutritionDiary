@@ -7,9 +7,11 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Configuration
 {
+
+
     public class ExternalLoginConfiguration : EntityTypeConfiguration<ExternalLogin>
     {
-        public ExternalLoginConfiguration()
+        internal ExternalLoginConfiguration()
         {
             ToTable("ExternalLogin");
 
@@ -38,4 +40,5 @@ namespace WebApplication1.Configuration
 
         }
     }
+
 }

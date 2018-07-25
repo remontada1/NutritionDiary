@@ -1141,6 +1141,7 @@
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
     <Compile Include="Identity\ApplicationUser.cs" />
+    <Compile Include="Identity\IdentityRole.cs" />
     <Compile Include="Identity\PasswordHasher.cs" />
     <Compile Include="Identity\UserStore.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
@@ -1179,6 +1180,18 @@
     <Compile Include="Migrations\201807251814054_AddIdentityModels.Designer.cs">
       <DependentUpon>201807251814054_AddIdentityModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807251829171_AddExternalLogin.cs" />
+    <Compile Include="Migrations\201807251829171_AddExternalLogin.Designer.cs">
+      <DependentUpon>201807251829171_AddExternalLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807251836499_AddExternalLogin1.cs" />
+    <Compile Include="Migrations\201807251836499_AddExternalLogin1.Designer.cs">
+      <DependentUpon>201807251836499_AddExternalLogin1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807251840434_AddExternalLogin2.cs" />
+    <Compile Include="Migrations\201807251840434_AddExternalLogin2.Designer.cs">
+      <DependentUpon>201807251840434_AddExternalLogin2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
@@ -1197,7 +1210,7 @@
     <Compile Include="Providers\CustomOAuthProvider.cs" />
     <Compile Include="Repository\ExternalLoginRepository.cs" />
     <Compile Include="Repository\GuidRepository.cs" />
-    <Compile Include="Repository\IRoleRepository.cs" />
+    <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\FoodRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1237,6 +1250,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807251814054_AddIdentityModels.resx">
       <DependentUpon>201807251814054_AddIdentityModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807251829171_AddExternalLogin.resx">
+      <DependentUpon>201807251829171_AddExternalLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807251836499_AddExternalLogin1.resx">
+      <DependentUpon>201807251836499_AddExternalLogin1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807251840434_AddExternalLogin2.resx">
+      <DependentUpon>201807251840434_AddExternalLogin2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

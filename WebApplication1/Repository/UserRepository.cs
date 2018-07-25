@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WebApplication1.Infrastructure;
 using System.Threading.Tasks;
-
+using System.Threading;
 
 namespace WebApplication1.Repository
 {
@@ -21,15 +21,15 @@ namespace WebApplication1.Repository
         {
             return DbContext.Users.FirstOrDefault(x => x.UserName == username);
         }
-        public Task<User> FindByUsernameAsync(string username)
+        public Task<User> FindByUsernameAsync(string username, CancellationToken cancellationToken)
         {
-            return DbContext.Users.FirstOrDefaultAsync(x => x.UserName == username);
+            return DbContext.Users.FirstOrDefaultAsync(x => x.UserName == username, cancellationToken);
         }
     }
 
     public interface IUserRepository : IRepository<User>
     {
         User FindByUsername(string username);
-        Task<User> FindByUsernameAsync(string username);
+        Task<User> FindByUsernameAsync(string username, CancellationToken cancellationToken);
     }
 }

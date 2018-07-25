@@ -11,6 +11,7 @@ namespace WebApplication1.Infrastructure
         private readonly IDbFactory dbFactory;
         private CustomerContext dbContext;
         private IUserRepository _userRepository;
+        private IRoleRepository _roleRepository;
         private IExternalLoginRepository _externalLoginRepository;
         public UnitOfWork(IDbFactory dbFactory)
         {
@@ -20,6 +21,11 @@ namespace WebApplication1.Infrastructure
         public CustomerContext DbContext
         {
             get { return dbContext ?? (dbContext = dbFactory.Init()); }
+        }
+
+        public IRoleRepository RoleRepository
+        {
+            get { return _roleRepository ?? (_roleRepository = new RoleRepository(dbFactory)); }
         }
 
         public IUserRepository UserRepository

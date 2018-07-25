@@ -19,7 +19,7 @@ namespace WebApplication1.Migrations
             //            Height = c.Int(nullable: false),
             //        })
             //    .PrimaryKey(t => t.Id);
-            
+
             //CreateTable(
             //    "dbo.Foods",
             //    c => new
@@ -34,7 +34,7 @@ namespace WebApplication1.Migrations
             //            Weight = c.Int(nullable: false),
             //        })
             //    .PrimaryKey(t => t.Id);
-            
+
             //CreateTable(
             //    "dbo.Meals",
             //    c => new
@@ -47,19 +47,19 @@ namespace WebApplication1.Migrations
             //    .PrimaryKey(t => t.Id)
             //    .ForeignKey("dbo.User", t => t.UserId)
             //    .Index(t => t.UserId);
-            
-            //CreateTable(
-            //    "dbo.ExternalLogin",
-            //    c => new
-            //        {
-            //            LoginProvider = c.String(nullable: false, maxLength: 128),
-            //            ProviderKey = c.String(nullable: false, maxLength: 128),
-            //            UserId = c.Guid(nullable: false),
-            //        })
-            //    .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-            //    .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
-            //    .Index(t => t.UserId);
-            
+
+            CreateTable(
+                "dbo.ExternalLogin",
+                c => new
+                {
+                    LoginProvider = c.String(nullable: false, maxLength: 128),
+                    ProviderKey = c.String(nullable: false, maxLength: 128),
+                    UserId = c.Guid(nullable: false),
+                })
+                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+
             //CreateTable(
             //    "dbo.User",
             //    c => new
@@ -71,7 +71,7 @@ namespace WebApplication1.Migrations
             //            JoinDate = c.DateTime(nullable: false),
             //        })
             //    .PrimaryKey(t => t.Id);
-            
+
             //CreateTable(
             //    "dbo.MealFoods",
             //    c => new
@@ -84,9 +84,9 @@ namespace WebApplication1.Migrations
             //    .ForeignKey("dbo.Foods", t => t.Food_Id, cascadeDelete: true)
             //    .Index(t => t.Meal_Id)
             //    .Index(t => t.Food_Id);
-            
+
         }
-        
+
         public override void Down()
         {
             //DropForeignKey("dbo.ExternalLogin", "UserId", "dbo.User");

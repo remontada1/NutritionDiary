@@ -23,11 +23,6 @@ namespace WebApplication1.Identity
             this.UserName = userName;
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, Guid> manager, string authenticationType)
-        {
-            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
-            return userIdentity;
-        }
 
         public Guid Id { get; set; }
         public string UserName { get; set; }
