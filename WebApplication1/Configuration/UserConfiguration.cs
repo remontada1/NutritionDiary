@@ -37,6 +37,19 @@ namespace WebApplication1.Configuration
                 .HasMaxLength(256)
                 .IsRequired();
 
+            HasMany(x => x.Roles)
+                .WithMany(x => x.Users)
+                .Map(x =>
+                {
+                    x.ToTable("UserRole");
+                    x.MapLeftKey("UserId");
+                    x.MapRightKey("RoleId");
+                });
+
+            HasMany(x => x.Claims)
+                .WithRequired(x => x.User)
+                .HasForeignKey(x => x.UserId);
+
             HasMany(x => x.Logins)
                .WithRequired(x => x.User)
                .HasForeignKey(x => x.UserId);

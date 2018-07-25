@@ -1126,6 +1126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Configuration\ClaimConfiguration.cs" />
     <Compile Include="Configuration\ExternalLoginConfiguration.cs" />
     <Compile Include="Configuration\UserConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -1133,6 +1134,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="DAL\CustomerContext.cs" />
+    <Compile Include="Configuration\RoleConfiguration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1173,8 +1175,14 @@
     <Compile Include="Migrations\201807242056496_AddJoinDateAgain.Designer.cs">
       <DependentUpon>201807242056496_AddJoinDateAgain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807251814054_AddIdentityModels.cs" />
+    <Compile Include="Migrations\201807251814054_AddIdentityModels.Designer.cs">
+      <DependentUpon>201807251814054_AddIdentityModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Models\CustomerData.cs" />
@@ -1189,6 +1197,7 @@
     <Compile Include="Providers\CustomOAuthProvider.cs" />
     <Compile Include="Repository\ExternalLoginRepository.cs" />
     <Compile Include="Repository\GuidRepository.cs" />
+    <Compile Include="Repository\IRoleRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\FoodRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1225,6 +1234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807242056496_AddJoinDateAgain.resx">
       <DependentUpon>201807242056496_AddJoinDateAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807251814054_AddIdentityModels.resx">
+      <DependentUpon>201807251814054_AddIdentityModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

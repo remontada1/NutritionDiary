@@ -28,6 +28,7 @@ namespace WebApplication1.DAL
         public DbSet<Meal> Meals { get; set; }
         public DbSet<CustomerData> CustomersData { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<ExternalLogin> Logins { get; set; }
 
         public virtual void Commit()
@@ -44,6 +45,8 @@ namespace WebApplication1.DAL
         {
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new ExternalLoginConfiguration());
+            modelBuilder.Configurations.Add(new ClaimConfiguration());
+            modelBuilder.Configurations.Add(new RoleConfiguration());
         }
     }
 }

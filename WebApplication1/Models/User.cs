@@ -18,8 +18,9 @@ namespace WebApplication1.Models
     public class User
     {
 
-     
+        private ICollection<Claim> _claims;
         private ICollection<ExternalLogin> _externalLogins;
+        private ICollection<Role> _roles;
 
         public Guid Id { get; set; }
         public string UserName { get; set; }
@@ -37,6 +38,18 @@ namespace WebApplication1.Models
         {
             Meals = new List<Meal>();
             JoinDate = DateTime.Now;
+        }
+
+        public virtual ICollection<Claim> Claims
+        {
+            get { return _claims ?? (_claims = new List<Claim>()); }
+            set { _claims = value; }
+        }
+
+        public virtual ICollection<Role> Roles
+        {
+            get { return _roles ?? (_roles = new List<Role>()); }
+            set { _roles = value; }
         }
 
         public ICollection<ExternalLogin> Logins

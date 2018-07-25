@@ -8,7 +8,7 @@ using WebApplication1.DAL;
 using System.Data.Entity;
 using System.Web.Http;
 using System.Threading.Tasks;
-
+using System.Threading;
 
 namespace WebApplication1.Repository
 {
@@ -27,6 +27,10 @@ namespace WebApplication1.Repository
         {
             return DbContext.Logins.FirstOrDefaultAsync(x => x.LoginProvider == loginProvider && x.ProviderKey == providerKey);
         }
+        public Task<ExternalLogin> GetByProviderAndKeyAsync(CancellationToken cancellationToken, string loginProvider, string providerKey)
+        {
+            return DbContext.Logins.FirstOrDefaultAsync(x => x.LoginProvider == loginProvider && x.ProviderKey == providerKey, cancellationToken);
+        }
 
     }
 
@@ -34,5 +38,6 @@ namespace WebApplication1.Repository
     {
         ExternalLogin GetByProviderAndKey(string loginProvider, string providerKey);
         Task<ExternalLogin> GetByProviderAndKeyAsync(string loginProvider, string ProviderKey);
+        Task<ExternalLogin> GetByProviderAndKeyAsync(CancellationToken cancellationToken, string loginProvider, string providerKey);
     }
 }
