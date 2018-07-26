@@ -9,6 +9,8 @@ using System.Net;
 using WebApplication1.Repository;
 using WebApplication1.Service;
 using System.Web.Http.Cors;
+using System.Linq;
+using WebApplication1.Infrastructure;
 
 namespace WebApplication1.Controllers
 {
@@ -18,9 +20,16 @@ namespace WebApplication1.Controllers
         private readonly UserManager<Identity.ApplicationUser, Guid> _userManager;
         private readonly IUserRepository _userRepository;
         private readonly IMealService _mealService;
-        public AccountController(UserManager<Identity.ApplicationUser, Guid> userManager,
-            IUserRepository userRepository, IMealService mealService)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRoleRepository _roleRepository;
+
+
+        public AccountController(UserManager<ApplicationUser, Guid> userManager,
+            IUserRepository userRepository, IMealService mealService,
+            IUnitOfWork unitOfWork, IRoleRepository roleRepository)
         {
+            _unitOfWork = unitOfWork;
+            _roleRepository = roleRepository;
             _userManager = userManager;
             _userRepository = userRepository;
             _mealService = mealService;
@@ -35,7 +44,7 @@ namespace WebApplication1.Controllers
                 return Content(HttpStatusCode.NotAcceptable, "Input is not valid");
             }
 
-            var user = new ApplicationUser() { UserName = userModel.UserName, JoinDate = new DateTime(2010,08,08) };
+            var user = new ApplicationUser() { UserName = userModel.UserName, JoinDate = new DateTime(2010, 08, 08) };
             var result = await _userManager.CreateAsync(user, userModel.Password);
 
             if (result.Succeeded)
@@ -63,7 +72,22 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, mealList);
         }
-      
+        [Route("api/roles/{id:guid}/roles")]
+        [HttpPost]
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string roleToAssign)
+        {
+            var guidUser = getGuid(id);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var role =  await _userManager.AddToRoleAsync(guidUser, roleToAssign);
+
+            return Ok("Role added");
+        }
+
         private Guid getGuid(string value)
         {
             var result = default(Guid);

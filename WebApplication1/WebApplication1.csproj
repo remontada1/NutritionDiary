@@ -1133,6 +1133,7 @@
     <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MealController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="DAL\CustomerContext.cs" />
     <Compile Include="Configuration\RoleConfiguration.cs" />
     <Compile Include="Global.asax.cs">
@@ -1143,6 +1144,7 @@
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\IdentityRole.cs" />
     <Compile Include="Identity\PasswordHasher.cs" />
+    <Compile Include="Identity\RoleStore.cs" />
     <Compile Include="Identity\UserStore.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
@@ -1196,6 +1198,7 @@
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RoleCreateBindingModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Models\CustomerData.cs" />

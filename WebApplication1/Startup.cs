@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity;
 using WebApplication1.Identity;
 using Microsoft.Owin.Security.OAuth;
 using WebApplication1.Providers;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 [assembly: OwinStartup(typeof(WebApplication1.Startup))]
 
@@ -56,7 +57,9 @@ namespace WebApplication1
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
             builder.RegisterType<UserStore>().As<IUserStore<ApplicationUser, Guid>>().InstancePerRequest();
+            builder.RegisterType<RoleStore>().As<IRoleStore<Identity.IdentityRole, Guid>>();
             builder.RegisterType<UserManager<ApplicationUser, Guid>>();
+            builder.RegisterType<RoleManager<Identity.IdentityRole, Guid>>();
             builder.Register(context => context.Resolve<MapperConfiguration>().CreateMapper(context.Resolve)).As<IMapper>()
                 .InstancePerLifetimeScope();
 
