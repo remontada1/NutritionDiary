@@ -72,6 +72,8 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, mealList);
         }
+
+        
         [Route("api/roles/{id:guid}/{role}")]
         [HttpGet]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] Guid id, [FromUri] string role)
@@ -93,8 +95,7 @@ namespace WebApplication1.Controllers
 
         private Guid getGuid(string value)
         {
-            var result = default(Guid);
-            Guid.TryParse(value, out result);
+            Guid.TryParse(value, out Guid result);
             return result;
         }
     }

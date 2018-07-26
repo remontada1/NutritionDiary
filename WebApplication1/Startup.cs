@@ -15,6 +15,10 @@ using WebApplication1.Identity;
 using Microsoft.Owin.Security.OAuth;
 using WebApplication1.Providers;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
+using Microsoft.Owin.Security.DataHandler.Encoder;
+using Microsoft.Owin.Security.Jwt;
+using System.Web.Configuration;
 
 [assembly: OwinStartup(typeof(WebApplication1.Startup))]
 
@@ -38,6 +42,7 @@ namespace WebApplication1
             builder.RegisterModule(new AutoMapperModule());
             builder.RegisterInstance(app).As<IAppBuilder>();
 
+            ConfigureOAuthTokenConsumption(app);
             builder.RegisterType<CustomOAuthProvider>().As<IOAuthAuthorizationServerProvider>().InstancePerDependency();
 
             builder
@@ -46,10 +51,13 @@ namespace WebApplication1
                     AllowInsecureHttp = true,
                     TokenEndpointPath = new PathString("/oauth/token"),
                     AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                    Provider = x.Resolve<IOAuthAuthorizationServerProvider>()
+                    Provider = x.Resolve<IOAuthAuthorizationServerProvider>(),
+                    AccessTokenFormat = new CustomJwtFormat("http://localhost:36290")
                 })
                  .AsSelf()
                 .InstancePerDependency();
+
+
 
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
             builder.RegisterType<OAuthAuthorizationServerMiddleware>().AsSelf().InstancePerLifetimeScope();
@@ -78,7 +86,29 @@ namespace WebApplication1
             app.UseAutofacMiddleware(container);
             app.UseWebApi(config);
             app.UseAutofacWebApi(config);
+            
             app.UseNLog();
+        }
+
+
+        private void ConfigureOAuthTokenConsumption(IAppBuilder app)
+        {
+
+            var issuer = "http://localhost:36290";
+            string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
+            byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["as:AudienceSecret"]);
+
+            // Api controllers with an [Authorize] attribute will be validated with JWT
+            app.UseJwtBearerAuthentication(
+                new JwtBearerAuthenticationOptions
+                {
+                    AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Active,
+                    AllowedAudiences = new[] { audienceId },
+                    IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
+                    {
+                        new SymmetricKeyIssuerSecurityTokenProvider(issuer, audienceSecret)
+                    }
+                });
         }
     }
 }

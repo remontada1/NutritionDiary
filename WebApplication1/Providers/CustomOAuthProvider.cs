@@ -38,6 +38,7 @@ namespace WebApplication1.Providers
             var allowedOrigin = "*";
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
             ApplicationUser user = await _userManager.FindAsync(context.UserName, context.Password);
+            
 
             if (user == null)
             {
@@ -45,8 +46,15 @@ namespace WebApplication1.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(_userManager, "JWT");
 
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+            identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+            identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
+            identity.AddClaim(new Claim(ClaimTypes.Role, "Админ"));
+
+            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(_userManager, OAuthDefaults.AuthenticationType);
+
+            
             var ticket = new AuthenticationTicket(oAuthIdentity, null);
 
             context.Validated(ticket);

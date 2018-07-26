@@ -30,7 +30,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "User")]
         [Route("api/foods")]
         public async Task<IHttpActionResult> GetFoods()
         {

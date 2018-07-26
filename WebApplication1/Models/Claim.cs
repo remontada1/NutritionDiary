@@ -19,11 +19,8 @@ namespace WebApplication1.Models
         {
             get { return _user; }
             set {
-                if (value == null)
-                    throw new ArgumentNullException("value");
-                _user = value;
+                _user = value ?? throw new ArgumentNullException("value");
                 UserId = value.Id;
-
             }
         }
     }
