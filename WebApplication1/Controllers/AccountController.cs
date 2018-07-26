@@ -17,10 +17,10 @@ namespace WebApplication1.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
+        private readonly RoleManager<Identity.IdentityRole, Guid> _roleManager;
         private readonly UserManager<Identity.ApplicationUser, Guid> _userManager;
         private readonly IUserRepository _userRepository;
         private readonly IMealService _mealService;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IRoleRepository _roleRepository;
 
 
@@ -28,7 +28,7 @@ namespace WebApplication1.Controllers
             IUserRepository userRepository, IMealService mealService,
             IUnitOfWork unitOfWork, IRoleRepository roleRepository)
         {
-            _unitOfWork = unitOfWork;
+
             _roleRepository = roleRepository;
             _userManager = userManager;
             _userRepository = userRepository;
@@ -72,19 +72,22 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, mealList);
         }
-        [Route("api/roles/{id:guid}/roles")]
-        [HttpPost]
-        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string roleToAssign)
+        [Route("api/roles/{id:guid}/{role}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] Guid id, [FromUri] string role)
         {
-            var guidUser = getGuid(id);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //var roleModel = await _roleManager.FindByNameAsync(role);
 
-            var role =  await _userManager.AddToRoleAsync(guidUser, roleToAssign);
+            //var roleName = roleModel.Name;
 
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            var result =  await _userManager.AddToRoleAsync(id, role);
+            
             return Ok("Role added");
         }
 
