@@ -20,11 +20,13 @@ namespace WebApplication1.Providers
     {
 
         private readonly UserManager<ApplicationUser, Guid> _userManager;
+        private readonly RoleManager<Identity.IdentityRole, Guid> _roleManager;
 
-        public CustomOAuthProvider(UserManager<ApplicationUser, Guid> userManager)
+        public CustomOAuthProvider(UserManager<ApplicationUser, Guid> userManager, RoleManager<Identity.IdentityRole, Guid> roleManager)
         {
             _userManager = userManager;
-                
+            _roleManager = roleManager;
+
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -32,13 +34,13 @@ namespace WebApplication1.Providers
             context.Validated();
             return Task.FromResult<object>(null);
         }
-        
+
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var allowedOrigin = "*";
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
             ApplicationUser user = await _userManager.FindAsync(context.UserName, context.Password);
-            
+
 
             if (user == null)
             {
@@ -48,14 +50,22 @@ namespace WebApplication1.Providers
 
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
-            identity.AddClaim(new Claim(ClaimTypes.Role, "Админ"));
+
+            var roles = _roleManager.Roles.ToList();
+            foreach (var role in roles)
+            {
+                identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
+            }
+
+
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(_userManager, OAuthDefaults.AuthenticationType);
 
-            
-            var ticket = new AuthenticationTicket(oAuthIdentity, null);
+
+            var ticket = new AuthenticationTicket(identity, null);
 
             context.Validated(ticket);
         }

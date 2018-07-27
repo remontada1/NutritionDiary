@@ -11,6 +11,10 @@ using WebApplication1.Service;
 using System.Web.Http.Cors;
 using System.Linq;
 using WebApplication1.Infrastructure;
+using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security;
 
 namespace WebApplication1.Controllers
 {
@@ -33,6 +37,20 @@ namespace WebApplication1.Controllers
             _userManager = userManager;
             _userRepository = userRepository;
             _mealService = mealService;
+        }
+
+
+        [Authorize]
+        [Route("api/test")]
+        public IEnumerable<object> Get()
+        {
+            var identity = User.Identity as ClaimsIdentity;
+
+            return identity.Claims.Select(c => new
+            {
+                c.Type,
+                c.Value
+            });
         }
 
         [AllowAnonymous]
@@ -73,25 +91,18 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, mealList);
         }
 
-        
+
         [Route("api/roles/{id:guid}/{role}")]
         [HttpGet]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] Guid id, [FromUri] string role)
         {
+            var result = await _userManager.AddToRoleAsync(id, role);
+            string message = String.Format("Role {0} assigned to user", role);
 
-            //var roleModel = await _roleManager.FindByNameAsync(role);
-
-            //var roleName = roleModel.Name;
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
-            var result =  await _userManager.AddToRoleAsync(id, role);
-            
-            return Ok("Role added");
+            return Content(HttpStatusCode.OK, message);
         }
+
+
 
         private Guid getGuid(string value)
         {

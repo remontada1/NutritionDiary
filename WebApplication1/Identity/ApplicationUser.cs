@@ -7,6 +7,7 @@ using WebApplication1.Models;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication1.Controllers;
 
 namespace WebApplication1.Identity
 {
@@ -34,7 +35,7 @@ namespace WebApplication1.Identity
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser,Guid> manager, string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
-
+            
             return userIdentity;
         }
     }

@@ -16,6 +16,7 @@ using System.IO;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "User")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FoodController : ApiController
     {
@@ -30,7 +31,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "User")]
+        
         [Route("api/foods")]
         public async Task<IHttpActionResult> GetFoods()
         {
