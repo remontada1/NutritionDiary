@@ -66,7 +66,7 @@ namespace WebApplication1.Identity
         #region IDisposable Members
         public void Dispose()
         {
-            // Dispose does nothing since we want Unity to manage the lifecycle of our Unit of Work
+            
         }
         #endregion
 

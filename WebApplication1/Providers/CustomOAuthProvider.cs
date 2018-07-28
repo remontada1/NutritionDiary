@@ -41,13 +41,11 @@ namespace WebApplication1.Providers
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
             ApplicationUser user = await _userManager.FindAsync(context.UserName, context.Password);
 
-
             if (user == null)
             {
                 context.SetError("invalid_grant", "The username or password is incorrect");
                 return;
             }
-
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
@@ -55,15 +53,20 @@ namespace WebApplication1.Providers
             identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
 
             var roles = _roleManager.Roles.ToList();
+
             foreach (var role in roles)
             {
-                identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
+                if (identity.HasClaim(x => x.Value == role.Name))
+                {
+                    continue;
+                }
+                else
+                {
+                    identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
+                }
             }
 
-
-
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(_userManager, OAuthDefaults.AuthenticationType);
-
 
             var ticket = new AuthenticationTicket(identity, null);
 
