@@ -29,17 +29,25 @@ namespace WebApplication1.Repository
 
         public void AttachFoodToMeal(int mealId, int foodId)
         {
+            var user = guidRepository.GetUserByGuid();
+
             var meal = this.DbContext.Meals.Find(mealId);
-            this.DbContext.Meals.Attach(meal);
 
-            var food = this.DbContext.Foods.Find(foodId);
-            this.DbContext.Foods.Attach(food);
+            if (user.Id == meal.UserId)
+            {
+                this.DbContext.Meals.Attach(meal);
 
-            meal.Foods.Add(food);
+                var food = this.DbContext.Foods.Find(foodId);
+                this.DbContext.Foods.Attach(food);
+
+                meal.Foods.Add(food);
+            }
         }
+
         // counting total nutrients
         public MealTotalNutrients SumOfNutrients(int mealId)
         {
+
             var meal = this.DbContext.Meals
                 .Where(m => m.Id == mealId)
                 .GroupBy(m => m.Name)
@@ -58,8 +66,7 @@ namespace WebApplication1.Repository
         {
             var mealWithFoods = this.DbContext.Meals
                  .Where(m => m.Id == mealId)
-                 .Include(f => f.Foods)
-                 .ToList();
+                 .Include(f => f.Foods);
 
             return mealWithFoods;
         }
@@ -67,24 +74,38 @@ namespace WebApplication1.Repository
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
             var meal = this.DbContext.Meals.Find(mealId);
-
             var food = this.DbContext.Foods.Find(foodId);
+
+            var user = guidRepository.GetUserByGuid();
+
             if (meal == null || food == null)
             {
                 throw new Exception("Meal or Food not found.");
             }
 
-            this.DbContext.Entry(meal).Collection("Foods").Load();
+            if (meal.UserId == user.Id)
+            {
+                this.DbContext.Entry(meal).Collection("Foods").Load();
 
-            meal.Foods.Remove(food);
+                meal.Foods.Remove(food);
+            }
+            else
+            {
+                throw new Exception("You can't remove another's food");
+            }
+
         }
 
         public void CreateMeal(Meal meal)
         {
             var user = guidRepository.GetUserByGuid();
 
-            var mealEntity = this.DbContext.Meals.Add(meal);
+            if (user == null)
+            {
+                throw new Exception("Please login to system for creating new meal.");
+            }
 
+            var mealEntity = this.DbContext.Meals.Add(meal);
             DbContext.Meals.Add(mealEntity);
             DbContext.Users.Attach(user);
 
@@ -93,19 +114,14 @@ namespace WebApplication1.Repository
 
         public IEnumerable<Meal> GetCurrentUserMeals()
         {
-            Guid guid = Guid.Empty;
-            var currentUserId = HttpContext.Current.User.Identity.GetUserId();
-            guid = new Guid(currentUserId);
-
-            var user = DbContext.Users.FirstOrDefault(i => i.Id == guid);
+            var user = guidRepository.GetUserByGuid();
 
             IEnumerable<Meal> meals = DbContext.Meals
-                .Where(x => x.UserId == guid)
-                .OrderByDescending(d => d.SetDate).ToList();
+                .Where(x => x.UserId == user.Id)
+                .OrderByDescending(d => d.SetDate);
 
             return meals;
         }
-
     }
 
     public interface IMealRepository : IRepository<Meal>

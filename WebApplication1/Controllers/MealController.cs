@@ -15,6 +15,7 @@ using WebApplication1.ViewModels;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication1.Controllers
 {
@@ -86,6 +87,7 @@ namespace WebApplication1.Controllers
         public IHttpActionResult RemoveFoodFromMeal(int mealId, int foodId)
         {
             mealService.RemoveFoodFromMeal(mealId, foodId);
+            
             mealService.SaveMeals();
 
             return Content(HttpStatusCode.Accepted, "Food deleted.");
