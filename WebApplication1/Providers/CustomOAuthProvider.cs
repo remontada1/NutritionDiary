@@ -12,6 +12,7 @@ using WebApplication1.Identity;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
 using System.Web.Http.Cors;
+using WebApplication1.Models;
 
 namespace WebApplication1.Providers
 {
@@ -49,22 +50,10 @@ namespace WebApplication1.Providers
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
-            identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
-            identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
-
-            var roles = _roleManager.Roles.ToList();
-
-            foreach (var role in roles)
-            {
-                if (identity.HasClaim(x => x.Value == role.Name))
-                {
-                    continue;
-                }
-                else
-                {
-                    identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
-                }
-            }
+            identity.AddClaim(new System.Security.Claims.Claim(ClaimTypes.Name, context.UserName));
+            
+            identity.AddClaim(new System.Security.Claims.Claim(ClaimTypes.Role, "User"));
+            identity.AddClaim(new System.Security.Claims.Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(_userManager, OAuthDefaults.AuthenticationType);
 
