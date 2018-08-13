@@ -316,8 +316,7 @@ namespace WebApplication1.Identity
 
         public Task<IList<string>> GetRolesAsync(ApplicationUser user)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
+         
 
             var u = _unitOfWork.UserRepository.FindById(user.Id);
             if (u == null)

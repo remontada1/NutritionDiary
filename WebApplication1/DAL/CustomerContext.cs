@@ -29,6 +29,7 @@ namespace WebApplication1.DAL
         public DbSet<CustomerData> CustomersData { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        
         public DbSet<ExternalLogin> Logins { get; set; }
 
         public virtual void Commit()

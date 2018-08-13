@@ -16,7 +16,7 @@ using System.IO;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "User")]
+    
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FoodController : ApiController
     {
@@ -31,7 +31,6 @@ namespace WebApplication1.Controllers
 
 
         [HttpGet]
-        
         [Route("api/foods")]
         public async Task<IHttpActionResult> GetFoods()
         {
@@ -48,6 +47,7 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, viewModelFoods);
             
         }
+
         [HttpGet]
         [Route("api/food/{id:int}")]
         public IHttpActionResult GetFoodById(int id)
@@ -63,6 +63,7 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.OK, viewModelFood);
         }
+
         [HttpGet]
         [Route("api/food/{name}")]
         public IHttpActionResult GetFoodByName(string name)
@@ -80,7 +81,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin")]
         [Route("api/food")]
         public IHttpActionResult AddFood(Food food)
         {
@@ -120,6 +121,7 @@ namespace WebApplication1.Controllers
             }
         }
 
+        
         [HttpPost]
         [Route("api/food/upload/{foodId}")]
         public async Task<HttpResponseMessage> PostFoodImage(int foodId)

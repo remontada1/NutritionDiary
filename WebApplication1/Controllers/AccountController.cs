@@ -21,7 +21,6 @@ namespace WebApplication1.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
-        private readonly RoleManager<Identity.IdentityRole, Guid> _roleManager;
         private readonly UserManager<Identity.ApplicationUser, Guid> _userManager;
         private readonly IUserRepository _userRepository;
         private readonly IMealService _mealService;
@@ -91,18 +90,18 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, mealList);
         }
 
-
+        [Authorize]
         [Route("api/roles/{id:guid}/{role}")]
         [HttpGet]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] Guid id, [FromUri] string role)
         {
             var result = await _userManager.AddToRoleAsync(id, role);
+
+
             string message = String.Format("Role {0} assigned to user", role);
 
             return Content(HttpStatusCode.OK, message);
         }
-
-
 
         private Guid getGuid(string value)
         {

@@ -48,10 +48,12 @@ namespace WebApplication1.Providers
                 return;
             }
 
+            var roles = await _userManager.GetRolesAsync(user.Id);
+            
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
             identity.AddClaim(new System.Security.Claims.Claim(ClaimTypes.Name, context.UserName));
-            
+
             identity.AddClaim(new System.Security.Claims.Claim(ClaimTypes.Role, "User"));
             identity.AddClaim(new System.Security.Claims.Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
 
