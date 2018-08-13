@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using WebApplication1.Repository;
 using System.Web;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace WebApplication1.Repository
 {
@@ -41,6 +42,10 @@ namespace WebApplication1.Repository
                 this.DbContext.Foods.Attach(food);
 
                 meal.Foods.Add(food);
+            }
+            else
+            {
+                throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
             }
         }
 
