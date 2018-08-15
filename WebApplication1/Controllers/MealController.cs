@@ -31,10 +31,10 @@ namespace WebApplication1.Controllers
             this.mapper = mapper;
         }
 
-        // add food to existing meal
+        [Authorize]
         [HttpPost]
         [Route("meal/{mealId}/food/{foodId}")]
-        public IHttpActionResult AttachMealToFood(Meal meal, int mealId, int foodId)
+        public IHttpActionResult AttachMealToFood(int mealId, int foodId)
         {
             mealService.AddFoodToMeal(mealId, foodId);
             mealService.SaveMeals();
@@ -44,34 +44,42 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, currentMealFoodList);
         }
 
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         [Route("api/meals")]
         public IHttpActionResult GetCurrentUserMeals()
         {
             var mealList = mealService.GetCurrentUserMeal();
 
-            var userMealsVM = mapper.Map<IEnumerable<Meal>,IEnumerable<MealViewModel>>(mealList);
+            var userMealsVM = mapper.Map<IEnumerable<Meal>, IEnumerable<MealViewModel>>(mealList);
 
             return Content(HttpStatusCode.OK, userMealsVM);
         }
 
         // returns meal with foods
+        [Authorize]
         [HttpGet]
         [Route("meal/{mealId}/foods")]
-        public IHttpActionResult GetMealAndFoodsUnauthorized(int mealId)
+        public IHttpActionResult GetMealAndFoods(int mealId)
         {
             IEnumerable<MealViewModel> mealVm;
 
-            var totalCalories = mealService.SumOfNutrients(mealId);
+            var totalCalories = mealService.SumOfNutrientsPerMeal(mealId);
+
             var meals = mealService.GetMealWithFoods(mealId);
+
+            if (totalCalories == null || meals == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Meal not found.");
+            }
+
             mealVm = mapper.Map<IEnumerable<Meal>, IEnumerable<MealViewModel>>(meals);
 
             return Content(HttpStatusCode.OK, new { totalCalories, mealVm });
         }
 
-        [HttpPost]
         [Authorize]
+        [HttpPost]
         [Route("api/meal")]
         public IHttpActionResult CreateMeal(Meal meal)
         {
@@ -82,12 +90,13 @@ namespace WebApplication1.Controllers
         }
 
         // delete existing food from meal
+        [Authorize]
         [HttpDelete]
         [Route("meal/{mealId}/food/{foodId}")]
         public IHttpActionResult RemoveFoodFromMeal(int mealId, int foodId)
         {
             mealService.RemoveFoodFromMeal(mealId, foodId);
-            
+
             mealService.SaveMeals();
 
             return Content(HttpStatusCode.Accepted, "Food deleted.");
