@@ -27,7 +27,7 @@ namespace WebApplication1.Repository
             var meal = this.DbContext.Meals.Where(m => m.Name == name).FirstOrDefault();
             return meal;
         }
-
+       
         public void AttachFoodToMeal(int mealId, int foodId)
         {
             var user = guidRepository.GetUserByGuid();
@@ -48,7 +48,7 @@ namespace WebApplication1.Repository
                 throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
             }
         }
-
+        
         // counting total nutrients
         public MealTotalNutrients SumOfNutrientsPerMeal(int mealId)
         {
@@ -67,15 +67,20 @@ namespace WebApplication1.Repository
 
             return meal;
         }
-        public MealTotalNutrients SumTotalNutrientsPerDay(DateTime date)
+
+        public MealTotalNutrients SumOfNutrientsPerDay(DateTime date)
         {
+            var dateDay = date.Day;
+            var dateMonth = date.Month;
+            var dateYear = date.Year;
+
             var user = guidRepository.GetUserByGuid();
 
-            string dateDay = date.ToString("dd'/'MM'/'yyyy");
-
             var meal = this.DbContext.Meals
-                .Where(d => d.SetDate.ToString() == dateDay)
-                .GroupBy(g => g.SetDate)
+                .Where(d => d.SetDate.Year == dateYear && 
+                d.SetDate.Month == dateMonth &&
+                d.SetDate.Day == dateDay)
+                .GroupBy(g => g.SetDate.Day)
                 .Select(m => new MealTotalNutrients
                 {
                     TotalCalories = m.Sum(f => f.Foods.Sum(c => (int?)c.KCalory)),
@@ -88,6 +93,7 @@ namespace WebApplication1.Repository
         }
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
+
             User user = guidRepository.GetUserByGuid();
             var mealWithFoods = this.DbContext.Meals
                  .Where(m => m.Id == mealId && m.UserId == user.Id)
@@ -158,6 +164,6 @@ namespace WebApplication1.Repository
         MealTotalNutrients SumOfNutrientsPerMeal(int mealId);
         void CreateMeal(Meal meal);
         IEnumerable<Meal> GetCurrentUserMeals();
-        MealTotalNutrients SumTotalNutrientsPerDay(DateTime date);
+        MealTotalNutrients SumOfNutrientsPerDay(DateTime date);
     }
 }

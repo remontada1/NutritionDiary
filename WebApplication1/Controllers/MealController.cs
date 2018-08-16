@@ -56,7 +56,11 @@ namespace WebApplication1.Controllers
             return Content(HttpStatusCode.OK, userMealsVM);
         }
 
-        // returns meal with foods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mealId"></param>
+        /// <returns>meal with foods</returns>
         [Authorize]
         [HttpGet]
         [Route("meal/{mealId}/foods")]
@@ -80,6 +84,22 @@ namespace WebApplication1.Controllers
 
         [Authorize]
         [HttpPost]
+        [Route("meal/foods")]
+        public IHttpActionResult GetMealAndFoodsPerDay(DateDTO date)
+        {
+            //string dateDay = date.Date.ToString("dd'/'MM'/'yyyy");
+            var totalCalories = mealService.SumOfNutrientsPerDay(date.Date);
+
+            if (totalCalories == null)
+            {
+                return Content(HttpStatusCode.NotFound, "Meals not found.");
+            }
+
+            return Content(HttpStatusCode.OK, totalCalories);
+        }
+        
+        [Authorize]
+        [HttpPost]
         [Route("api/meal")]
         public IHttpActionResult CreateMeal(Meal meal)
         {
@@ -88,7 +108,7 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.Accepted, "Meal created");
         }
-
+        
         // delete existing food from meal
         [Authorize]
         [HttpDelete]

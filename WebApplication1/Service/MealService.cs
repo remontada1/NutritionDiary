@@ -27,7 +27,6 @@ namespace WebApplication1.Service
             this.userRepository = userRepository;
         }
 
-
         public void RemoveFoodFromMeal(int mealId, int foodId)
         {
             mealRepository.RemoveFoodFromMeal(mealId, foodId);
@@ -36,7 +35,7 @@ namespace WebApplication1.Service
         {
             mealRepository.AttachFoodToMeal(mealId, foodId);
         }
-
+        
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
 
@@ -62,6 +61,11 @@ namespace WebApplication1.Service
         public void UpdateMeal(Meal meal)
         {
             mealRepository.Update(meal);
+        }
+
+        public MealTotalNutrients SumOfNutrientsPerDay(DateTime date)
+        {
+            return mealRepository.SumOfNutrientsPerDay(date);
         }
 
         public MealTotalNutrients SumOfNutrientsPerMeal(int mealId)
@@ -95,6 +99,7 @@ namespace WebApplication1.Service
         IEnumerable<Meal> GetMeals();
         IEnumerable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrientsPerMeal(int mealId);
+        MealTotalNutrients SumOfNutrientsPerDay(DateTime date);
         void CreateMeal(Meal meal);
         IEnumerable<Meal> GetCurrentUserMeal();
 
