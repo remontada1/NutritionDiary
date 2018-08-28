@@ -81,7 +81,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize]
         [Route("api/food")]
         public IHttpActionResult AddFood(Food food)
         {
