@@ -27,7 +27,7 @@ namespace WebApplication1.Repository
             var meal = this.DbContext.Meals.Where(m => m.Name == name).FirstOrDefault();
             return meal;
         }
-       
+
         public void AttachFoodToMeal(int mealId, int foodId)
         {
             var user = guidRepository.GetUserByGuid();
@@ -48,7 +48,7 @@ namespace WebApplication1.Repository
                 throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
             }
         }
-        
+
         // counting total nutrients
         public MealTotalNutrients SumOfNutrientsPerMeal(int mealId)
         {
@@ -70,16 +70,11 @@ namespace WebApplication1.Repository
 
         public MealTotalNutrients SumOfNutrientsPerDay(DateTime date)
         {
-            var dateDay = date.Day;
-            var dateMonth = date.Month;
-            var dateYear = date.Year;
 
             var user = guidRepository.GetUserByGuid();
 
             var meal = this.DbContext.Meals
-                .Where(d => d.SetDate.Year == dateYear && 
-                d.SetDate.Month == dateMonth &&
-                d.SetDate.Day == dateDay)
+                .Where( d => DbFunctions.TruncateTime(d.SetDate) == DbFunctions.TruncateTime(date))
                 .GroupBy(g => g.SetDate.Day)
                 .Select(m => new MealTotalNutrients
                 {
@@ -125,6 +120,16 @@ namespace WebApplication1.Repository
                 throw new Exception("You can't remove another's food");
             }
 
+        }
+
+        public IEnumerable<Meal> GetMealAndFoodsPerDay(DateTime day)
+        {
+
+            var mealAndFood = this.DbContext.Meals
+                .Where(x => x.SetDate.Date == day.Date)
+                .Include(f => f.Foods);
+
+            return mealAndFood;
         }
 
         public void CreateMeal(Meal meal)
