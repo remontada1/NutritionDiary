@@ -87,17 +87,22 @@ namespace WebApplication1.Controllers
         [Route("meal/foods")]
         public IHttpActionResult GetMealAndFoodsPerDay(DateDTO date)
         {
+            IEnumerable<MealViewModel> mealVm;
             //string dateDay = date.Date.ToString("dd'/'MM'/'yyyy");
             var totalCalories = mealService.SumOfNutrientsPerDay(date.Date);
 
-            if (totalCalories == null)
+            var mealAndFoods = mealService.GetMealAndFoodsPerDay(date.Date);
+
+            if (totalCalories == null || mealAndFoods == null)
             {
                 return Content(HttpStatusCode.NotFound, "Meals not found.");
             }
 
-            return Content(HttpStatusCode.OK, totalCalories);
+            mealVm = mapper.Map<IEnumerable<Meal>, IEnumerable<MealViewModel>>(mealAndFoods);
+
+            return Content(HttpStatusCode.OK, new { totalCalories, mealVm });
         }
-        
+
         [Authorize]
         [HttpPost]
         [Route("api/meal")]
@@ -108,7 +113,7 @@ namespace WebApplication1.Controllers
 
             return Content(HttpStatusCode.Accepted, "Meal created");
         }
-        
+
         // delete existing food from meal
         [Authorize]
         [HttpDelete]

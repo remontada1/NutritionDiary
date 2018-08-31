@@ -20,6 +20,7 @@ namespace WebApplication1.Repository
             : base(dbFactory)
         {
             this.guidRepository = guidRepository;
+
         }
 
         public Meal GetMealByName(string name)
@@ -74,7 +75,7 @@ namespace WebApplication1.Repository
             var user = guidRepository.GetUserByGuid();
 
             var meal = this.DbContext.Meals
-                .Where( d => DbFunctions.TruncateTime(d.SetDate) == DbFunctions.TruncateTime(date))
+                .Where(d => DbFunctions.TruncateTime(d.SetDate) == DbFunctions.TruncateTime(date))
                 .GroupBy(g => g.SetDate.Day)
                 .Select(m => new MealTotalNutrients
                 {
@@ -122,11 +123,11 @@ namespace WebApplication1.Repository
 
         }
 
-        public IEnumerable<Meal> GetMealAndFoodsPerDay(DateTime day)
+        public IEnumerable<Meal> GetMealAndFoodsPerDay(DateTime date)
         {
 
             var mealAndFood = this.DbContext.Meals
-                .Where(x => x.SetDate.Date == day.Date)
+                .Where(d => DbFunctions.TruncateTime(d.SetDate) == DbFunctions.TruncateTime(date))
                 .Include(f => f.Foods);
 
             return mealAndFood;
@@ -170,5 +171,6 @@ namespace WebApplication1.Repository
         void CreateMeal(Meal meal);
         IEnumerable<Meal> GetCurrentUserMeals();
         MealTotalNutrients SumOfNutrientsPerDay(DateTime date);
+        IEnumerable<Meal> GetMealAndFoodsPerDay(DateTime date);
     }
 }

@@ -35,7 +35,7 @@ namespace WebApplication1.Service
         {
             mealRepository.AttachFoodToMeal(mealId, foodId);
         }
-        
+
         public IEnumerable<Meal> GetMealWithFoods(int mealId)
         {
 
@@ -80,12 +80,17 @@ namespace WebApplication1.Service
 
         public IEnumerable<Meal> GetCurrentUserMeal()
         {
-             return mealRepository.GetCurrentUserMeals();
+            return mealRepository.GetCurrentUserMeals();
         }
 
         public void SaveMeals()
         {
             unitOfWork.Commit();
+        }
+
+        public IEnumerable<Meal> GetMealAndFoodsPerDay(DateTime date)
+        {
+            return mealRepository.GetMealAndFoodsPerDay(date);
         }
     }
 
@@ -102,6 +107,7 @@ namespace WebApplication1.Service
         MealTotalNutrients SumOfNutrientsPerDay(DateTime date);
         void CreateMeal(Meal meal);
         IEnumerable<Meal> GetCurrentUserMeal();
+        IEnumerable<Meal> GetMealAndFoodsPerDay(DateTime date);
 
     }
 }

@@ -19,11 +19,12 @@ namespace WebApplication1.Mappings
                 .ForMember(f => f.KCalory, map => map.MapFrom(vm => vm.KCalory))
                 .ForMember(f => f.Fats, map => map.MapFrom(vm => vm.Fats))
                 .ForMember(f => f.Protein, map => map.MapFrom(vm => vm.Protein))
-                .ForMember(f => f.Image, map => map.MapFrom(vm => vm.Image));
+
 
             CreateMap<Meal, MealViewModel>().ForMember(vm => vm.Name, map => map.MapFrom(m => m.Name))
                 .ForMember(vm => vm.MealDate, map => map.MapFrom(m => m.SetDate))
                 .ForMember(vm => vm.Id, map => map.MapFrom(m => m.Id));
+                
                 
             CreateMap<User, UserMealsViewModel>().ForMember(u => u.Name, map => map.MapFrom(vm => vm.UserName));
 
