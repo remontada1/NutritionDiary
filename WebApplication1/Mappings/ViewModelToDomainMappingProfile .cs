@@ -18,7 +18,7 @@ namespace WebApplication1.Mappings
                 .ForMember(f => f.FoodCarboHydrates, map => map.MapFrom(vm => vm.Hydrates))
                 .ForMember(f => f.KCalory, map => map.MapFrom(vm => vm.KCalory))
                 .ForMember(f => f.Fats, map => map.MapFrom(vm => vm.Fats))
-                .ForMember(f => f.Protein, map => map.MapFrom(vm => vm.Protein))
+                .ForMember(f => f.Protein, map => map.MapFrom(vm => vm.Protein));
 
 
             CreateMap<Meal, MealViewModel>().ForMember(vm => vm.Name, map => map.MapFrom(m => m.Name))
