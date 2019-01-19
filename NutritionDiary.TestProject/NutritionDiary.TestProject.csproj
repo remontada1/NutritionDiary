@@ -110,8 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FoodServiceTestscs.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="FoodRepositoryTests.cs" />
+    <Compile Include="FoodServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
