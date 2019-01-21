@@ -21,9 +21,6 @@ namespace NutritionDiary.TestProject
             contextMock.Setup(x => x.Set<Food>()).Returns(dbSetFoodMock.Object);
             factoryMock.Setup(x => x.Init()).Returns(contextMock.Object);
 
-            var mockRepository = new Mock<IFoodRepository>();
-            var unitOfWork = new Mock<IUnitOfWork>().Object;
-
             var expected = new Food { Id = 42, Fats = 13 };
 
             var repository = new FoodRepository(factoryMock.Object);

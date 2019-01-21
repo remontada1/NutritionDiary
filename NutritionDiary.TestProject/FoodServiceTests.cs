@@ -12,42 +12,65 @@ namespace NutritionDiary.TestProject
 {
     class FoodServiceTests
     {
-        [Test]
-        public void GetFood_ShouldReturnAllFood()
-        {
-            var mockRepository = new Mock<IFoodRepository>();
-            var unitOfWork = new Mock<IUnitOfWork>().Object;
+        private Mock<IFoodRepository> mockRepository;
+        private IUnitOfWork unitOfWork;
+        private List<Food> foodList;
+        private List<Meal> mealList;
 
-            var expected = new List<Food>()
+        [SetUp]
+        protected void SetUp()
+        {
+            mockRepository = new Mock<IFoodRepository>();
+            unitOfWork = new Mock<IUnitOfWork>().Object;
+
+            foodList = new List<Food>()
             {
                 new Food { Id = 42, Fats = 13 },
                 new Food { Id = 21, Fats = 33 }
             };
 
-            mockRepository.Setup(x => x.GetAll()).Returns(expected);
+            mealList = new List<Meal>()
+            {
+                new Meal() {
+                    Id = 1,
+                    SetDate = new DateTime(2017, 10, 17),
+                    Foods = new List<Food>() {
+                        new Food { Id = 42, KCalory = 155, Hydrates = 30, Fats = 10, Protein = 6},
+                        new Food { Id = 21, KCalory = 55, Hydrates = 12, Fats = 5, Protein = 3 }
+                        }
+                },
+                 new Meal() {
+                    Id = 2,
+                    SetDate = new DateTime(2017, 10, 17),
+                    Foods = new List<Food>() {
+                        new Food { Id = 43, KCalory = 150, Hydrates = 30, Fats = 10, Protein = 6},
+                        new Food { Id = 22, KCalory = 55, Hydrates = 12, Fats = 5, Protein = 3 }
+                        }
+                }
+            };
+        }
+
+
+        [Test]
+        public void GetFood_ShouldReturnAllFood()
+        {
+
+            mockRepository.Setup(x => x.GetAll()).Returns(foodList);
             var service = new FoodService(mockRepository.Object, unitOfWork);
 
             var result = service.GetFoods();
 
             Assert.NotNull(result);
-            Assert.AreEqual(2, expected.Count);
+            Assert.AreEqual(2, foodList.Count);
 
         }
 
         [Test]
         public void GetFoodById_SholdReturnFoodWithSameId()
         {
-            var mockRepository = new Mock<IFoodRepository>();
-            var unitOfWork = new Mock<IUnitOfWork>().Object;
-
-            var expected = new List<Food>()
-            {
-                new Food { Id = 42, Fats = 13 },
-                new Food { Id = 21, Fats = 33 }
-            };
 
             mockRepository.Setup(x => x.GetById(21)).
-                Returns(new Func<int, Food>(id => expected.Find(p => p.Id.Equals(id))));
+                Returns(new Func<int, Food>(id => foodList.Find(p => p.Id.Equals(id))));
 
             var service = new FoodService(mockRepository.Object, unitOfWork);
 
@@ -60,25 +83,14 @@ namespace NutritionDiary.TestProject
         [Test]
         public void AddSumOfNutritionPerMeal_ShouldReturnCorrectSum()
         {
-           
+
             var mealRepository = new Mock<IMealRepository>();
             var unitOfWork = new Mock<IUnitOfWork>().Object;
 
-            var expected = new List<Meal>(1)
-            {
-                new Meal() {
-                    Id = 1,
-                    SetDate = new DateTime(17 / 10 / 2015),
-                    Foods = new List<Food>() {
-                        new Food { Id = 42, KCalory = 150, Hydrates = 30, Fats = 10, Protein = 6},
-                        new Food { Id = 21, KCalory = 55, Hydrates = 12, Fats = 5, Protein = 3 }
-                        }
-                }
-            };
 
             mealRepository.Setup(x => x.SumOfNutrientsPerMeal(1))
                     .Returns(new Func<int, MealTotalNutrients>
-                    (f => expected.GroupBy(x => x.SetDate.Day).Select(x => new MealTotalNutrients
+                    (f => mealList.GroupBy(x => x.Id).Select(x => new MealTotalNutrients
                     {
                         TotalCalories = x.Sum(k => k.Foods.Sum(c => (int?)c.KCalory)),
                         TotalFats = x.Sum(k => k.Foods.Sum(c => (int?)c.Fats)),
@@ -94,7 +106,7 @@ namespace NutritionDiary.TestProject
 
 
             Assert.AreEqual(42, result.TotalCarbs);
-            Assert.AreEqual(205, result.TotalCalories);
+            Assert.AreEqual(210, result.TotalCalories);
             Assert.AreEqual(15, result.TotalFats);
             Assert.AreEqual(9, result.TotalProteins);
         }
