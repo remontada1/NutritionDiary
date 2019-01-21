@@ -57,7 +57,7 @@ namespace WebApplication1.Repository
 
             var meal = this.DbContext.Meals
                 .Where(m => m.Id == mealId && m.UserId == user.Id)
-                .GroupBy(m => m.SetDate.Day)
+                .GroupBy(m => m.Id)
                 .Select(f => new MealTotalNutrients
                 {
                     TotalCalories = f.Sum(k => k.Foods.Sum(c => (int?)c.KCalory)),
