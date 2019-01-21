@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="FoodRepositoryTests.cs" />
     <Compile Include="FoodServiceTests.cs" />
+    <Compile Include="MealRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
