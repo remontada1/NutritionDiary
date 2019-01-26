@@ -49,7 +49,7 @@ namespace NutritionDiary.TestProject
         public void GetFoodById_SholdReturnFoodWithSameId()
         {
 
-            mockRepository.Setup(x => x.GetById(21)).
+            mockRepository.Setup(x => x.GetById(It.IsAny<int>())).
                 Returns(new Func<int, Food>(id => foodList.Find(p => p.Id.Equals(id))));
 
             var service = new FoodService(mockRepository.Object, unitOfWork);
