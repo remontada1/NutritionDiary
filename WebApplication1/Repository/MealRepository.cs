@@ -87,7 +87,7 @@ namespace WebApplication1.Repository
 
             return meal;
         }
-        public IEnumerable<Meal> GetMealWithFoods(int mealId)
+        public IQueryable<Meal> GetMealWithFoods(int mealId)
         {
 
             User user = guidRepository.GetUserByGuid();
@@ -123,7 +123,7 @@ namespace WebApplication1.Repository
 
         }
 
-        public IEnumerable<Meal> GetMealAndFoodsPerDay(DateTime date)
+        public IQueryable<Meal> GetMealAndFoodsPerDay(DateTime date)
         {
 
             var mealAndFood = this.DbContext.Meals
@@ -149,11 +149,11 @@ namespace WebApplication1.Repository
             user.Meals.Add(meal);
         }
 
-        public IEnumerable<Meal> GetCurrentUserMeals()
+        public IQueryable<Meal> GetCurrentUserMeals()
         {
             var user = guidRepository.GetUserByGuid();
 
-            IEnumerable<Meal> meals = DbContext.Meals
+            IQueryable<Meal> meals = DbContext.Meals
                 .Where(x => x.UserId == user.Id)
                 .OrderBy(d => d.SetDate);
 
@@ -166,11 +166,11 @@ namespace WebApplication1.Repository
         void RemoveFoodFromMeal(int mealId, int foodId);
         Meal GetMealByName(string name);
         void AttachFoodToMeal(int mealId, int foodId);
-        IEnumerable<Meal> GetMealWithFoods(int mealId);
+        IQueryable<Meal> GetMealWithFoods(int mealId);
         MealTotalNutrients SumOfNutrientsPerMeal(int mealId);
         void CreateMeal(Meal meal);
-        IEnumerable<Meal> GetCurrentUserMeals();
+        IQueryable<Meal> GetCurrentUserMeals();
         MealTotalNutrients SumOfNutrientsPerDay(DateTime date);
-        IEnumerable<Meal> GetMealAndFoodsPerDay(DateTime date);
+        IQueryable<Meal> GetMealAndFoodsPerDay(DateTime date);
     }
 }
