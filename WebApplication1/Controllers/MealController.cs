@@ -16,9 +16,11 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using System.Web.Http.Cors;
 
 namespace WebApplication1.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MealController : ApiController
 
     {
