@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Security;
+using WebApplication1.ActionFilter;
 
 namespace WebApplication1.Controllers
 {
@@ -54,14 +55,11 @@ namespace WebApplication1.Controllers
 
         [AllowAnonymous]
         [Route("signup")]
+        [ValidateModel]
         public async Task<IHttpActionResult> Register(UserBindingModel userModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return Content(HttpStatusCode.NotAcceptable, "Input is not valid");
-            }
 
-            var user = new ApplicationUser() { UserName = userModel.UserName, JoinDate = new DateTime(2010, 08, 08) };
+            var user = new ApplicationUser() { UserName = userModel.UserName, JoinDate = DateTime.Now};
             var result = await _userManager.CreateAsync(user, userModel.Password);
 
             if (result.Succeeded)
@@ -70,7 +68,7 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                return Content(HttpStatusCode.NotModified, "User not created");
+                return Content(HttpStatusCode.BadRequest, "User not created");
             }
         }
 

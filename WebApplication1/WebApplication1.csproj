@@ -1136,6 +1136,7 @@
   <ItemGroup>
     <Compile Include="ActionFilter\GlobalExceptionAttribute.cs" />
     <Compile Include="ActionFilter\LoggingFilterAttribute.cs" />
+    <Compile Include="ActionFilter\ValidateModelAttribute.cs" />
     <Compile Include="App_Start\AttributeRoutingConfig.cs" />
     <Compile Include="App_Start\AttributeRoutingHttpConfig.cs" />
     <Compile Include="App_Start\Bootstrapper.cs" />
