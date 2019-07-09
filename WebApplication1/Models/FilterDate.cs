@@ -6,11 +6,11 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class DateDTO
+    public class FilterDate
     {
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
-        public DateTime Date { get; set; }
+        public string filterDate { get; set; }
 
     }
 }

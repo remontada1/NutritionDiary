@@ -1213,7 +1213,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Claim.cs" />
-    <Compile Include="Models\DateDTO.cs" />
+    <Compile Include="Models\FilterDate.cs" />
     <Compile Include="Models\ExternalLogin.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RoleCreateBindingModel.cs" />

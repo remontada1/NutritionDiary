@@ -17,6 +17,7 @@ using AutoMapper;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using System.Web.Http.Cors;
+using System.Globalization;
 
 namespace WebApplication1.Controllers
 {
@@ -87,13 +88,16 @@ namespace WebApplication1.Controllers
         [Authorize]
         [HttpPost]
         [Route("meal/foods")]
-        public IHttpActionResult GetMealAndFoodsPerDay(DateDTO date)
+        public IHttpActionResult GetMealAndFoodsPerDay(FilterDate date)
         {
             IEnumerable<MealViewModel> mealVm;
-            //string dateDay = date.Date.ToString("dd'/'MM'/'yyyy");
-            var totalCalories = mealService.SumOfNutrientsPerDay(date.Date);
 
-            var mealAndFoods = mealService.GetMealAndFoodsPerDay(date.Date);
+            CultureInfo provider = CultureInfo.CurrentCulture;
+            var dateFormat = DateTime.ParseExact(date.filterDate, "MM/dd/yyyy", provider);
+
+            var totalCalories = mealService.SumOfNutrientsPerDay(dateFormat);
+
+            var mealAndFoods = mealService.GetMealAndFoodsPerDay(dateFormat);
 
             if (totalCalories == null || mealAndFoods == null)
             {

@@ -19,7 +19,7 @@ using WebApplication1.ActionFilter;
 
 namespace WebApplication1.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         private readonly UserManager<Identity.ApplicationUser, Guid> _userManager;
@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
         public async Task<IHttpActionResult> Register(UserBindingModel userModel)
         {
 
-            var user = new ApplicationUser() { UserName = userModel.UserName, JoinDate = DateTime.Now};
+            var user = new ApplicationUser() { UserName = userModel.UserName, JoinDate = DateTime.UtcNow};
             var result = await _userManager.CreateAsync(user, userModel.Password);
 
             if (result.Succeeded)
